@@ -14,7 +14,6 @@ import { Button } from "@/components/ui/button";
 import { 
     IconPersonTextRectangle, 
     IconHandbagFill, 
-    IconArrowRight, 
     IconListBullet,
     IconQrcode,
     IconInfoCircle,

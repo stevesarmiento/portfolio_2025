@@ -16,8 +16,8 @@ import {
     IconQuestionmarkCircle,
     IconCheckmarkCircleFill,
     IconCircle,
-    IconXmark,
     IconPhotoBadgePlus,
+    IconMegaphoneFill,
 } from "symbols-react"
 import { Separator } from "@/components/ui/separator"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -33,9 +33,9 @@ import {
 export function DrawerDemo() {
     const [step, setStep] = React.useState(0)
     const [selectedOption, setSelectedOption] = React.useState("")
-    const [direction, setDirection] = React.useState(1);
+    const [, setDirection] = React.useState(1);
     const [selectedColor, setSelectedColor] = React.useState("");
-    const [isChecked, setIsChecked] = React.useState(false);
+    //const [isChecked, setIsChecked] = React.useState(false);
 
       const nextStep = () => {
       setDirection(1);
@@ -59,9 +59,9 @@ export function DrawerDemo() {
           nextStep();
         };
 
-    const handleCheckboxChange = () => {
-        setIsChecked(!isChecked);
-      };
+    // const handleCheckboxChange = () => {
+    //     setIsChecked(!isChecked);
+    //   };
   
     const getHeadline = () => {
       if (step === 0) return "How can we help?"
@@ -86,9 +86,13 @@ export function DrawerDemo() {
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        <Button className="rounded-full hover:bg-primary/80">Open Modal</Button>
+        <Button 
+        endIcon={<IconMegaphoneFill className="h-4 w-4 fill-orange-300" />}
+        className="rounded-full hover:bg-primary/80">
+          Send Feedback
+        </Button>
       </DrawerTrigger>
-      <DrawerContent>
+      <DrawerContent hideTitle>
         <div className="mx-auto w-full max-w-sm pb-6 px-6 pt-2.5">
           <DrawerHeader>
             <div className="flex flex-row justify-between">
@@ -98,7 +102,7 @@ export function DrawerDemo() {
                         <div className="text-[#949595]" >
                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path 
-                                d="M10.4854 1.99998L2.00007 10.4853" stroke="#999999" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10.4854 10.4844L2.00007 1.99908" stroke="#999999" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                d="M10.4854 1.99998L2.00007 10.4853" stroke="#999999" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M10.4854 10.4844L2.00007 1.99908" stroke="#999999" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                                 </path>
                             </svg>
                         </div>
@@ -110,7 +114,7 @@ export function DrawerDemo() {
                         <div className="text-[#949595]" >
                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path 
-                                d="M10.4854 1.99998L2.00007 10.4853" stroke="#999999" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10.4854 10.4844L2.00007 1.99908" stroke="#999999" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                d="M10.4854 1.99998L2.00007 10.4853" stroke="#999999" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M10.4854 10.4844L2.00007 1.99908" stroke="#999999" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                                 </path>
                             </svg>
                         </div>

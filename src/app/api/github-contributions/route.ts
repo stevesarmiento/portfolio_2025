@@ -1,5 +1,30 @@
 import { NextResponse } from 'next/server';
 
+interface ContributionDay {
+  date: string;
+  count: number;
+  level: 0 | 1 | 2 | 3 | 4;
+}
+
+interface GitHubResponse {
+  data: {
+    user: {
+      contributionsCollection: {
+        contributionCalendar: {
+          totalContributions: number;
+          weeks: {
+            contributionDays: {
+              contributionCount: number;
+              date: string;
+              contributionLevel: string;
+            }[];
+          }[];
+        };
+      };
+    };
+  };
+}
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const username = searchParams.get('username');
@@ -41,12 +66,11 @@ export async function GET(request: Request) {
       throw new Error('Failed to fetch GitHub data');
     }
 
-    const data = await response.json();
+    const data = (await response.json()) as GitHubResponse;
     
-    // Transform the data into a flatter structure
-    const contributions = data.data.user.contributionsCollection.contributionCalendar.weeks
-      .flatMap((week: any) => week.contributionDays)
-      .map((day: any) => ({
+    const contributions: ContributionDay[] = data.data.user.contributionsCollection.contributionCalendar.weeks
+      .flatMap(week => week.contributionDays)
+      .map(day => ({
         date: day.date,
         count: day.contributionCount,
         level: getLevelFromContributionLevel(day.contributionLevel),
@@ -63,12 +87,12 @@ export async function GET(request: Request) {
 }
 
 function getLevelFromContributionLevel(level: string): 0 | 1 | 2 | 3 | 4 {
-  const levels = {
+  const levels: Record<string, 0 | 1 | 2 | 3 | 4> = {
     NONE: 0,
     FIRST_QUARTILE: 1,
     SECOND_QUARTILE: 2,
     THIRD_QUARTILE: 3,
     FOURTH_QUARTILE: 4,
   };
-  return (levels[level as keyof typeof levels] || 0) as 0 | 1 | 2 | 3 | 4;
+  return levels[level] ?? 0;
 }

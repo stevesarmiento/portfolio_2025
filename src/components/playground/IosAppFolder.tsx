@@ -21,26 +21,28 @@ import {
 } from 'symbols-react';
 
 
-// interface IosAppFolderProps {
-//     icons: { name: string, icon: React.ReactNode }[];
-// }
+interface AppIcon {
+    name: string;
+    icon: React.ReactNode;
+}
 
-let icons = [
+interface IosAppFolderProps {
+    className?: string;
+}
+
+const icons: AppIcon[] = [
     { name: 'Aufn', icon: <Image src="/img/work-aufn.png" alt="Icon 1" layout="fill" objectFit="cover" /> },
     { name: 'Component Kit', icon: <Image src="/img/work-componentkit.png" alt="Icon 2" layout="fill" objectFit="cover" /> },
     { name: 'RES', icon: <Image src="/img/work-res.png" alt="Icon 3" layout="fill" objectFit="cover" /> },
     { name: 'Toshi', icon: <Image src="/img/work-toshi.png" alt="Icon 4" layout="fill" objectFit="cover" /> },
     { name: 'Symbols', icon: <Image src="/img/work-symbols.png" alt="Icon 5" layout="fill" objectFit="cover" /> },
-    // { name: 'Icon 6', icon: <Image src="/img/work-res.png" alt="Icon 6" width={50} height={50} /> },
-    // { name: 'Icon 7', icon: <Image src="/img/work-toshi.png" alt="Icon 7" width={50} height={50} /> },
-    // { name: 'Icon 8', icon: <Image src="/img/work-symbols.png" alt="Icon 8" width={50} height={50} /> },
-    // { name: 'Icon 9', icon: <Image src="/img/work-symbols.png" alt="Icon 9" width={50} height={50} /> },
-
 ];
 
 
-export const IosAppFolder: React.FC<{}> = () => {    return (
-    <div className="flex flex-col items-center">
+export function IosAppFolder({ className = "" }: IosAppFolderProps) {
+  
+    return (
+    <div className={`flex flex-col items-center ${className}`}>
         <AnimatePresence>
             <Dialog>
                 <DialogTrigger asChild>
@@ -53,14 +55,13 @@ export const IosAppFolder: React.FC<{}> = () => {    return (
                             <div className="grid grid-cols-3 gap-3">
                                 {icons.map((icon, index) => (
                                     <div key={index} className="relative w-[35px] h-[35px] rounded-lg overflow-hidden">
-                                    {icon.icon}
-                                        {/* <span>{icon.name}</span> */}
+                                        {icon.icon}
                                     </div>
                                 ))}
                             </div>
                     </motion.div>
                 </DialogTrigger>
-                    <DialogContent>
+                    <DialogContent hideTitle>
                         <motion.div 
                             layoutId="ios-app-folder" 
                             transition={{ type: "spring", stiffness: 400, damping: 30 }}                             

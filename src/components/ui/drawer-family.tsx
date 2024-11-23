@@ -34,10 +34,19 @@ const DrawerOverlay = React.forwardRef<
 ))
 DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName
 
+const VisuallyHidden = ({ children }: { children: React.ReactNode }) => (
+  <span className="absolute w-[1px] h-[1px] p-0 -m-[1px] overflow-hidden whitespace-nowrap border-0">
+    {children}
+  </span>
+);
+
 const DrawerContent = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
->(({ className, children, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content> & {
+    hideTitle?: boolean;
+    title?: string;
+  }
+>(({ className, children, hideTitle, title = "Drawer", ...props }, ref) => (
   <DrawerPortal>
     <DrawerOverlay />
     <DrawerPrimitive.Content
@@ -48,7 +57,11 @@ const DrawerContent = React.forwardRef<
       )}
       {...props}
     >
-      {/* <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted" /> */}
+      {hideTitle ? (
+        <VisuallyHidden>
+          <DrawerTitle>{title}</DrawerTitle>
+        </VisuallyHidden>
+      ) : null}
       {children}
     </DrawerPrimitive.Content>
   </DrawerPortal>

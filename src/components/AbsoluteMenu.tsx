@@ -46,7 +46,7 @@ const transition = {
 //   );
 // }
 
-let socials = [
+const socials = [
     {
       name: "X",
       link: "https://x.com/stevensarmi_",

@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
-import { IconXmarkCircleFill } from "symbols-react"
 
 import { cn } from "@/lib/utils"
 
@@ -29,10 +28,19 @@ const DialogOverlay = React.forwardRef<
 ))
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName
 
+const VisuallyHidden = ({ children }: { children: React.ReactNode }) => (
+  <span className="absolute w-[1px] h-[1px] p-0 -m-[1px] overflow-hidden whitespace-nowrap border-0">
+    {children}
+  </span>
+);
+
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(({ className, children, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
+    hideTitle?: boolean;
+    title?: string;
+  }
+>(({ className, children, hideTitle, title = "Dialog", ...props }, ref) => (
   <DialogPortal>
     <DialogOverlay />
     <DialogPrimitive.Content
@@ -43,6 +51,11 @@ const DialogContent = React.forwardRef<
       )}
       {...props}
     >
+      {hideTitle ? (
+        <VisuallyHidden>
+          <DialogTitle>{title}</DialogTitle>
+        </VisuallyHidden>
+      ) : null}
       {children}
       {/* <DialogPrimitive.Close className="absolute right-4 top-4 rounded-full ring-offset-transparent transition-opacity hover:opacity-100 focus:outline-none focus:ring-0 focus:ring-ring focus:ring-offset-0 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
         <IconXmarkCircleFill className="h-5 w-5 fill-primary/30 hover:fill-primary/40 active:scale-95 hover:scale-110" />

@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { FC } from "react";
 import { IconGamecontrollerFill, IconSquareOnSquare } from "symbols-react";
-import { cn } from "@/lib/utils";
 
 interface FamilyWalletCardProps {
     bgColor?: string;

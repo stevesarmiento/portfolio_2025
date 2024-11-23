@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@/components/ui/tooltip';
 // import { IconCircleFill } from 'symbols-react';
 
-let boxes = [
+const boxes = [
   { id: 1, content: 'Component Kit', image: '/img/work-componentkit.png', link: 'https://example.com/componentkit' },
   { id: 2, content: 'Symbols', image: '/img/work-symbols.png', link: 'https://example.com/symbols' },
   { id: 3, content: 'Toshi', image: '/img/work-toshi.png', link: 'https://example.com/toshi' },

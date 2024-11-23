@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import AbsoluteMenu from "@/components/AbsoluteMenu";
 import PlausibleProvider from "next-plausible";
+import { Providers } from "./providers";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -35,7 +36,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <Providers>{children}</Providers>
         <div className="flex w-full justify-center">
             <AbsoluteMenu />
           </div>
