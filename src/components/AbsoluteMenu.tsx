@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { usePathname, useRouter } from "next/navigation";
 import { 
     IconEllipsis,
-    IconFigureSoccer, 
+    IconFigureIndoorSoccer, 
     IconHouseFill, 
     IconXLogo, 
     IconFigmaLogo, 
@@ -72,11 +72,11 @@ const socials = [
 export default function AbsoluteMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const router = useRouter();
-  const pathname = usePathname();
-  useClickOutside(containerRef, () => {
+  useClickOutside(containerRef as React.RefObject<HTMLElement>, () => {
     setIsOpen(false);
   });
+  const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <MotionConfig transition={transition}>
@@ -108,7 +108,7 @@ export default function AbsoluteMenu() {
                     onClick={() => router.push('/playground')}
                 >
                     <span className="sr-only">Playground</span>
-                    <IconFigureSoccer className={`h-4 w-4 fill-white/50 group-hover:fill-white ${pathname === '/playground' ? '' : 'fill-white'}`} />
+                    <IconFigureIndoorSoccer className={`h-4 w-4 fill-white/50 group-hover:fill-white ${pathname === '/playground' ? '' : 'fill-white'}`} />
                 </Button>
                   <Button
                     variant="ghost"

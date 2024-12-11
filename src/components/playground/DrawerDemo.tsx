@@ -9,9 +9,9 @@ import {
     IconTextBubbleFill,
     IconSquareTextSquareFill,
     IconPaperplane,
-    IconArrowTriangle2Circlepath,
+    IconArrowTrianglehead2Clockwise,
     IconWaveformPathEcg,
-    IconCircleBottomrighthalfCheckered,
+    IconCircleBottomrighthalfPatternCheckered,
     IconPhoto,
     IconQuestionmarkCircle,
     IconCheckmarkCircleFill,
@@ -193,7 +193,7 @@ export function DrawerDemo() {
                 </div>
                 <div className="flex items-center space-x-2 justify-between w-full cursor-pointer hover:bg-primary/5 p-3 rounded-xl transition-all duration-150 ease-in-out active:scale-[0.98]" onClick={() => document.getElementById('swaps')?.click()}>
                     <div className="flex items-center space-x-2 flex-row">
-                    <IconArrowTriangle2Circlepath className="h-5 w-5 fill-primary/40" />
+                    <IconArrowTrianglehead2Clockwise className="h-5 w-5 fill-primary/40" />
                     <label
                     htmlFor="swaps"
                     className="text-md font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -225,7 +225,7 @@ export function DrawerDemo() {
                 </div>
                 <div className="flex items-center space-x-2 justify-between w-full cursor-pointer hover:bg-primary/5 p-3 rounded-xl transition-all duration-150 ease-in-out active:scale-[0.98]" onClick={() => document.getElementById('tokens')?.click()}>
                     <div className="flex items-center space-x-2 flex-row">
-                    <IconCircleBottomrighthalfCheckered className="h-5 w-5 fill-primary/40" />
+                    <IconCircleBottomrighthalfPatternCheckered className="h-5 w-5 fill-primary/40" />
                     <label
                     htmlFor="tokens"
                     className="text-md font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"

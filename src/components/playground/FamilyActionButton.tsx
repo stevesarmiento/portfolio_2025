@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react"
 import {
-    IconArrowTriangle2Circlepath,
+    IconArrowTrianglehead2Clockwise,
     IconPlus,
     IconArrowDown,
     IconPaperplaneFill,
@@ -61,7 +61,7 @@ export function FamilyActionButton() {
               <div className="w-[290px] cursor-pointer rounded-[13px] p-2 bg-accent/5 border-[1px] border-white/5 hover:bg-accent/10 active:scale-95 transition-all duration-150 ease-in-out">
                 <div className="flex flex-row items-start justify-start space-x-2">
                   <div className="flex items-center justify-center rounded-full bg-gray-500 p-2">
-                    <IconArrowTriangle2Circlepath className="h-4 w-4 fill-white" />
+                    <IconArrowTrianglehead2Clockwise className="h-4 w-4 fill-white" />
                   </div>
                   <div className="flex flex-col">
                     <span className="text-sm font-medium text-white">Swap</span>
