@@ -26,7 +26,7 @@ export default function AsciiBgV2() {
   const mountedRef = useRef(true)
 
   // Fixed parameters - adjust these as needed
-  const resolution = 0.8 // Optimized for better performance
+  const resolution = 0.6 // Optimized for better performance
   const inverted = false
   const grayscale = false // Set to true for grayscale
   const charSet = "minimal" // "standard", "detailed", "blocks", "minimal"
@@ -35,7 +35,7 @@ export default function AsciiBgV2() {
     standard: " .:-=+*#%@",
     detailed: " .,:;i1tfLCG08@",
     blocks: " ░▒▓█",
-    minimal: " .:.",
+    minimal: " .:",
   }
 
   // Cleanup on unmount
@@ -271,8 +271,8 @@ export default function AsciiBgV2() {
       // const videoUrl = "https://cdn.midjourney.com/video/a851e2d9-d630-46fa-a6f8-08742647d348/0.mp4"
       
       // GOOD TO GO
-      const videoUrl = "https://cdn.midjourney.com/video/0f357baf-1a92-4acf-b074-9ddc377d7805/0.mp4"
-      // const videoUrl = "https://cdn.midjourney.com/video/4f2e9964-3aed-4452-a74a-332f9ff74bc9/0.mp4"
+      // const videoUrl = "https://cdn.midjourney.com/video/0f357baf-1a92-4acf-b074-9ddc377d7805/0.mp4"
+      const videoUrl = "https://cdn.midjourney.com/video/4f2e9964-3aed-4452-a74a-332f9ff74bc9/0.mp4"
       // const videoUrl = "https://cdn.midjourney.com/video/ad03f41b-e25f-4ea3-b617-5a4e9193f861/0.mp4"
       // const videoUrl = "https://cdn.midjourney.com/video/8a467a72-d5dd-4065-87a2-4766dc7034e9/0.mp4"
 

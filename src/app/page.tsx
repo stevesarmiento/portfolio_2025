@@ -3,29 +3,23 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { 
-  IconLaurelLeading,
-  IconLaurelTrailing,
+  // IconLaurelLeading,
+  // IconLaurelTrailing,
   IconSealFill, 
-  IconArrowUpForward,
   IconGithubLogo,
 } from "symbols-react";
 import { motion } from "framer-motion";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 import InitialLoader from "@/components/InitialLoader";
 // import InteractiveIntro from "@/components/InteractiveIntro";
-import SeparatorDots from "@/components/SeparatorDots";
 import AsciiBgV2 from "@/components/ui/ascii-bg-v2";
 
-import Work from "@/components/Work";
+// import Work from "@/components/Work";
 import GithubSection from "@/components/GithubSection";
 import { AnimatedText } from "@/components/ui/animated-text";
 import AboutMe from "@/components/AboutMe";
-import CommunityLinks from "@/components/CommunityLinks";
+//import CommunityLinks from "@/components/CommunityLinks";
 
-interface IconProps extends React.SVGProps<SVGSVGElement> {
-  className?: string;
-}
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -85,43 +79,31 @@ export default function Home() {
             transition={{ duration: 0.3, delay: 0.7 }}
             className="flex flex-col items-center justify-center gap-y-2 mt-[40px]"
           >
-              {/* <InteractiveIntro /> */}
               <AboutMe /> 
-              <CommunityLinks />
-              <SeparatorDots />
-              <div className="w-full relative ">
+              <div className="w-full relative mt-6">
                 <div className="relative flex flex-row items-center font-nuvo gap-x-3 mb-2 px-4 py-2">
-                  <TooltipProvider>
-                    <Tooltip delayDuration={0}>
-                      <TooltipTrigger asChild>
                         <a 
                           href="https://github.com/stevesarmiento" 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="group inline-flex items-center text-xl font-bold text-[#2E4D61] cursor-pointer hover:text-[#2E4D61]/70 transition-colors duration-150"
+                          className="group inline-flex items-center text-lg font-bold text-zinc-50/50 cursor-pointer hover:text-zinc-50 transition-colors duration-150"
                         >
-                          <AnimatedText text="Work" isAnimating={isHovering} />
-                          <IconArrowUpForward className="ml-2 w-[10px] h-[10px] transition-all duration-150 ease-in-out fill-[#2E4D61]/50 group-hover:fill-[#2E4D61] translate-y-[1px] group-hover:translate-y-[-1px]" />
+                          <AnimatedText text="Github" isAnimating={isHovering} />
+                          <IconGithubLogo className="ml-2 w-[20px] h-[20px] transition-all duration-150 ease-in-out fill-zinc-50/50 group-hover:fill-zinc-50 translate-y-[1px] group-hover:translate-y-[-1px]" />
                         </a>
-                      </TooltipTrigger>
-                      <TooltipContent side="right" className="bg-[#E1E7F3] text-[#2E4D61]/50 border-none font-nuvo shadow-none">
-                        Check out my <IconGithubLogo className="w-[18px] h-[18px] fill-[#2E4D61]/50 inline-block align-middle" /> Github
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
                 </div>
                 <div className="w-full relative">
-                  <div className="w-full sm:flex hidden justify-center items-center py-4">
+                  <div className="w-full sm:flex hidden items-center p-4">
                     <GithubSection />
                   </div>
                 </div>
-                <div className="relative w-full pt-4 pb-6 px-6">
+                {/* <div className="relative w-full pt-4 pb-6 px-6">
                   <Work />
-                </div>
+                </div> */}
               </div>
           </motion.div>
 
-            <div className="flex flex-col items-left justify-center gap-y-2 w-full my-12">
+            {/* <div className="flex flex-col items-left justify-center gap-y-2 w-full my-12">
               <div className="relative flex items-center justify-center w-full">
                 <div className="absolute h-[1px] w-full"></div>
                 <div className="group absolute bg-[#E1E7F3] flex flex-row items-center justify-center border-[#2E4D61]/30 ring-[8px] ring-[#E1E7F3]">
@@ -135,7 +117,7 @@ export default function Home() {
                 <Icon className="absolute h-6 w-6 -bottom-[13px] -left-[13px]  text-[#2E4D61] p-1 bg-[#E1E7F3]" />
                 <Icon className="absolute h-6 w-6 -bottom-[13px] -right-[11px] text-[#2E4D61] p-1 bg-[#E1E7F3]" />
               </div>
-            </div>
+            </div> */}
         </div>
       </div>
 
@@ -148,19 +130,3 @@ export default function Home() {
     </main>
   );
 }
-
-const Icon = ({ className, ...rest }: IconProps) => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth="1.5"
-      stroke="currentColor"
-      className={className}
-      {...rest}
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m6-6H6" />
-    </svg>
-  );
-};

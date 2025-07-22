@@ -46,11 +46,11 @@ export function GithubContributions({
 
   const getContributionColor = (level: number) => {
     const colors = {
-      0: 'bg-[#2E4D61]/10',
-      1: 'bg-[#2E4D61]/50',
-      2: 'bg-[#2E4D61]/70',
-      3: 'bg-[#2E4D61]/90',
-      4: 'bg-[#2E4D61]'
+      0: 'bg-zinc-50/10',
+      1: 'bg-zinc-50/30',
+      2: 'bg-zinc-50/50',
+      3: 'bg-zinc-50/60',
+      4: 'bg-zinc-50/70'
     };
     return colors[level as keyof typeof colors];
   };
@@ -103,7 +103,7 @@ export function GithubContributions({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className=""
+      className=" bg-zinc-800/50 border border-zinc-50/10 p-3 rounded-[12px]"
     >
       <div className="flex gap-[3px]">
         {weeks.map((week, weekIndex) => (
@@ -118,7 +118,7 @@ export function GithubContributions({
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: (weekIndex * 7 + dayIndex) * 0.001 }}
-                    className={`w-3.5 h-3.5 ${getContributionColor(day.level)} rounded-sm`}
+                    className={`w-3.5 h-3.5 ${getContributionColor(day.level)} rounded`}
                     title={day.date ? `${day.count} contributions on ${day.date}` : 'No contributions'}
                     />
                   </TooltipTrigger>
