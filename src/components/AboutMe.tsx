@@ -13,35 +13,38 @@ export default function AboutMe() {
     };
 
   return (
-    <div className="flex flex-col items-left">
+    <div className="flex flex-col items-left w-full">
       <div className="flex flex-col items-left font-nuvo gap-y-6 mt-6 px-4 ">
         {/* <h2 className="text-lg font-nuvo text-[#2E4D61]/30">TLDR;</h2> */}
-          <TooltipProvider>
+
+
+        <p className="group text-2xl text-zinc-50 hover:text-zinc-50 cursor-crosshair transition-all duration-150 ease-in-out">
+          <span className="group-hover:border-b-2 border-dotted group-hover:border-zinc-50/50">I&apos;m a designer &amp; engineer who <br /> enjoys crafting thoughtful <br />design into code</span>.
+        </p>
+
+        <TooltipProvider>
               <Tooltip delayDuration={0}>
                 <TooltipTrigger asChild>
                   <Button
                   variant="link"
                   onClick={() => setIsExpanded(!isExpanded)}
-                  className="group text-lg font-nuvo text-[#2E4D61]/30 transition-colors duration-150 ease-in-out mr-auto p-0"
-                  endIcon={isExpanded ? <IconApplescript className="mt-[2px] w-5 h-5 fill-[#2E4D61]/50 group-hover:fill-[#2E4D61]" />: <IconEyes className="mt-[2px] w-5 h-5 fill-[#2E4D61]/50 group-hover:fill-[#2E4D61]" />}
+                  className="group text-lg font-nuvo text-zinc-50/50 hover:text-zinc-50 transition-colors duration-150 ease-in-out mr-auto p-0"
+                  endIcon={isExpanded ? <IconApplescript className="mt-[2px] w-5 h-5 fill-zinc-50/50 group-hover:fill-zinc-50" />: <IconEyes className="mt-[2px] w-5 h-5 fill-zinc-50/50 group-hover:fill-zinc-50" />}
                 >
                   {isExpanded ? <span style={{ textDecoration: "line-through" }}>TLDR;</span> : "TLDR;"}
                 </Button>
               </TooltipTrigger>
               <TooltipContent 
                 side="right" 
-                className="text-[#2E4D61]/50 bg-[#E1E7F3] text-xs font-nuvo shadow-none"
+                sideOffset={10}
+                className="text-zinc-50 bg-zinc-950 border border-zinc-50/10 text-xs font-nuvo shadow-none"
               >
                 dive deeper
               </TooltipContent>
             </Tooltip>          
           </TooltipProvider>
-
-        <p className="group text-md text-[#2E4D61]/80 hover:text-[#2E4D61] cursor-crosshair transition-all duration-150 ease-in-out">
-          <span className="group-hover:border-b-2 border-dotted group-hover:border-[#2E4D61]/70">I really like crafting thoughtful design into code </span> and always looking for interesting problems to solve with Lassi, my design and development studio.
-        </p>
-
         <AnimatePresence>
+
           {isExpanded && (
             <motion.div
               initial="hidden"

@@ -80,7 +80,7 @@ export default function AbsoluteMenu() {
 
   return (
     <MotionConfig transition={transition}>
-      <div className="fixed bottom-6 flex items-center gap-2 bg-[#1a1c24] border border-white/5 backdrop-blur-md rounded-2xl shadow-lg overflow-hidden" ref={containerRef}>
+      <div className="fixed bottom-6 flex items-center gap-2 bg-[#1a1c2405] border border-white/5 backdrop-blur-md rounded-2xl shadow-lg overflow-hidden" ref={containerRef}>
         <div className='h-[55px] w-full'>
           <motion.div
             animate={{

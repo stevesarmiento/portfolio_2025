@@ -37,7 +37,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers>{children}</Providers>
-        <div className="flex w-full justify-center">
+        <div className="flex w-full justify-end px-12">
             <AbsoluteMenu />
           </div>
         </body>
