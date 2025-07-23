@@ -38,9 +38,9 @@ export default function Home() {
   }
 
   return (
-    <main className="flex h-screen w-full overflow-hidden">
+    <main className="h-screen w-full overflow-hidden grid grid-cols-4">
       {/* Content Column */}
-      <div className="w-full lg:w-1/2 py-24 flex flex-col items-center text-[#2E4D61] bg-black overflow-y-auto">
+      <div className="w-full col-span-2 py-24 flex flex-col items-center text-[#2E4D61] bg-black overflow-y-auto">
         <div className="flex w-[620px] flex-col gap-y-2 items-left justify-between">
           <motion.div 
             initial={{ opacity: 0, y: -5, filter: 'blur(5px)' }}
@@ -124,11 +124,16 @@ export default function Home() {
       </div>
 
       {/* ASCII Video Background Column */}
-      <div className="hidden lg:flex lg:w-1/2 relative bg-black">
-        <div className="absolute top-0 left-0 right-[-25%] bottom-0">
+      <motion.div 
+        initial={{ opacity: 0, filter: 'blur(5px)' }}
+        animate={{ opacity: 1, filter: 'blur(0px)' }}
+        transition={{ duration: 0.3, delay: 1.3 }}
+        className="col-span-2 relative bg-black"
+      >
+        <div className="h-full w-full translate-x-[8%]">
           <AsciiBgV2 />
         </div>
-      </div>
+      </motion.div>
     </main>
   );
 }

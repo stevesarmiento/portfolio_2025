@@ -32,13 +32,13 @@ export default function RootLayout({
         <head>
             <link rel="stylesheet" href="https://use.typekit.net/eom2mzt.css" />
             <PlausibleProvider domain="stevensarmi.com" />
-            <script
+            {/* <script
               crossOrigin="anonymous"
               src="//unpkg.com/react-scan/dist/auto.global.js"
-            />
+            /> */}
         </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black`}
       >
         <Providers>{children}</Providers>
         <div className="fixed bottom-[6%] right-[4%] z-50">
