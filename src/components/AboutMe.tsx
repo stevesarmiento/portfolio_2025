@@ -69,7 +69,7 @@ export default function AboutMe() {
               </p>
 
               <p className="group text-md text-zinc-50/50 hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
-                Most recently, <span className="group-hover:border-b-2 border-dotted group-hover:border-zinc-50/20">I helped startups, like 
+                Most recently, <span className="group-hover:border-b-2 border-dotted group-hover:border-zinc-50/20">I helped startups like 
                 <a href="https://metadao.fi" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 group-hover:border-b-2 group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-2">
                   <Image 
                     src="/img/work-metadao.png" 
