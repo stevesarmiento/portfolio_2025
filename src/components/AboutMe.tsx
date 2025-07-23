@@ -29,7 +29,7 @@ export default function AboutMe() {
                   <Button
                   variant="link"
                   onClick={() => setIsExpanded(!isExpanded)}
-                  className="group text-lg font-nuvo text-zinc-50/50 hover:text-zinc-50 transition-colors duration-150 ease-in-out mr-auto p-0"
+                  className="group text-lg font-nuvo text-zinc-50/70 hover:text-zinc-50 transition-colors duration-150 ease-in-out mr-auto p-0"
                   endIcon={isExpanded ? <IconApplescript className="mt-[2px] w-5 h-5 fill-zinc-50/50 group-hover:fill-zinc-50" />: <IconEyes className="mt-[2px] w-5 h-5 fill-zinc-50/50 group-hover:fill-zinc-50" />}
                 >
                   {isExpanded ? <span style={{ textDecoration: "line-through" }}>TLDR;</span> : "TLDR;"}
@@ -55,7 +55,7 @@ export default function AboutMe() {
               variants={variants}
               transition={{ duration: 0.5 }}
             >
-              <p className="group text-md text-zinc-50/50 hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
+              <p className="group text-md text-zinc-50/70 hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
                 Today, <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">I&apos;m building tools to help move internet capital markets forward for the  
                 <a href="https://solana.com" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-2">
                   <Image 
@@ -69,7 +69,7 @@ export default function AboutMe() {
                 </a></span>
               </p>
 
-              <p className="group text-md text-zinc-50/50 hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
+              <p className="group text-md text-zinc-50/70 hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
                 Most recently, <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">I worked with startups like 
                 <a href="https://metadao.fi" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-2">
                   <Image 
@@ -104,7 +104,7 @@ export default function AboutMe() {
                 </a> on product, design and <br />engineering.</span>
               </p>
 
-              <p className="group text-md text-zinc-50/50 hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
+              <p className="group text-md text-zinc-50/70 hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
                 I&apos;ve also built some things - <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">
                 <a href="https://capi.dev" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-1">
                   <Image 
@@ -174,7 +174,7 @@ export default function AboutMe() {
                 </span>
               </p>
 
-              <p className="group text-md text-zinc-50/50 hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
+              <p className="group text-md text-zinc-50/70 hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
                 Previously, <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">I was a contributor to 
                 <a href="https://mango.markets" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-2">
                   <Image 
