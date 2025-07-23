@@ -51,8 +51,8 @@ export default function Home() {
             onMouseLeave={() => setIsHovering(false)}
           >
             <div className="relative hover:cursor-crosshair hover:scale-110 active:scale-95 transition-all duration-150 ease-in-out">
-              <IconSealFill className=" h-[64px] w-[64px] fill-[#ffb7b7] group-hover:fill-slate-150 transition-all duration-150 ease-in-out group-hover:animate-spin-slow" />
-              <h1 className="absolute left-[25px] top-[14px] text-3xl font-black font-rafaella text-[#6f4747] transition-all duration-150 ease-in-out">S</h1>
+              <IconSealFill className=" h-[54px] w-[54px] fill-[#ffb7b7] group-hover:fill-slate-150 transition-all duration-150 ease-in-out group-hover:animate-spin-slow" />
+              <h1 className="absolute left-[21px] top-[11px] text-2xl font-black font-rafaella text-[#6f4747] transition-all duration-150 ease-in-out">S</h1>
             </div>
             <div className="flex-col text-right">
                 <span className="text-lg text-white font-nuvo flex flex-row items-center gap-x-1">
