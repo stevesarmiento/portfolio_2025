@@ -18,9 +18,10 @@ import {
 import GlassSurface from './ui/glass-surface';
 
 const transition = {
-  type: 'spring',
-  bounce: 0.1,
-  duration: 0.2,
+  type: "spring",
+  stiffness: 800,
+  damping: 80,
+  mass: 4,
 };
 
 const dragTransition = {
@@ -117,18 +118,25 @@ export default function AbsoluteMenu() {
           }}
           className="cursor-grab active:cursor-grabbing"
         >
-        <GlassSurface
-          displace={1.5}
-          distortionScale={-100}
-          redOffset={5}
-          greenOffset={15}
-          blueOffset={25}
-          brightness={60}
-          opacity={0.8}
-          height={66}
-          width={isOpen ? 255 : 166}
-          mixBlendMode="screen"
+        <motion.div
+          animate={{
+            width: isOpen ? 260 : 166,
+          }}
+          transition={transition}
+          initial={false}
         >
+          <GlassSurface
+            displace={1.5}
+            distortionScale={-100}
+            redOffset={5}
+            greenOffset={15}
+            blueOffset={25}
+            brightness={60}
+            opacity={0.8}
+            height={66}
+            width="100%"
+            mixBlendMode="screen"
+          >
           <div className='h-[55px] w-full'>
             <motion.div
               animate={{
@@ -202,6 +210,7 @@ export default function AbsoluteMenu() {
             </motion.div>
           </div>
         </GlassSurface>
+        </motion.div>
       </motion.div>
     </MotionConfig>
   );

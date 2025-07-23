@@ -68,7 +68,7 @@ export default function Home() {
                     height={22} 
                     className="inline-block mx-1 rounded-md ring-1 ring-white/10" 
                   />
-                  <a href="https://solana.foundation" target="_blank" rel="noreferrer" className="hover:text-zinc-50 hover:border-b-2 hover:border-[#ffb7b7] inline-flex space-x-1 items-center gap-1">
+                  <a href="https://solana.foundation" target="_blank" rel="noreferrer" className="hover:text-zinc-50 hover:border-b-2 hover:border-[#ffb7b7] inline-flex items-baseline space-x-1 items-center gap-1">
                     Solana Foundation
                   </a>
                 </span>
