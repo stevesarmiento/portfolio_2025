@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import AbsoluteMenu from "@/components/AbsoluteMenu";
 import PlausibleProvider from "next-plausible";
 import { Providers } from "./providers";
+import AbsoluteMenu from "@/components/AbsoluteMenu";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,14 +32,18 @@ export default function RootLayout({
         <head>
             <link rel="stylesheet" href="https://use.typekit.net/eom2mzt.css" />
             <PlausibleProvider domain="stevensarmi.com" />
+            <script
+              crossOrigin="anonymous"
+              src="//unpkg.com/react-scan/dist/auto.global.js"
+            />
         </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers>{children}</Providers>
-        <div className="flex w-full justify-end px-12">
+        <div className="fixed bottom-[6%] right-[4%] z-50">
             <AbsoluteMenu />
-          </div>
+        </div>
         </body>
       </html>
   );

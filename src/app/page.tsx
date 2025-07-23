@@ -40,7 +40,7 @@ export default function Home() {
   return (
     <main className="flex h-screen w-full overflow-hidden">
       {/* Content Column */}
-      <div className="w-full lg:w-1/2 py-24 flex flex-col items-center text-[#2E4D61] bg-zinc-950 overflow-y-auto">
+      <div className="w-full lg:w-1/2 py-24 flex flex-col items-center text-[#2E4D61] bg-black overflow-y-auto">
         <div className="flex w-[620px] flex-col gap-y-2 items-left justify-between">
           <motion.div 
             initial={{ opacity: 0, y: -5, filter: 'blur(5px)' }}
@@ -51,8 +51,8 @@ export default function Home() {
             onMouseLeave={() => setIsHovering(false)}
           >
             <div className="relative hover:cursor-crosshair hover:scale-110 active:scale-95 transition-all duration-150 ease-in-out">
-              <IconSealFill className=" h-[64px] w-[64px] fill-[#2E4D6160] group-hover:fill-slate-150 transition-all duration-150 ease-in-out group-hover:animate-spin-slow" />
-              <h1 className="absolute left-[25px] top-[14px] text-3xl font-rafaella text-white transition-all duration-150 ease-in-out">S</h1>
+              <IconSealFill className=" h-[64px] w-[64px] fill-[#ffb7b7] group-hover:fill-slate-150 transition-all duration-150 ease-in-out group-hover:animate-spin-slow" />
+              <h1 className="absolute left-[25px] top-[14px] text-3xl font-black font-rafaella text-[#6f4747] transition-all duration-150 ease-in-out">S</h1>
             </div>
             <div className="flex-col text-right">
                 <span className="text-lg text-white font-nuvo flex flex-row items-center gap-x-1">
@@ -68,7 +68,9 @@ export default function Home() {
                     height={22} 
                     className="inline-block mx-1 rounded-md ring-1 ring-white/10" 
                   />
-                  Solana Foundation
+                  <a href="https://solana.foundation" target="_blank" rel="noreferrer" className="hover:text-zinc-50 hover:border-b-2 hover:border-[#ffb7b7] inline-flex space-x-1 items-center gap-1">
+                    Solana Foundation
+                  </a>
                 </span>
               </div>
           </motion.div>
@@ -77,10 +79,10 @@ export default function Home() {
             initial={{ opacity: 0, y: 5, filter: 'blur(5px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 0.3, delay: 0.7 }}
-            className="flex flex-col items-center justify-center gap-y-2 mt-[40px]"
+            className="flex flex-col items-center justify-center gap-y-24 mt-[40px]"
           >
               <AboutMe /> 
-              <div className="w-full relative mt-6">
+              <div className="w-full relative mt-6 hidden">
                 <div className="relative flex flex-row items-center font-nuvo gap-x-3 mb-2 px-4 py-2">
                         <a 
                           href="https://github.com/stevesarmiento" 
@@ -122,7 +124,7 @@ export default function Home() {
       </div>
 
       {/* ASCII Video Background Column */}
-      <div className="hidden lg:flex lg:w-1/2 relative bg-zinc-950">
+      <div className="hidden lg:flex lg:w-1/2 relative bg-black">
         <div className="absolute top-0 left-0 right-[-25%] bottom-0">
           <AsciiBgV2 />
         </div>

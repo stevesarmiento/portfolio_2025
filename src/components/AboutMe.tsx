@@ -18,9 +18,8 @@ export default function AboutMe() {
       <div className="flex flex-col items-left font-nuvo gap-y-6 mt-6 px-4 ">
         {/* <h2 className="text-lg font-nuvo text-zinc-50/30/30">TLDR;</h2> */}
 
-
         <p className="group text-2xl text-zinc-50 hover:text-zinc-50 cursor-crosshair transition-all duration-150 ease-in-out">
-          <span className="group-hover:border-b-2 border-dotted group-hover:border-zinc-50/50">I&apos;m a designer &amp; engineer who <br /> enjoys crafting thoughtful <br />design into code</span>.
+          <span className="group-hover:border-b-2 border-dotted group-hover:border-zinc-50/20">I&apos;m a designer &amp; engineer who enjoys crafting thoughtful experiences <br /> into code</span>.
         </p>
 
         <TooltipProvider>
@@ -56,8 +55,8 @@ export default function AboutMe() {
               transition={{ duration: 0.5 }}
             >
               <p className="group text-md text-zinc-50/50 hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
-                Today, <span className="group-hover:border-b-2 border-dotted group-hover:border-[#2E4D61]/70">I&apos;m helping move internet capital markets forward with the  
-                <a href="https://solana.foundation" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 group-hover:border-b-2 group-hover:border-[#ffb7b7] inline-flex space-x-1 items-center gap-1 ml-2">
+                Today, <span className="group-hover:border-b-2 border-dotted group-hover:border-zinc-50/20">I&apos;m building tools to help move internet capital markets forward for the  
+                <a href="https://solana.com" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 group-hover:border-b-2 group-hover:border-[#ffb7b7] inline-flex space-x-1 items-center gap-1 ml-2">
                   <Image 
                     src="/img/work-solana.png" 
                     alt="Solana Foundation" 
@@ -65,46 +64,12 @@ export default function AboutMe() {
                     height={18} 
                     className="inline-block rounded-sm ring-1 ring-white/20 mr-1" 
                   />
-                  Solana Foundation
-                </a></span>.
+                  Solana ecosystem.
+                </a></span>
               </p>
 
               <p className="group text-md text-zinc-50/50 hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
-                I&apos;ve built some things - <span className="group-hover:border-b-2 border-dotted group-hover:border-[#2E4D61]/70">
-                <a href="https://capi.dev" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 group-hover:border-b-2 group-hover:border-[#ffb7b7] inline-flex space-x-1 items-center gap-1 ml-1">
-                  <Image 
-                    src="/img/work-capi.png" 
-                    alt="Capi" 
-                    width={18} 
-                    height={18} 
-                    className="inline-block rounded-sm ring-1 ring-white/20 mr-1" 
-                  />
-                  Capi
-                </a>, 
-                <a href="https://symbols.dev" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 group-hover:border-b-2 group-hover:border-[#ffb7b7] inline-flex space-x-1 items-center gap-1 ml-1">
-                  <Image 
-                    src="/img/work-symbols.png" 
-                    alt="Symbols" 
-                    width={18} 
-                    height={18} 
-                    className="inline-block rounded-sm ring-1 ring-white/20 mr-1" 
-                  />
-                  Symbols
-                </a>, and 
-                <a href="https://svela.xyz" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 group-hover:border-b-2 group-hover:border-[#ffb7b7] inline-flex space-x-1 items-center gap-1 ml-3">
-                  <Image 
-                    src="/img/work-svela.png" 
-                    alt="Svela" 
-                    width={18} 
-                    height={18} 
-                    className="inline-block rounded-sm ring-1 ring-white/20 mr-1" 
-                  />
-                  Svela
-                </a></span>.
-              </p>
-
-              <p className="group text-md text-zinc-50/50 hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
-                Most recently, <span className="group-hover:border-b-2 border-dotted group-hover:border-[#2E4D61]/70">I helped startups, like 
+                Most recently, <span className="group-hover:border-b-2 border-dotted group-hover:border-zinc-50/20">I helped startups, like 
                 <a href="https://metadao.fi" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 group-hover:border-b-2 group-hover:border-[#ffb7b7] inline-flex space-x-1 items-center gap-1 ml-2">
                   <Image 
                     src="/img/work-metadao.png" 
@@ -138,7 +103,41 @@ export default function AboutMe() {
               </p>
 
               <p className="group text-md text-zinc-50/50 hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
-                Previously, <span className="group-hover:border-b-2 border-dotted group-hover:border-[#2E4D61]/70">I was a contributor to 
+                I&apos;ve also built some things - <span className="group-hover:border-b-2 border-dotted group-hover:border-zinc-50/20">
+                <a href="https://capi.dev" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 group-hover:border-b-2 group-hover:border-[#ffb7b7] inline-flex space-x-1 items-center gap-1 ml-1">
+                  <Image 
+                    src="/img/work-capi.png" 
+                    alt="Capi" 
+                    width={18} 
+                    height={18} 
+                    className="inline-block rounded-sm ring-1 ring-white/20 mr-1" 
+                  />
+                  Capi
+                </a>, 
+                <a href="https://symbols.dev" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 group-hover:border-b-2 group-hover:border-[#ffb7b7] inline-flex space-x-1 items-center gap-1 ml-1">
+                  <Image 
+                    src="/img/work-symbols.png" 
+                    alt="Symbols" 
+                    width={18} 
+                    height={18} 
+                    className="inline-block rounded-sm ring-1 ring-white/20 mr-1" 
+                  />
+                  Symbols
+                </a>, 
+                <a href="https://svela.xyz" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 group-hover:border-b-2 group-hover:border-[#ffb7b7] inline-flex space-x-1 items-center gap-1 ml-3">
+                  <Image 
+                    src="/img/work-svela.png" 
+                    alt="Svela" 
+                    width={18} 
+                    height={18} 
+                    className="inline-block rounded-sm ring-1 ring-white/20 mr-1" 
+                  />
+                  Svela,
+                </a> and more.</span>
+              </p>
+
+              <p className="group text-md text-zinc-50/50 hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
+                Previously, <span className="group-hover:border-b-2 border-dotted group-hover:border-zinc-50/20">I was a contributor to 
                 <a href="https://mango.markets" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 group-hover:border-b-2 group-hover:border-[#ffb7b7] inline-flex space-x-1 items-center gap-1 ml-2">
                   <Image 
                     src="/img/work-mango.png" 
@@ -148,7 +147,7 @@ export default function AboutMe() {
                     className="inline-block rounded-sm ring-1 ring-white/20 mr-1" 
                   />
                   Mango
-                </a> a defi protocol. and was on the marketing team for 
+                </a> a defi protocol. prior to, I was on the marketing team for 
                 <a href="https://www.nasdaq.com/articles/coinbase-acquires-crypto-wallet-firm-brd" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 group-hover:border-b-2 group-hover:border-[#ffb7b7] inline-flex items-center gap-1 ml-2">
                   <Image 
                     src="/img/work-brd.png" 
@@ -158,7 +157,7 @@ export default function AboutMe() {
                     className="inline-block rounded-sm ring-1 ring-white/20 mr-1" 
                   />
                   BRD
-                </a> a crypto wallet.</span>
+                </a> <br />a crypto wallet.</span>
               </p>
             </motion.div>
           )}
