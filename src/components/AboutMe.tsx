@@ -19,8 +19,8 @@ export default function AboutMe() {
       <div className="flex flex-col items-left font-nuvo gap-y-6 mt-6 px-4 ">
         {/* <h2 className="text-lg font-nuvo text-zinc-50/30/30">TLDR;</h2> */}
 
-        <p className="group text-3xl text-zinc-50 hover:text-zinc-50 cursor-crosshair transition-all duration-150 ease-in-out">
-          <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">I design thoughtful experiences &amp; solve problems with code.</span>
+        <p className="group text-2xl text-zinc-50 hover:text-zinc-50 cursor-crosshair transition-all duration-150 ease-in-out">
+          <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">I help design thoughtful experiences <br />&amp; solve problems with code.</span>
         </p>
 
         <TooltipProvider>
