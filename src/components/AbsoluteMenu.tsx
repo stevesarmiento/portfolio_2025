@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useCallback, useMemo } from 'react';
 import { motion, MotionConfig } from 'framer-motion';
 import useClickOutside from '@/hooks/useClickOutside';
 import { Button } from "@/components/ui/button";
@@ -52,7 +52,7 @@ const socials = [
       link: "mailto:sarmiento.steven@gmail.com",
       icon: IconEnvelopeFill
     }
-  ]
+] as const;
 
 export default function AbsoluteMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -65,14 +65,42 @@ export default function AbsoluteMenu() {
   });
   const containerRef = useRef<HTMLDivElement>(null);
   
-  useClickOutside(containerRef as React.RefObject<HTMLElement>, () => {
+  const router = useRouter();
+  const pathname = usePathname();
+
+  // Memoize navigation handlers to prevent re-creation on every render
+  const handleHomeClick = useCallback(() => {
+    if (!isDragging && pathname !== '/') {
+      router.push('/');
+    }
+  }, [isDragging, pathname, router]);
+
+  const handlePlaygroundClick = useCallback(() => {
+    if (!isDragging && pathname !== '/playground') {
+      router.push('/playground');
+    }
+  }, [isDragging, pathname, router]);
+
+  const handleMoreClick = useCallback(() => {
+    if (!isDragging) {
+      setIsOpen(true);
+    }
+  }, [isDragging]);
+
+  const handleBackClick = useCallback(() => {
     if (!isDragging) {
       setIsOpen(false);
     }
-  });
+  }, [isDragging]);
+
+  // Memoize click outside handler
+  const handleClickOutside = useCallback(() => {
+    if (!isDragging) {
+      setIsOpen(false);
+    }
+  }, [isDragging]);
   
-  const router = useRouter();
-  const pathname = usePathname();
+  useClickOutside(containerRef as React.RefObject<HTMLElement>, handleClickOutside);
 
   // Set up drag constraints based on viewport size
   React.useEffect(() => {
@@ -92,32 +120,48 @@ export default function AbsoluteMenu() {
     return () => window.removeEventListener('resize', updateConstraints);
   }, []);
 
-  const handleDragStart = () => {
+  const handleDragStart = useCallback(() => {
     setIsDragging(true);
-  };
+  }, []);
 
-  const handleDragEnd = () => {
+  const handleDragEnd = useCallback(() => {
     setIsDragging(false);
-  };
+  }, []);
+
+  // Memoize social links to prevent re-renders
+  const socialLinks = useMemo(() => 
+    socials.map((social) => (
+      <a key={social.name} href={social.link} target="_blank" rel="noreferrer">
+        <Button 
+          variant="ghost" 
+          size="icon"
+          className="group rounded-xl bg-white/5 hover:bg-white/10"
+          disabled={isDragging}
+        >
+          <social.icon className="h-4 w-4 fill-white/50 group-hover:fill-white" />
+        </Button>
+      </a>
+    ))
+  , [isDragging]);
 
   return (
     <MotionConfig transition={transition}>
-              <motion.div
-          ref={containerRef}
-          drag
-          dragMomentum={false}
-          dragElastic={0.1}
-          dragSnapToOrigin={true}
-          dragConstraints={dragConstraints}
-          onDragStart={handleDragStart}
-          onDragEnd={handleDragEnd}
-          transition={dragTransition}
-          whileDrag={{
-            scale: 1.05,
-            rotate: isDragging ? 2 : 0,
-          }}
-          className="cursor-grab active:cursor-grabbing"
-        >
+      <motion.div
+        ref={containerRef}
+        drag
+        dragMomentum={false}
+        dragElastic={0.1}
+        dragSnapToOrigin={true}
+        dragConstraints={dragConstraints}
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
+        transition={dragTransition}
+        whileDrag={{
+          scale: 1.05,
+          rotate: isDragging ? 2 : 0,
+        }}
+        className="cursor-grab active:cursor-grabbing"
+      >
         <motion.div
           animate={{
             width: isOpen ? 260 : 166,
@@ -151,7 +195,7 @@ export default function AbsoluteMenu() {
                         variant="ghost" 
                         size="icon"
                         className={`group rounded-xl hover:bg-white/10 ${pathname === '/' ? 'bg-white/5' : ''}`}
-                        onClick={() => router.push('/')}
+                        onClick={handleHomeClick}
                         disabled={isDragging}
                     >
                         <span className="sr-only">Home</span>
@@ -161,7 +205,7 @@ export default function AbsoluteMenu() {
                         variant="ghost" 
                         size="icon"
                         className={`group rounded-xl hover:bg-white/10 ${pathname === '/playground' ? 'bg-white/5' : ''}`}
-                        onClick={() => router.push('/playground')}
+                        onClick={handlePlaygroundClick}
                         disabled={isDragging}
                     >
                         <span className="sr-only">Playground</span>
@@ -171,7 +215,7 @@ export default function AbsoluteMenu() {
                       variant="ghost"
                       size="icon" 
                       className="group rounded-xl hover:bg-white/10"
-                      onClick={() => !isDragging && setIsOpen(true)}
+                      onClick={handleMoreClick}
                       disabled={isDragging}
                       aria-label='more'
                     >
@@ -184,25 +228,14 @@ export default function AbsoluteMenu() {
                       variant="ghost"
                       size="icon"
                       className="group rounded-xl hover:bg-white/10"
-                      onClick={() => !isDragging && setIsOpen(false)} 
+                      onClick={handleBackClick} 
                       disabled={isDragging}
                       aria-label='Back'
                     >
                       <IconArrowLeft className='h-4 w-4 fill-white/50 group-hover:fill-white' />
                     </Button>
                     <div className='relative w-full space-x-2'>
-                      {socials.map((box, index) => ( 
-                          <a key={index} href={box.link} target="_blank" rel="noreferrer">
-                              <Button 
-                                  variant="ghost" 
-                                  size="icon"
-                                  className="group rounded-xl bg-white/5 hover:bg-white/10"
-                                  disabled={isDragging}
-                              >
-                              <box.icon className="h-4 w-4 fill-white/50 group-hover:fill-white" />
-                              </Button>
-                          </a>
-                      ))}
+                      {socialLinks}
                     </div>
                   </div>
                 )}

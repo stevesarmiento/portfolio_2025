@@ -31,7 +31,7 @@ export function FamilyActionButton() {
         {!isOpen ? (
           <motion.div 
             layoutId="family-button" 
-            className="flex flex-row items-center justify-center group p-1 rounded-full w-[40px] h-[40px] transition-all duration-150 ease-in-out bg-primary hover:bg-primary/90 border-[1px] border-white/5 shadow-lg shadow-black/40 cursor-pointer"
+            className="flex flex-row items-center justify-center group p-1 rounded-full w-[40px] h-[40px] transition-all duration-150 ease-in-out bg-zinc-700 hover:bg-zinc-600 border-[1px] border-white/5 shadow-lg shadow-black/40 cursor-pointer"
             transition={{ type: "spring", stiffness: 500, damping: 30}} 
             style={{ transformOrigin: "bottom right" }}           
             onClick={() => setIsOpen(true)}
@@ -41,7 +41,7 @@ export function FamilyActionButton() {
         ) : (
           <motion.div 
             layoutId="family-button" 
-            className="bg-primary h-[226px] w-[300px] rounded-[18px] p-1 cursor-pointer shadow-lg shadow-black/40"
+            className="bg-zinc-800 h-[226px] w-[300px] rounded-[18px] p-1 cursor-pointer shadow-lg shadow-black/40"
             transition={{ type: "spring", stiffness: 500, damping: 30 }}
             style={{ transformOrigin: "bottom right" }}
 

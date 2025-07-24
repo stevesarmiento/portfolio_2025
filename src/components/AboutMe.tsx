@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./ui/button";
-import { IconEyes, IconApplescript, IconPlus } from "symbols-react";
+import { IconSunDustFill, IconApplescript, IconPlus } from "symbols-react";
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip";
 
 export default function AboutMe() {
@@ -30,7 +30,7 @@ export default function AboutMe() {
                   variant="link"
                   onClick={() => setIsExpanded(!isExpanded)}
                   className="group text-lg font-nuvo text-zinc-50/70 hover:text-zinc-50 transition-colors duration-150 ease-in-out mr-auto p-0"
-                  endIcon={isExpanded ? <IconApplescript className="mt-[2px] w-5 h-5 fill-zinc-50/50 group-hover:fill-zinc-50" />: <IconEyes className="mt-[2px] w-5 h-5 fill-zinc-50/50 group-hover:fill-zinc-50" />}
+                  endIcon={isExpanded ? <IconApplescript className="mt-[2px] w-5 h-5 fill-zinc-50/50 group-hover:fill-zinc-50" />: <IconSunDustFill className="mt-[2px] w-5 h-5 fill-yellow-500/50 group-hover:fill-yellow-300" />}
                 >
                   {isExpanded ? <span style={{ textDecoration: "line-through" }}>TLDR;</span> : "TLDR;"}
                 </Button>
@@ -147,7 +147,7 @@ export default function AboutMe() {
                  
                 {showMoreProjects && (
                   <>
-                    <a href="https://senko.xyz" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-1">
+                    <a href="https://apps.apple.com/us/app/senko-simple-pro-camera/id6584516223" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-1">
                       <Image 
                         src="/img/work-senko.png" 
                         alt="Senko" 
@@ -158,7 +158,7 @@ export default function AboutMe() {
                       Senko
                     </a>
                     , and
-                    <a href="https://zenmail.xyz" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-1">
+                    <a href="https://github.com/rescomputer/res-ios" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-1">
                       <Image 
                         src="/img/work-res.png" 
                         alt="RES" 
@@ -176,7 +176,7 @@ export default function AboutMe() {
 
               <p className="group text-md text-zinc-50/70 hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
                 Previously, <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">I was a contributor to 
-                <a href="https://mango.markets" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-2">
+                <a href="https://x.com/mangomarkets" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-2">
                   <Image 
                     src="/img/work-mango.png" 
                     alt="Mango" 

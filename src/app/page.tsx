@@ -38,9 +38,21 @@ export default function Home() {
   }
 
   return (
-    <main className="h-screen w-full overflow-hidden grid grid-cols-4">
+    <main 
+      className="h-screen w-full overflow-hidden grid grid-cols-4 bg-[#171717]"
+      style={{
+        backgroundImage: `repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 13px,
+          rgba(255, 255, 255, 0.05) 15px,
+          rgba(255, 255, 255, 0.05) 15px
+        )`
+      }}
+      >
       {/* Content Column */}
-      <div className="w-full col-span-2 py-24 flex flex-col items-center text-[#2E4D61] bg-black overflow-y-auto">
+      <div 
+        className="w-full col-span-2 py-24 flex flex-col items-center text-[#2E4D61] overflow-y-auto">
         <div className="flex w-[620px] flex-col gap-y-2 items-left justify-between">
           <motion.div 
             initial={{ opacity: 0, y: -5, filter: 'blur(5px)' }}
@@ -51,8 +63,8 @@ export default function Home() {
             onMouseLeave={() => setIsHovering(false)}
           >
             <div className="relative hover:cursor-crosshair hover:scale-110 active:scale-95 transition-all duration-150 ease-in-out">
-              <IconSealFill className=" h-[54px] w-[54px] fill-zinc-900 group-hover:fill-slate-150 transition-all duration-150 ease-in-out group-hover:animate-spin-slow" />
-              <h1 className="absolute left-[21px] top-[11px] text-2xl font-black font-rafaella text-zinc-800 group-hover:text-zinc-50 transition-all duration-150 ease-in-out">S</h1>
+              <IconSealFill className=" h-[54px] w-[54px] fill-zinc-800 group-hover:fill-zinc-800 transition-all duration-150 ease-in-out group-hover:animate-spin-slow" />
+              <h1 className="absolute left-[21px] top-[11px] text-2xl font-black font-rafaella text-zinc-600 group-hover:text-zinc-50 transition-all duration-150 ease-in-out">S</h1>
             </div>
             <div className="flex-col text-right">
                 <span className="text-lg text-white font-nuvo flex flex-row items-center gap-x-1">
@@ -128,11 +140,16 @@ export default function Home() {
         initial={{ opacity: 0, filter: 'blur(5px)' }}
         animate={{ opacity: 1, filter: 'blur(0px)' }}
         transition={{ duration: 0.3, delay: 1.3 }}
-        className="col-span-2 relative bg-black"
-      >
-        <div className="h-full w-full translate-x-[8%]">
-          <AsciiBgV2 />
+        className="col-span-2 relative overflow-hidden"
+        >
+        <div 
+          className="h-full w-full overflow-hidden"
+          >
+          <div className="h-full w-full translate-x-[5%] scale-110">
+            <AsciiBgV2 />
+          </div>          
         </div>
+
       </motion.div>
     </main>
   );

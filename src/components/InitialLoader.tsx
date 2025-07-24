@@ -4,7 +4,7 @@ import { IconSealFill } from 'symbols-react';
 
 const InitialLoader: React.FC = () => {
   return (
-    <main className="flex flex-col items-center justify-center text-white w-screen h-screen bg-black">
+    <main className="flex flex-col items-center justify-center text-white w-screen h-screen bg-[#171717]">
         <motion.div 
             className="flex items-center justify-center"
             initial={{ scale: 1, opacity: 1, filter: 'blur(0px)' }}

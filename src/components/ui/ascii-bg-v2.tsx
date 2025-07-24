@@ -26,7 +26,7 @@ export default function AsciiBgV2() {
   const mountedRef = useRef(true)
 
   // Fixed parameters - adjust these as needed
-  const resolution = 0.44 // Slightly reduced for better performance
+  const resolution = 0.35 // Slightly reduced for better performance
   const inverted = false
   const grayscale = false
   const charSet = "minimal"

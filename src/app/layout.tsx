@@ -38,7 +38,7 @@ export default function RootLayout({
             /> */}
         </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#171717]`}
       >
         <Providers>{children}</Providers>
         <div className="fixed bottom-[6%] right-[4%] z-50">
