@@ -56,7 +56,7 @@ export default function Playground() {
           <div className="flex h-full w-full items-center justify-center rounded-[23px] ring-slate-700/10 ring-[1px] mb-3">
             <FamilyWalletCreation />
           </div>
-          <div className="text-center max-w-xs">
+          <div className="text-left w-full">
             <h2 className="text-base font-nuvo text-[#2E4D61]/40 mb-1">Family Wallet Creation</h2>
             <span className="text-xs text-[#2E4D61]/80">Wallet creation animation experiment</span>
           </div>
@@ -67,7 +67,7 @@ export default function Playground() {
           <div className="flex h-full w-full items-center justify-center rounded-[20px] bg-[#2E4D61]/10 bg-bkg-ios-bkg bg-cover bg-center ring-slate-700/10 ring-[1px] mb-3">
             <IosAppFolder />
           </div>
-          <div className="text-center max-w-xs">
+          <div className="text-left w-full">
             <h2 className="text-base font-nuvo text-[#2E4D61]/40 mb-1">iOS App Folder</h2>
             <span className="text-xs text-[#2E4D61]/80">iOS folder animation replica</span>
           </div>
@@ -89,7 +89,7 @@ export default function Playground() {
             }}>
               <WalletModal />
             </div>
-            <div className="text-center max-w-xs">
+            <div className="text-left w-full">
               <h2 className="text-base font-nuvo text-[#2E4D61]/40 mb-1">Wallet Info Modal</h2>
               <span className="text-xs text-[#2E4D61]/80">Transitional animations experiment</span>
             </div>
@@ -111,7 +111,7 @@ export default function Playground() {
             }}>
               <WalletCommander />
             </div>
-            <div className="text-center max-w-xs">
+            <div className="text-left w-full">
               <h2 className="text-base font-nuvo text-[#2E4D61]/40 mb-1">Wallet CMD + K</h2>
               <span className="text-xs text-[#2E4D61]/80">Natural language wallet interface</span>
             </div>
@@ -134,7 +134,7 @@ export default function Playground() {
             }}>
             <FamilyGasSelector isDark={false} />
           </div>
-          <div className="text-center max-w-xs">
+          <div className="text-left w-full">
             <h2 className="text-base font-nuvo text-[#2E4D61]/40 mb-1">Family TX Confirmation</h2>
             <span className="text-xs text-[#2E4D61]/80">Transaction simulator with gas selector</span>
           </div>
@@ -155,7 +155,7 @@ export default function Playground() {
             }}>
             <DrawerDemo />
           </div>
-          <div className="text-center max-w-xs">
+          <div className="text-left w-full">
             <h2 className="text-base font-nuvo text-[#2E4D61]/40 mb-1">Family Feedback Modal</h2>
             <span className="text-xs text-[#2E4D61]/80">Family feedback modal with drawer</span>
           </div>
@@ -176,7 +176,7 @@ export default function Playground() {
             }}>
             <FamilyActionButton />
           </div>
-          <div className="text-center max-w-xs">
+          <div className="text-left w-full">
             <h2 className="text-base font-nuvo text-[#2E4D61]/40 mb-1">Family Action Button</h2>
             <span className="text-xs text-[#2E4D61]/80">Action button with state transitions</span>
           </div>
@@ -189,7 +189,7 @@ export default function Playground() {
               <IconScribble className="w-10 h-10 fill-[#2E4D61]/30" />
             </div>
           </div>
-          <div className="text-center max-w-xs">
+          <div className="text-left w-full">
             <h2 className="text-base font-nuvo text-[#2E4D61]/30 mb-1">Coming Soon</h2>
             <span className="text-xs text-[#2E4D61]/40">Space for your next experiment</span>
           </div>
