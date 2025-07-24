@@ -45,8 +45,8 @@ export default function Home() {
           90deg,
           transparent,
           transparent 13px,
-          rgba(255, 255, 255, 0.05) 15px,
-          rgba(255, 255, 255, 0.05) 15px
+          rgba(255, 255, 255, 0.02) 15px,
+          rgba(255, 255, 255, 0.02) 15px
         )`
       }}
       >
