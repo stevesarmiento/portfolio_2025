@@ -51,15 +51,15 @@ export default function Home() {
             onMouseLeave={() => setIsHovering(false)}
           >
             <div className="relative hover:cursor-crosshair hover:scale-110 active:scale-95 transition-all duration-150 ease-in-out">
-              <IconSealFill className=" h-[54px] w-[54px] fill-[#ffb7b7] group-hover:fill-slate-150 transition-all duration-150 ease-in-out group-hover:animate-spin-slow" />
-              <h1 className="absolute left-[21px] top-[11px] text-2xl font-black font-rafaella text-[#6f4747] transition-all duration-150 ease-in-out">S</h1>
+              <IconSealFill className=" h-[54px] w-[54px] fill-zinc-900 group-hover:fill-slate-150 transition-all duration-150 ease-in-out group-hover:animate-spin-slow" />
+              <h1 className="absolute left-[21px] top-[11px] text-2xl font-black font-rafaella text-zinc-800 group-hover:text-zinc-50 transition-all duration-150 ease-in-out">S</h1>
             </div>
             <div className="flex-col text-right">
                 <span className="text-lg text-white font-nuvo flex flex-row items-center gap-x-1">
                   <AnimatedText text="Steven Sarmi" isAnimating={isHovering} />
                   <motion.span animate={{ opacity: [1, 0, 1] }} transition={{ repeat: Infinity, duration: 0.5 }}>_</motion.span>
                 </span>
-                <span className="text-md text-zinc-50/40 font-mono flex flex-row items-center gap-x-1">
+                <span className="text-md text-zinc-50/40 font-mono flex flex-row items-center gap-x-1 border-b-2 border-transparent">
                   Product Engineering @ the
                   <Image 
                     src="/img/work-solana.png" 
@@ -68,7 +68,7 @@ export default function Home() {
                     height={22} 
                     className="inline-block mx-1 rounded-md ring-1 ring-white/10" 
                   />
-                  <a href="https://solana.foundation" target="_blank" rel="noreferrer" className="hover:text-zinc-50 hover:border-b-2 hover:border-[#ffb7b7] inline-flex items-baseline space-x-1 items-center gap-1">
+                  <a href="https://solana.foundation" target="_blank" rel="noreferrer" className="hover:text-zinc-50 border-b-2 border-transparent hover:border-[#ffb7b7] inline-flex items-baseline space-x-1 gap-1 translate-y-[2px]">
                     Solana Foundation
                   </a>
                 </span>
