@@ -24,7 +24,7 @@ export const WalletModal: FC<WalletModalProps> = () => {
     
     return (
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger className="inline-flex items-center justify-center rounded-full text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-[#2b2b2b] text-white hover:bg-[#383838] h-10 px-4 py-2">
+            <DialogTrigger className="inline-flex items-center justify-center rounded-full text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-zinc-700 hover:bg-zinc-600 border-[1px] border-white/5 shadow-lg shadow-black/40 text-white h-10 px-4 py-2">
                 What is a Wallet?
             </DialogTrigger>
             <DialogContent className="max-w-[350px] max-h-[520px] bg-[#2b2b2b] !rounded-[30px]" hideTitle>

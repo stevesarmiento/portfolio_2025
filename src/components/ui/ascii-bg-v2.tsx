@@ -26,16 +26,16 @@ export default function AsciiBgV2() {
   const mountedRef = useRef(true)
 
   // Fixed parameters - adjust these as needed
-  const resolution = 0.8 // Optimized for better performance
+  const resolution = 0.35 // Slightly reduced for better performance
   const inverted = false
-  const grayscale = false // Set to true for grayscale
-  const charSet = "minimal" // "standard", "detailed", "blocks", "minimal"
+  const grayscale = false
+  const charSet = "minimal"
 
   const charSets = {
     standard: " .:-=+*#%@",
     detailed: " .,:;i1tfLCG08@",
     blocks: " ░▒▓█",
-    minimal: " .:.",
+    minimal: " . ",
   }
 
   // Cleanup on unmount
@@ -254,26 +254,31 @@ export default function AsciiBgV2() {
       video.autoplay = false // Don't autoplay initially
 
       // Use Big Buck Bunny - a reliable open source video
-      //const videoUrl = "https://cdn.midjourney.com/video/5968eaf4-8897-47f5-9850-3b64a3a72f5e/0.mp4"
-      //const videoUrl = "https://cdn.midjourney.com/video/91b92886-9e4a-4a39-9c8f-bc6f75635012/0.mp4"
-      //const videoUrl = "https://cdn.midjourney.com/video/4f2e9964-3aed-4452-a74a-332f9ff74bc9/0.mp4"
-      //const videoUrl = "https://cdn.midjourney.com/video/d0f201b5-3746-424e-9507-1a7996e94227/0.mp4"
-      //const videoUrl = "https://cdn.midjourney.com/video/ad03f41b-e25f-4ea3-b617-5a4e9193f861/0.mp4"
-      //const videoUrl = "https://cdn.midjourney.com/video/91f43552-5b7c-4451-81af-42af5e342a6c/0.mp4"
-      //const videoUrl = "https://cdn.midjourney.com/video/561afba0-b9a4-4d8b-ae50-3b528862369d/0.mp4"
-      //const videoUrl = "https://cdn.midjourney.com/video/790f3e18-4d55-4b9c-bc39-ce423c85421e/0.mp4"
-      //const videoUrl = "https://cdn.midjourney.com/video/860c7a91-e2f3-4211-af82-4950de922ed7/0.mp4"
-      //const videoUrl = "https://cdn.midjourney.com/video/8a467a72-d5dd-4065-87a2-4766dc7034e9/0.mp4"
-      //const videoUrl = "https://cdn.midjourney.com/video/1703ed12-23ee-4b5d-a73d-4c1acd46e823/0.mp4"
-      //const videoUrl = "https://cdn.midjourney.com/video/b99e9209-ca8a-45ef-b121-803b01c31506/0.mp4"
-      //const videoUrl = "https://cdn.midjourney.com/video/a5db9318-5787-4e7b-9970-12e005ae9e25/0.mp4"
-//      const videoUrl = "https://cdn.midjourney.com/video/c6fea955-cf63-489b-9d0a-aa4e55705478/0.mp4"
-     const videoUrl = "https://cdn.midjourney.com/video/0f357baf-1a92-4acf-b074-9ddc377d7805/0.mp4"
-//      const videoUrl = "https://cdn.midjourney.com/video/355af0af-465d-43a3-92bc-6cc8dcd9f0ea/0.mp4"
-//      const videoUrl = "https://cdn.midjourney.com/video/6a379917-a44d-4f68-9ac1-7c1f9e5d4e21/0.mp4"
-//      const videoUrl = "https://cdn.midjourney.com/video/196e067c-6a32-4b42-9476-66bd56f6b775/0.mp4"
-      //const videoUrl = "https://cdn.midjourney.com/video/a851e2d9-d630-46fa-a6f8-08742647d348/0.mp4"
-      
+      // const videoUrl = "https://cdn.midjourney.com/video/5968eaf4-8897-47f5-9850-3b64a3a72f5e/0.mp4"
+      // const videoUrl = "https://cdn.midjourney.com/video/91b92886-9e4a-4a39-9c8f-bc6f75635012/0.mp4"
+      // const videoUrl = "https://cdn.midjourney.com/video/d0f201b5-3746-424e-9507-1a7996e94227/0.mp4"
+      // const videoUrl = "https://cdn.midjourney.com/video/91f43552-5b7c-4451-81af-42af5e342a6c/0.mp4"
+      // const videoUrl = "https://cdn.midjourney.com/video/561afba0-b9a4-4d8b-ae50-3b528862369d/0.mp4"
+      // const videoUrl = "https://cdn.midjourney.com/video/790f3e18-4d55-4b9c-bc39-ce423c85421e/0.mp4"
+      // const videoUrl = "https://cdn.midjourney.com/video/860c7a91-e2f3-4211-af82-4950de922ed7/0.mp4"
+      // const videoUrl = "https://cdn.midjourney.com/video/1703ed12-23ee-4b5d-a73d-4c1acd46e823/0.mp4"
+      // const videoUrl = "https://cdn.midjourney.com/video/b99e9209-ca8a-45ef-b121-803b01c31506/0.mp4"
+      //  const videoUrl = "https://cdn.midjourney.com/video/a5db9318-5787-4e7b-9970-12e005ae9e25/0.mp4"
+      // const videoUrl = "https://cdn.midjourney.com/video/c6fea955-cf63-489b-9d0a-aa4e55705478/0.mp4"
+      //  const videoUrl = "https://cdn.midjourney.com/video/355af0af-465d-43a3-92bc-6cc8dcd9f0ea/0.mp4"
+      //  const videoUrl = "https://cdn.midjourney.com/video/6a379917-a44d-4f68-9ac1-7c1f9e5d4e21/0.mp4"
+      //  const videoUrl = "https://cdn.midjourney.com/video/196e067c-6a32-4b42-9476-66bd56f6b775/0.mp4"
+      // const videoUrl = "https://cdn.midjourney.com/video/a851e2d9-d630-46fa-a6f8-08742647d348/0.mp4"
+      // const videoUrl = "https://cdn.midjourney.com/video/16b86ec9-f310-4d40-95be-9c5bc885ac84/0.mp4"
+
+      // GOOD TO GO
+      // const videoUrl = "https://cdn.midjourney.com/video/0f357baf-1a92-4acf-b074-9ddc377d7805/0.mp4"
+     const videoUrl = "https://cdn.midjourney.com/video/4f2e9964-3aed-4452-a74a-332f9ff74bc9/0.mp4"
+      // const videoUrl = "https://cdn.midjourney.com/video/ad03f41b-e25f-4ea3-b617-5a4e9193f861/0.mp4"
+      // const videoUrl = "https://cdn.midjourney.com/video/8a467a72-d5dd-4065-87a2-4766dc7034e9/0.mp4"
+
+
+
       console.log("📥 Loading video from:", videoUrl)
       
       const loadPromise = new Promise<void>((resolve, reject) => {
@@ -430,7 +435,7 @@ export default function AsciiBgV2() {
   }
 
   return (
-    <div className="w-full h-full bg-zinc-950 overflow-hidden relative">
+    <div className="w-full h-full overflow-hidden relative">
       <canvas ref={canvasRef} className="hidden" />
       
       <canvas

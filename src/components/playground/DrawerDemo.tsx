@@ -88,7 +88,7 @@ export function DrawerDemo() {
       <DrawerTrigger asChild>
         <Button 
         endIcon={<IconMegaphoneFill className="h-4 w-4 fill-orange-300" />}
-        className="rounded-full hover:bg-primary/80">
+        className="rounded-full bg-zinc-700 hover:bg-zinc-600 border-[1px] border-white/5 shadow-lg shadow-black/40">
           Send Feedback
         </Button>
       </DrawerTrigger>
