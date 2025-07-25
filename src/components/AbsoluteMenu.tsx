@@ -33,16 +33,6 @@ const dragTransition = {
 
 const socials = [
     {
-      name: "X",
-      link: "https://x.com/stevensarmi_",
-      icon: IconXLogo
-    },
-    {
-      name: "Figma",
-      link: "https://www.figma.com/@sarmiento",
-      icon: IconFigmaLogo
-    },
-    {
       name: "Calendar",
       link: "https://cal.com/lassi",
       icon: IconCalendar
@@ -51,6 +41,16 @@ const socials = [
       name: "Email",
       link: "mailto:sarmiento.steven@gmail.com",
       icon: IconEnvelopeFill
+    },
+    {
+      name: "X",
+      link: "https://x.com/stevensarmi_",
+      icon: IconXLogo
+    },
+    {
+      name: "Figma",
+      link: "https://www.figma.com/@sarmiento",
+      icon: IconFigmaLogo
     }
 ] as const;
 

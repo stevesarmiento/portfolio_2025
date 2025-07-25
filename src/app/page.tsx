@@ -72,7 +72,7 @@ export default function Home() {
                   <motion.span animate={{ opacity: [1, 0, 1] }} transition={{ repeat: Infinity, duration: 0.5 }}>_</motion.span>
                 </span>
                 <span className="text-md text-zinc-50/40 font-mono flex flex-row items-center gap-x-1 border-b-2 border-transparent">
-                  Product Engineering @ the
+                  Product Engineer @ the
                   <Image 
                     src="/img/work-solana.png" 
                     alt="Solana Foundation" 
