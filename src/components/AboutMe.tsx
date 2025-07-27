@@ -20,7 +20,7 @@ export default function AboutMe() {
         {/* <h2 className="text-lg font-nuvo text-zinc-50/30/30">TLDR;</h2> */}
 
         <p className="group text-2xl text-zinc-50 hover:text-zinc-50 cursor-crosshair transition-all duration-150 ease-in-out">
-          <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">I help design thoughtful experiences <br />&amp; solve problems with code.</span>
+          <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">Pushing towards building thoughtful experiences &amp; solving interesting problems with code.</span>
         </p>
 
         <TooltipProvider>
@@ -56,7 +56,7 @@ export default function AboutMe() {
               transition={{ duration: 0.5 }}
             >
               <p className="group text-md text-zinc-50/70 hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
-                Today, <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">I&apos;m building tools to help move internet capital markets forward for the  
+                Today, <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">I&apos;m helping to build tools for the  
                 <a href="https://solana.com" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-2">
                   <Image 
                     src="/img/work-solana.png" 
