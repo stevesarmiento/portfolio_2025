@@ -8,6 +8,9 @@ import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/comp
 export default function AboutMe() {
     const [isExpanded, setIsExpanded] = useState(true);
     const [showMoreProjects, setShowMoreProjects] = useState(false);
+    const [showMoreHistory, setShowMoreHistory] = useState(false);
+    const [showMoreBrd, setShowMoreBrd] = useState(false);
+
 
     const variants = {
       hidden: { opacity: 0, filter: "blur(4px)" },
@@ -185,7 +188,24 @@ export default function AboutMe() {
                     className="inline-block rounded-sm ring-1 ring-white/20 mr-1 transform translate-y-[2.5px]" 
                   />
                   Mango
-                </a> a defi protocol. Prior to that, I was on the marketing team for 
+                </a>,
+                <button 
+                  onClick={() => setShowMoreHistory(!showMoreHistory)}
+                  className="w-0 group-hover:w-4 ml-2 cursor-pointer"
+                >
+                  <IconPlus className={`hidden group-hover:block w-2.5 h-2.5 fill-zinc-50/50 group-hover:fill-zinc-50 ${showMoreHistory ? 'rotate-45' : ''} transition-all duration-150 ease-in-out`} />
+                </button>              
+                {showMoreHistory ? 'a open-source defi platform on Solana ' : 'a open-source defi platform on Solana. '}                 
+                {showMoreHistory && (
+                  <>
+                    where I worked on community growth, product strategy, and frontend development.
+                  </>
+                )}
+                </span>
+                </p>
+                <p className="group text-md text-zinc-50/70 hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
+                 Prior to that, I was on the marketing team for
+                 <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">
                 <a href="https://www.nasdaq.com/articles/coinbase-acquires-crypto-wallet-firm-brd" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex items-baseline gap-1 ml-2">
                   <Image 
                     src="/img/work-brd.png" 
@@ -195,7 +215,19 @@ export default function AboutMe() {
                     className="inline-block rounded-sm ring-1 ring-white/20 mr-1 transform translate-y-[2.5px]" 
                   />
                   BRD
-                </a> <br />a crypto wallet.</span>
+                </a>,
+                <button 
+                  onClick={() => setShowMoreBrd(!showMoreBrd)}
+                  className="w-0 group-hover:w-4 ml-2 cursor-pointer"
+                >
+                  <IconPlus className={`hidden group-hover:block w-2.5 h-2.5 fill-zinc-50/50 group-hover:fill-zinc-50 ${showMoreBrd ? 'rotate-45' : ''} transition-all duration-150 ease-in-out`} />
+                </button>
+                {showMoreBrd ? 'a crypto wallet ' : 'a crypto wallet.'}</span>
+                {showMoreBrd && (
+                  <>
+                    where I worked as a visual designer and marketing manager, leading user acquisition and growth.
+                  </>
+                )}
               </p>
             </motion.div>
           )}
