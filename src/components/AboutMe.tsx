@@ -178,7 +178,7 @@ export default function AboutMe() {
               </p>
 
               <p className="group text-md text-zinc-50/70 hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
-                Previously, <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">I was a contributor to 
+                Previously, <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">I was a core contributor to 
                 <a href="https://x.com/mangomarkets" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-2">
                   <Image 
                     src="/img/work-mango.png" 
