@@ -54,7 +54,7 @@ export default function AboutMe() {
               initial="hidden"
               animate="visible"
               exit="hidden"
-              className="flex flex-col items-left gap-y-6 w-[600px]"
+              className="flex flex-col items-left gap-y-6 w-full sm:w-[620px]"
               variants={variants}
               transition={{ duration: 0.5 }}
             >

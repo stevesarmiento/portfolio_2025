@@ -39,7 +39,7 @@ export default function Home() {
 
   return (
     <main 
-      className="h-screen w-full overflow-hidden grid grid-cols-4 bg-[#171717]"
+      className="h-screen w-full overflow-hidden grid sm:grid-cols-4 grid-cols-1 bg-[#171717]"
       style={{
         backgroundImage: `repeating-linear-gradient(
           90deg,
@@ -52,8 +52,8 @@ export default function Home() {
       >
       {/* Content Column */}
       <div 
-        className="w-full col-span-2 py-24 flex flex-col items-center text-[#2E4D61] overflow-y-auto">
-        <div className="flex w-[620px] flex-col gap-y-2 items-left justify-between">
+        className="w-full col-span-1 sm:col-span-2 py-24 flex flex-col items-center text-[#2E4D61] overflow-y-auto">
+        <div className="flex w-full sm:w-[620px] flex-col gap-y-2 items-left justify-between">
           <motion.div 
             initial={{ opacity: 0, y: -5, filter: 'blur(5px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -66,12 +66,12 @@ export default function Home() {
               <IconSealFill className=" h-[54px] w-[54px] fill-zinc-800 group-hover:fill-zinc-800 transition-all duration-150 ease-in-out group-hover:animate-spin-slow" />
               <h1 className="absolute left-[21px] top-[11px] text-2xl font-black font-rafaella text-zinc-600 group-hover:text-zinc-50 transition-all duration-150 ease-in-out">S</h1>
             </div>
-            <div className="flex-col text-right">
+            <div className="flex-col text-left">
                 <span className="text-lg text-white font-nuvo flex flex-row items-center gap-x-1">
                   <AnimatedText text="Steven Sarmi" isAnimating={isHovering} />
                   <motion.span animate={{ opacity: [1, 0, 1] }} transition={{ repeat: Infinity, duration: 0.5 }}>_</motion.span>
                 </span>
-                <span className="text-md text-zinc-50/40 font-mono flex flex-row items-center gap-x-1 border-b-2 border-transparent">
+                <span className="sm:text-md text-sm text-zinc-50/40 font-mono flex flex-row items-center gap-x-1 border-b-2 border-transparent">
                   Product Engineer @ the
                   <Image 
                     src="/img/work-solana.png" 
