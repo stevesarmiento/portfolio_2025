@@ -30,7 +30,7 @@
     "cmdk": "1.0.0",
     "lucide-react": "^0.381.0",
     "motion": "^11.18.2",
-    "next": "^15.4.2",
+    "next": "15.4.10",
     "next-plausible": "^3.12.4",
     "qrcode.react": "^4.2.0",
     "react": "^19.1.0",
