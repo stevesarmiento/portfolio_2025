@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { TooltipProvider } from '@/components/ui/tooltip';
-import { communityLints } from '@/data/communityLinkts';
+import { communityLinks } from '@/data/community-links';
 import { CommunityLinkCard } from './ui/community-link-card';
 
 export default function CommunityLinks() {
@@ -13,12 +13,12 @@ export default function CommunityLinks() {
 
       <TooltipProvider>
           <div className="flex flex-col space-y-1">
-            {communityLints.map((lint) => (
+            {communityLinks.map((link) => (
               <CommunityLinkCard 
-                key={lint.id} 
-                lint={lint}
+                key={link.id} 
+                link={link}
                 onClick={() => {
-                  window.open(lint.link, '_blank');
+                  window.open(link.link, '_blank');
                 }}
               />
             ))}

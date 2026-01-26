@@ -10,15 +10,15 @@ import {
 } from "symbols-react";
 import { motion } from "framer-motion";
 
-import InitialLoader from "@/components/InitialLoader";
-// import InteractiveIntro from "@/components/InteractiveIntro";
+import InitialLoader from "@/components/initial-loader";
+// import InteractiveIntro from "@/components/interactive-intro";
 import AsciiBgV2 from "@/components/ui/ascii-bg-v2";
 
-// import Work from "@/components/Work";
-import GithubSection from "@/components/GithubSection";
+// import Work from "@/components/work";
+import GithubSection from "@/components/github-section";
 import { AnimatedText } from "@/components/ui/animated-text";
-import AboutMe from "@/components/AboutMe";
-//import CommunityLinks from "@/components/CommunityLinks";
+import AboutMe from "@/components/about-me";
+//import CommunityLinks from "@/components/community-links";
 
 
 export default function Home() {

@@ -4,7 +4,7 @@ import { IconGamecontrollerFill, IconSquareOnSquare } from "symbols-react";
 
 interface FamilyWalletCardProps {
     bgColor?: string;
-    IconComponent?: React.ReactNode;
+    IconComponent?: React.ComponentType<{ className?: string }>;
     walletName?: string;
     ethValue?: string;
     onClick?: () => void;

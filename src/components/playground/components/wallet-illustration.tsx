@@ -23,7 +23,7 @@ export const WalletIllustration: React.FC<WalletIllustrationProps> = ({
     currentStep,
 }) => {
     const springTransition = {
-        type: 'spring',
+        type: 'spring' as const,
         stiffness: 150,
         damping: 19,
         mass: 1.2,
@@ -40,7 +40,7 @@ export const WalletIllustration: React.FC<WalletIllustrationProps> = ({
             rotate: 20,
             scale: 1,
             transition: {
-                springTransition,
+                ...springTransition,
             },
         },
         step2: {
@@ -49,7 +49,7 @@ export const WalletIllustration: React.FC<WalletIllustrationProps> = ({
             rotate: 360,
             scale: 0.2,
             transition: {
-                springTransition,
+                ...springTransition,
             },
         },
         step3: {
@@ -79,7 +79,7 @@ export const WalletIllustration: React.FC<WalletIllustrationProps> = ({
             scale: 1,
             opacity: 1,
             transition: {
-                springTransition,
+                ...springTransition,
                 delay: 0.2,
             },
         },
@@ -104,7 +104,7 @@ export const WalletIllustration: React.FC<WalletIllustrationProps> = ({
             scale: 0.8,
             rotate: -5,
             opacity: 1,
-            transition: { springTransition, delay: 0.2 },
+            transition: { ...springTransition, delay: 0.2 },
         },
         btcStep1: {
             x: -150,
@@ -112,7 +112,7 @@ export const WalletIllustration: React.FC<WalletIllustrationProps> = ({
             scale: 0.23,
             rotate: -13,
             opacity: 1,
-            transition: { springTransition },
+            transition: { ...springTransition },
         },
         ethStep0: {
             x: 48,
@@ -120,7 +120,7 @@ export const WalletIllustration: React.FC<WalletIllustrationProps> = ({
             scale: 0.7,
             rotate: 0,
             opacity: 1,
-            transition: { springTransition, delay: 0.3 },
+            transition: { ...springTransition, delay: 0.3 },
         },
         ethStep1: {
             x: -150,
@@ -128,7 +128,7 @@ export const WalletIllustration: React.FC<WalletIllustrationProps> = ({
             scale: 0.23,
             rotate: 0,
             opacity: 1,
-            transition: { springTransition },
+            transition: { ...springTransition },
         },
         solStep0: {
             x: -150,
@@ -136,7 +136,7 @@ export const WalletIllustration: React.FC<WalletIllustrationProps> = ({
             scale: 0.6,
             rotate: -15,
             opacity: 1,
-            transition: { springTransition, delay: 0.4 },
+            transition: { ...springTransition, delay: 0.4 },
         },
         solStep1: {
             x: -150,
@@ -144,7 +144,7 @@ export const WalletIllustration: React.FC<WalletIllustrationProps> = ({
             scale: 0.23,
             rotate: 0,
             opacity: 1,
-            transition: { springTransition },
+            transition: { ...springTransition },
         },
     };
 
@@ -153,7 +153,7 @@ export const WalletIllustration: React.FC<WalletIllustrationProps> = ({
         visible: {
             opacity: 1,
             y: 0,
-            transition: { springTransition },
+            transition: { ...springTransition },
         },
     };
 
@@ -182,7 +182,7 @@ export const WalletIllustration: React.FC<WalletIllustrationProps> = ({
                                 initial="hidden"
                                 animate="visible"
                                 exit="hidden"
-                                transition={{ springTransition, delay: 0.2 }}
+                                transition={{ ...springTransition, delay: 0.2 }}
                             />
                             <motion.div
                                 className="absolute w-[50px] h-[50px] rounded-full opacity-70"
@@ -197,7 +197,7 @@ export const WalletIllustration: React.FC<WalletIllustrationProps> = ({
                                 initial="hidden"
                                 animate="visible"
                                 exit="hidden"
-                                transition={{ springTransition, delay: 0.3 }}
+                                transition={{ ...springTransition, delay: 0.3 }}
                             />
                         </div>
                         <div className="absolute top-0 bottom-0 right-0 w-0">
@@ -215,7 +215,7 @@ export const WalletIllustration: React.FC<WalletIllustrationProps> = ({
                                 initial="hidden"
                                 animate="visible"
                                 exit="hidden"
-                                transition={{ springTransition, delay: 0.4 }}
+                                transition={{ ...springTransition, delay: 0.4 }}
                             />
                             <motion.div
                                 className="absolute w-[50px] h-[50px] rounded-full opacity-70"
@@ -230,7 +230,7 @@ export const WalletIllustration: React.FC<WalletIllustrationProps> = ({
                                 initial="hidden"
                                 animate="visible"
                                 exit="hidden"
-                                transition={{ springTransition, delay: 0.5 }}
+                                transition={{ ...springTransition, delay: 0.5 }}
                             />
                         </div>
                     </>

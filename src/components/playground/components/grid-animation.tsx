@@ -99,7 +99,7 @@ export default function GridAnimation() {
               transition: {
                 duration: 0.4,
                 delay: 2.1 + (i * 0.05),
-                type: "spring",
+                type: "spring" as const,
                 stiffness: 100,
                 damping: 20
               }
@@ -109,7 +109,7 @@ export default function GridAnimation() {
               transition: {
                 duration: 0.4,
                 delay: 2.5 + (i * 0.05),
-                type: "spring",
+                type: "spring" as const,
                 stiffness: 100,
                 damping: 20
               }

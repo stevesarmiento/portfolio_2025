@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { WalletIllustration } from './WalletIllustration';
+import { WalletIllustration } from './wallet-illustration';
 import { motion, AnimatePresence } from 'framer-motion';
 import { IconChevronBackward, IconXmark } from 'symbols-react';
 

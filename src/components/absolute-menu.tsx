@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useCallback, useMemo } from 'react';
 import { motion, MotionConfig } from 'framer-motion';
-import useClickOutside from '@/hooks/useClickOutside';
+import useClickOutside from '@/hooks/use-click-outside';
 import { Button } from "@/components/ui/button";
 import { usePathname, useRouter } from "next/navigation";
 import { 
@@ -18,14 +18,14 @@ import {
 import GlassSurface from './ui/glass-surface';
 
 const transition = {
-  type: "spring",
+  type: "spring" as const,
   stiffness: 800,
   damping: 80,
   mass: 4,
 };
 
 const dragTransition = {
-  type: "spring",
+  type: "spring" as const,
   stiffness: 800,
   damping: 80,
   mass: 4,

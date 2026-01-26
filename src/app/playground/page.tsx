@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { AnimatedText } from "@/components/ui/animated-text";
 import { IconScribble } from "symbols-react";
-import { PlaygroundContent } from "@/components/playground/PlaygroundContent";
+import { PlaygroundContent } from "@/components/playground/playground-content";
 
 export default function Playground() {
   const [isHovering, setIsHovering] = useState(false);
