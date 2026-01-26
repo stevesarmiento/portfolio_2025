@@ -129,16 +129,16 @@ export default function AboutMe() {
                   />
                   Symbols
                 </a>, 
-                <a href="https://svela.xyz" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-3">
-                  <Image 
-                    src="/img/work-svela.png" 
-                    alt="Svela" 
-                    width={18} 
-                    height={18} 
-                    className="inline-block rounded-sm ring-1 ring-white/20 mr-1 transform translate-y-[2.5px]" 
-                  />
-                  Svela
-                </a>
+                  <a href="https://apps.apple.com/us/app/senko-simple-pro-camera/id6584516223" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-1">
+                    <Image 
+                      src="/img/work-senko.png" 
+                      alt="Senko" 
+                      width={18} 
+                      height={18} 
+                      className="inline-block rounded-sm ring-1 ring-white/20 mr-1 transform translate-y-[2.5px]" 
+                    />
+                    Senko
+                  </a>
                 <br />
                 and more{showMoreProjects ? ' like' : '.'}
                 <button 
@@ -150,17 +150,6 @@ export default function AboutMe() {
                  
                 {showMoreProjects && (
                   <>
-                    <a href="https://apps.apple.com/us/app/senko-simple-pro-camera/id6584516223" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-1">
-                      <Image 
-                        src="/img/work-senko.png" 
-                        alt="Senko" 
-                        width={18} 
-                        height={18} 
-                        className="inline-block rounded-sm ring-1 ring-white/20 mr-1 transform translate-y-[2.5px]" 
-                      />
-                      Senko
-                    </a>
-                    , and
                     <a href="https://github.com/rescomputer/res-ios" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-1">
                       <Image 
                         src="/img/work-res.png" 
