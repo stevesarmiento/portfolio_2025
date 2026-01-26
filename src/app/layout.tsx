@@ -3,15 +3,15 @@ import localFont from "next/font/local";
 import "./globals.css";
 import PlausibleProvider from "next-plausible";
 import { Providers } from "./providers";
-import AbsoluteMenu from "@/components/AbsoluteMenu";
+import AbsoluteMenu from "@/components/absolute-menu";
 
 const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
+  src: "./fonts/geist-vf.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
 const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
+  src: "./fonts/geist-mono-vf.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
 });

@@ -7,7 +7,7 @@ import {
   DialogContent,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { WalletInfoContent } from './components/WalletInfoContent'
+import { WalletInfoContent } from './components/wallet-info-content'
 
 interface WalletModalProps {
   className?: string

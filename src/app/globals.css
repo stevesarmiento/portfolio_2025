@@ -1,8 +1,7 @@
 @import url("https://p.typekit.net/p.css?s=1&k=eom2mzt&ht=tk&f=13593.13596.45412.45413.45414.45415.45416.45417.45418.45419.45420.45421&a=16147672&app=typekit&e=css");
+@import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@config "../../tailwind.config.ts";
 
 @font-face {
   font-family:"ff-nuvo-mono-web-pro";

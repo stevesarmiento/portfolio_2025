@@ -1,34 +1,34 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { PlaygroundGridItem } from "./PlaygroundGridItem";
+import { PlaygroundGridItem } from "./playground-grid-item";
 
 // Dynamic imports for demo components only
-const FamilyActionButton = dynamic(() => import("@/components/playground/FamilyActionButton").then(mod => ({ default: mod.FamilyActionButton })), {
+const FamilyActionButton = dynamic(() => import("@/components/playground/family-action-button").then(mod => ({ default: mod.FamilyActionButton })), {
   ssr: false
 });
 
-const FamilyGasSelector = dynamic(() => import("@/components/playground/FamilyGasSelector").then(mod => ({ default: mod.FamilyGasSelector })), {
+const FamilyGasSelector = dynamic(() => import("@/components/playground/family-gas-selector").then(mod => ({ default: mod.FamilyGasSelector })), {
   ssr: false
 });
 
-const DrawerDemo = dynamic(() => import("@/components/playground/DrawerDemo").then(mod => ({ default: mod.DrawerDemo })), {
+const DrawerDemo = dynamic(() => import("@/components/playground/drawer-demo").then(mod => ({ default: mod.DrawerDemo })), {
   ssr: false
 });
 
-const IosAppFolder = dynamic(() => import("@/components/playground/IosAppFolder").then(mod => ({ default: mod.IosAppFolder })), {
+const IosAppFolder = dynamic(() => import("@/components/playground/ios-app-folder").then(mod => ({ default: mod.IosAppFolder })), {
   ssr: false
 });
 
-const WalletCommander = dynamic(() => import("@/components/playground/WalletCommander").then(mod => ({ default: mod.WalletCommander })), {
+const WalletCommander = dynamic(() => import("@/components/playground/wallet-commander").then(mod => ({ default: mod.WalletCommander })), {
   ssr: false
 });
 
-const WalletModal = dynamic(() => import("@/components/playground/WalletModal").then(mod => ({ default: mod.WalletModal })), {
+const WalletModal = dynamic(() => import("@/components/playground/wallet-modal").then(mod => ({ default: mod.WalletModal })), {
   ssr: false
 });
 
-const FamilyWalletCreation = dynamic(() => import("@/components/playground/FamilyWalletCreation"), {
+const FamilyWalletCreation = dynamic(() => import("@/components/playground/family-wallet-creation"), {
   ssr: false
 });
 

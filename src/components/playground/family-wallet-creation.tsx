@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { FamilyWalletCard } from "./components/FamilyWalletCard";
-import GridAnimation from "./components/GridAnimation";
+import { FamilyWalletCard } from "./components/family-wallet-card";
+import GridAnimation from "./components/grid-animation";
 
 export default function FamilyWalletCreation() {
     const [showGrid, setShowGrid] = useState(false);

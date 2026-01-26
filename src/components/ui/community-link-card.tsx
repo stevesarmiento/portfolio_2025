@@ -1,14 +1,14 @@
 import Image from 'next/image';
-import { CommunityLint } from '@/types/communityLints';
+import { CommunityLink } from '@/types/community-link';
 import { motion } from 'framer-motion';
 import { IconArrowUpRight } from 'symbols-react';
 
 interface CommunityLinkCardProps {
-  lint: CommunityLint;
+  link: CommunityLink;
   onClick?: () => void;
 }
 
-export function CommunityLinkCard({ lint, onClick }: CommunityLinkCardProps) {
+export function CommunityLinkCard({ link, onClick }: CommunityLinkCardProps) {
   return (
       <motion.div
         onClick={onClick}
@@ -18,8 +18,8 @@ export function CommunityLinkCard({ lint, onClick }: CommunityLinkCardProps) {
         <div className="relative h-full p-2 pr-4 bg-transparent hover:bg-black/5 rounded-[15px] flex flex-row justify-between items-center gap-x-4">
             <div className="flex flex-row items-center gap-x-2">
                 <Image 
-                    src={lint.image} 
-                    alt={lint.title}
+                    src={link.image} 
+                    alt={link.title}
                     width={25} 
                     height={25}
                     className="rounded-[8px] shadow-lg ring-1 ring-[#2E4D61]/10 shadow-[#2E4D61]/10"
@@ -27,7 +27,7 @@ export function CommunityLinkCard({ lint, onClick }: CommunityLinkCardProps) {
                 
                 <div>
                     <h3 className="text-md font-nuvo font-semibold text-[#2E4D61] mb-1">
-                    {lint.title}
+                    {link.title}
                     </h3>
                 </div>            
             </div>

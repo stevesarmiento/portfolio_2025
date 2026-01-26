@@ -1,4 +1,4 @@
-import { GithubContributions } from "./GithubContributions";
+import { GithubContributions } from "./github-contributions";
 
 export default function GithubSection() {
   return (
