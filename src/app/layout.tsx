@@ -41,7 +41,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#171717]`}
       >
         <Providers>{children}</Providers>
-        <div className="fixed bottom-[6%] right-[4%] z-50">
+        <div className="fixed bottom-[6%] right-[30%] sm:right-[45%] z-50">
             <AbsoluteMenu />
         </div>
         </body>

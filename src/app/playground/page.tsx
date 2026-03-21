@@ -10,7 +10,7 @@ export default function Playground() {
   const [isHovering, setIsHovering] = useState(false);
 
   return (
-    <main className="h-screen w-full bg-[#171717] overflow-hidden">
+    <main className="h-screen w-full bg-black overflow-hidden">
       {/* Header - Loads instantly */}
       <motion.div 
         initial={{ opacity: 0, y: -5, filter: 'blur(5px)' }}
