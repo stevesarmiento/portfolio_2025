@@ -83,7 +83,7 @@ export function BlackHoleScene({
       grayscale: false,
       chars: " .,:;-=+*#%@|/\\0<>",
       minChannel: 60,
-      alpha: 1,
+      alpha: 0.8,
       fontScale: 0.72,
       fontSize: 16,
       cellWidth: 10,

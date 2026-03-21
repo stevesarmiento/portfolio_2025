@@ -48,17 +48,40 @@ export interface ButtonProps
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, startIcon, endIcon, children, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button"
+    const resolvedClassName = cn(buttonVariants({ variant, size, className }))
+
+    if (asChild) {
+      if ((startIcon || endIcon) && React.isValidElement(children)) {
+        const onlyChild = React.Children.only(children) as React.ReactElement<{ children?: React.ReactNode }>
+
+        return (
+          <Slot className={resolvedClassName} ref={ref} {...props}>
+            {React.cloneElement(onlyChild, {
+              children: (
+                <>
+                  {startIcon ? <span className="mr-2">{startIcon}</span> : null}
+                  {onlyChild.props.children}
+                  {endIcon ? <span className="ml-2">{endIcon}</span> : null}
+                </>
+              ),
+            })}
+          </Slot>
+        )
+      }
+
+      return (
+        <Slot className={resolvedClassName} ref={ref} {...props}>
+          {children}
+        </Slot>
+      )
+    }
+
     return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      >
-        {startIcon && <span className="mr-2">{startIcon}</span>}
+      <button className={resolvedClassName} ref={ref} {...props}>
+        {startIcon ? <span className="mr-2">{startIcon}</span> : null}
         {children}
-        {endIcon && <span className="ml-2">{endIcon}</span>}
-      </Comp>
+        {endIcon ? <span className="ml-2">{endIcon}</span> : null}
+      </button>
     )
   }
 )

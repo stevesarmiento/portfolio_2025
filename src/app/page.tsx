@@ -1,11 +1,17 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, type ComponentType } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { 
   // IconLaurelLeading,
   // IconLaurelTrailing,
+  IconCalendar,
+  IconFigureIndoorSoccer,
   IconSealFill, 
+  IconGithubLogo,
+  IconScribble,
+  IconXLogo,
 } from "symbols-react";
 import { motion } from "framer-motion";
 
@@ -16,7 +22,23 @@ import { BlackHoleScene } from "@/components/black-hole-scene";
 // import Work from "@/components/work";
 import { AnimatedText } from "@/components/ui/animated-text";
 import AboutMe from "@/components/about-me";
+import { Button } from "@/components/ui/button";
 //import CommunityLinks from "@/components/community-links";
+
+interface FooterLinkItem {
+  label: string;
+  href: string;
+  icon: ComponentType<{ className?: string }>;
+  isExternal?: boolean;
+}
+
+const footerLinks: FooterLinkItem[] = [
+  { label: "Playground", href: "/playground", icon: IconFigureIndoorSoccer },
+  { label: "Musings", href: "/writings", icon: IconScribble },
+  { label: "GitHub", href: "https://github.com/stevesarmiento", icon: IconGithubLogo, isExternal: true },
+  { label: "Calendar", href: "https://cal.com/lassi", icon: IconCalendar, isExternal: true },
+  { label: "@stevensarmi_", href: "https://x.com/stevensarmi_", icon: IconXLogo, isExternal: true },
+];
 
 
 export default function Home() {
@@ -44,7 +66,7 @@ export default function Home() {
       </div>
 
       <div className="relative z-10 h-dvh w-full max-w-[620px] mx-auto border-r border-l border-white/10 overflow-y-auto">
-        <div className="mx-auto flex w-full max-w-[620px] flex-col items-center gap-y-2 px-4 py-24">
+        <div className="mx-auto flex w-full max-w-[620px] flex-col items-center gap-y-2 px-4 pt-24 pb-36">
           <motion.div 
             initial={{ opacity: 0, y: -5, filter: 'blur(5px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -63,7 +85,7 @@ export default function Home() {
                 <motion.span animate={{ opacity: [1, 0, 1] }} transition={{ repeat: Infinity, duration: 0.5 }}>_</motion.span>
               </span>
               <span className="sm:text-md text-sm text-zinc-50/40 font-mono flex flex-row flex-wrap items-center justify-center gap-x-1 border-b-2 border-transparent">
-                Product Engineer @ the
+                Product Engineering @ the
                 <Image 
                   src="/img/work-solana.png" 
                   alt="Solana Foundation" 
@@ -88,6 +110,57 @@ export default function Home() {
           </motion.div>
         </div>
       </div>
+
+      <footer className="fixed bottom-0 left-1/2 z-20 w-full max-w-[620px] -translate-x-1/2 border-t border-white/10 bg-transparent">
+        <div className="pb-[env(safe-area-inset-bottom)]">
+          <nav aria-label="Site links" className="w-full">
+            <ul className="grid grid-cols-5 divide-x divide-white/10">
+              {footerLinks.map((item) => {
+                const Icon = item.icon;
+
+                const content = (
+                  <>
+                    <Icon className="mix-blend-difference size-3 fill-white/50 group-hover:fill-white" />
+                    <span className="mix-blend-difference min-w-0 truncate font-mono text-[11px] text-white/80 group-hover:text-white">
+                      {item.label}
+                    </span>
+                  </>
+                );
+
+                if (item.isExternal) {
+                  return (
+                    <li key={item.label} className="flex">
+                      <Button
+                        asChild
+                        variant="ghost"
+                        className="group h-12 w-full flex-row gap-2 rounded-none text-zinc-50/70 hover:bg-white/5 hover:text-zinc-50"
+                      >
+                        <a href={item.href} target="_blank" rel="noreferrer" aria-label={item.label}>
+                          {content}
+                        </a>
+                      </Button>
+                    </li>
+                  );
+                }
+
+                return (
+                  <li key={item.label} className="flex">
+                    <Button
+                      asChild
+                      variant="ghost"
+                      className="group h-12 w-full flex-row gap-2 rounded-none text-zinc-50/70 hover:bg-white/5 hover:text-zinc-50"
+                    >
+                      <Link href={item.href} aria-label={item.label}>
+                        {content}
+                      </Link>
+                    </Button>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+        </div>
+      </footer>
     </main>
   );
 }

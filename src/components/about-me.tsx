@@ -6,7 +6,7 @@ import { IconSunDustFill, IconApplescript, IconPlus } from "symbols-react";
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip";
 
 export default function AboutMe() {
-    const [isExpanded, setIsExpanded] = useState(true);
+    const [isExpanded, setIsExpanded] = useState(false);
     const [showMoreProjects, setShowMoreProjects] = useState(false);
     const [showMoreHistory, setShowMoreHistory] = useState(false);
     const [showMoreBrd, setShowMoreBrd] = useState(false);
@@ -35,7 +35,7 @@ export default function AboutMe() {
                   className="group text-lg font-nuvo text-zinc-50/70 hover:text-zinc-50 transition-colors duration-150 ease-in-out mr-auto p-0"
                   endIcon={isExpanded ? <IconApplescript className="mt-[2px] w-5 h-5 fill-zinc-50/50 group-hover:fill-zinc-50" />: <IconSunDustFill className="mt-[2px] w-5 h-5 fill-yellow-500/50 group-hover:fill-yellow-300" />}
                 >
-                  {isExpanded ? <span style={{ textDecoration: "line-through" }}>TLDR;</span> : "TLDR;"}
+                  {isExpanded ? "TLDR;" : <span style={{ textDecoration: "line-through" }}>TLDR;</span>}
                 </Button>
               </TooltipTrigger>
               <TooltipContent 
@@ -54,12 +54,12 @@ export default function AboutMe() {
               initial="hidden"
               animate="visible"
               exit="hidden"
-              className="flex flex-col items-left gap-y-6 w-full sm:w-[620px]"
+              className="flex flex-col items-left gap-y-6 w-full sm:w-[520px]"
               variants={variants}
               transition={{ duration: 0.5 }}
             >
-              <p className="group text-md text-zinc-50/70 hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
-                Today, <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">I&apos;m helping to build tools for the  
+              <p className="group text-md text-white hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
+                Today, <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">I&apos;m building products and tools for the  
                 <a href="https://solana.com" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-2">
                   <Image 
                     src="/img/work-solana.png" 
@@ -72,7 +72,7 @@ export default function AboutMe() {
                 </a></span>
               </p>
 
-              <p className="group text-md text-zinc-50/70 hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
+              <p className="group text-md text-white hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
                 Most recently, <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">I worked with startups like 
                 <a href="https://metadao.fi" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-2">
                   <Image 
@@ -104,21 +104,21 @@ export default function AboutMe() {
                     className="inline-block rounded-sm ring-1 ring-white/20 mr-1 transform translate-y-[2.5px] transform translate-y-[2.5px]" 
                   />
                   Vapi
-                </a> on product, design and <br />engineering.</span>
+                </a> on product, design and engineering.</span>
               </p>
 
-              <p className="group text-md text-zinc-50/70 hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
-                I&apos;ve also built some things - <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">
-                <a href="https://capi.dev" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-1">
-                  <Image 
-                    src="/img/work-capi.png" 
-                    alt="Capi" 
-                    width={18} 
-                    height={18} 
-                    className="inline-block rounded-sm ring-1 ring-white/20 mr-1 transform translate-y-[2.5px]" 
-                  />
-                  Capi
-                </a>, 
+              <p className="group text-md text-white hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
+                I like to build things - <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">
+                 <a href="https://apps.apple.com/us/app/senko-simple-pro-camera/id6584516223" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-1">
+                    <Image 
+                      src="/img/work-senko.png" 
+                      alt="Senko" 
+                      width={18} 
+                      height={18} 
+                      className="inline-block rounded-sm ring-1 ring-white/20 mr-1 transform translate-y-[2.5px]" 
+                    />
+                    Senko
+                  </a>, 
                 <a href="https://symbols.dev" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-1">
                   <Image 
                     src="/img/work-symbols.png" 
@@ -129,18 +129,17 @@ export default function AboutMe() {
                   />
                   Symbols
                 </a>, 
-                  <a href="https://apps.apple.com/us/app/senko-simple-pro-camera/id6584516223" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-1">
-                    <Image 
-                      src="/img/work-senko.png" 
-                      alt="Senko" 
-                      width={18} 
-                      height={18} 
-                      className="inline-block rounded-sm ring-1 ring-white/20 mr-1 transform translate-y-[2.5px]" 
-                    />
-                    Senko
-                  </a>
-                <br />
-                and more{showMoreProjects ? ' like' : '.'}
+                <a href="https://capi.dev" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-1 mr-1">
+                  <Image 
+                    src="/img/work-capi.png" 
+                    alt="Capi" 
+                    width={18} 
+                    height={18} 
+                    className="inline-block rounded-sm ring-1 ring-white/20 mr-1 transform translate-y-[2.5px]" 
+                  />
+                  Capi
+                </a>
+                 and more{showMoreProjects ? ' like' : '.'}
                 <button 
                   onClick={() => setShowMoreProjects(!showMoreProjects)}
                   className="w-0 group-hover:w-4 ml-2 cursor-pointer"
@@ -166,7 +165,7 @@ export default function AboutMe() {
                 </span>
               </p>
 
-              <p className="group text-md text-zinc-50/70 hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
+              <p className="group text-md text-white hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
                 Previously, <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">I was a core contributor to 
                 <a href="https://x.com/mangomarkets" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-2">
                   <Image 
@@ -192,7 +191,7 @@ export default function AboutMe() {
                 )}
                 </span>
                 </p>
-                <p className="group text-md text-zinc-50/70 hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
+                <p className="group text-md text-white hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
                  Prior to that, I was on the marketing team for
                  <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">
                 <a href="https://www.nasdaq.com/articles/coinbase-acquires-crypto-wallet-firm-brd" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex items-baseline gap-1 ml-2">

@@ -3,7 +3,6 @@ import localFont from "next/font/local";
 import "./globals.css";
 import PlausibleProvider from "next-plausible";
 import { Providers } from "./providers";
-import AbsoluteMenu from "@/components/absolute-menu";
 
 const geistSans = localFont({
   src: "./fonts/geist-vf.woff",
@@ -41,9 +40,6 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#171717]`}
       >
         <Providers>{children}</Providers>
-        <div className="fixed bottom-[6%] right-[30%] sm:right-[45%] z-50">
-            <AbsoluteMenu />
-        </div>
         </body>
       </html>
   );
