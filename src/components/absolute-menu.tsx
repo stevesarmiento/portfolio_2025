@@ -44,7 +44,7 @@ const socials = [
     },
     {
       name: "X",
-      link: "https://x.com/stevensarmi_",
+      link: "https://x.com/stevensarmi",
       icon: IconXLogo
     },
     {
