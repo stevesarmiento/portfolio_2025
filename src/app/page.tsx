@@ -37,7 +37,7 @@ const footerLinks: FooterLinkItem[] = [
   { label: "Musings", href: "/writings", icon: IconScribble },
   { label: "GitHub", href: "https://github.com/stevesarmiento", icon: IconGithubLogo, isExternal: true },
   { label: "Calendar", href: "https://cal.com/lassi", icon: IconCalendar, isExternal: true },
-  { label: "@stevensarmi_", href: "https://x.com/stevensarmi_", icon: IconXLogo, isExternal: true },
+  { label: "@stevensarmi", href: "https://x.com/stevensarmi", icon: IconXLogo, isExternal: true },
 ];
 
 
