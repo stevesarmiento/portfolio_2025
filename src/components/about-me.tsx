@@ -129,15 +129,15 @@ export default function AboutMe() {
                   />
                   Symbols
                 </a>, 
-                <a href="https://capi.dev" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-1 mr-1">
-                  <Image 
-                    src="/img/work-capi.png" 
-                    alt="Capi" 
-                    width={18} 
-                    height={18} 
-                    className="inline-block rounded-sm ring-1 ring-white/20 mr-1 transform translate-y-[2.5px]" 
+                <a href="https://aggr.watch" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-1 mr-1">
+                  <Image
+                    src="/img/work-svela.png"
+                    alt="AggrWatch"
+                    width={18}
+                    height={18}
+                    className="inline-block rounded-sm ring-1 ring-white/20 mr-1 transform translate-y-[2.5px]"
                   />
-                  Capi
+                  AggrWatch
                 </a>
                  and more{showMoreProjects ? ' like' : '.'}
                 <button 
