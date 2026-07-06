@@ -137,7 +137,7 @@ export default function AboutMe() {
                     height={18}
                     className="inline-block rounded-sm ring-1 ring-white/20 mr-1 transform translate-y-[2.5px]"
                   />
-                  AggrWatch
+                  Aggr Watch
                 </a>
                  and more{showMoreProjects ? ' like' : '.'}
                 <button 
