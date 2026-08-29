@@ -1,7 +1,6 @@
 'use client'
 
 import Image from 'next/image';
-import React from 'react';
 import { 
     Dialog,
     DialogTrigger,
@@ -23,7 +22,7 @@ import {
 
 interface AppIcon {
     name: string;
-    icon: React.ReactNode;
+    image: string;
 }
 
 interface IosAppFolderProps {
@@ -31,11 +30,11 @@ interface IosAppFolderProps {
 }
 
 const icons: AppIcon[] = [
-    { name: 'Aufn', icon: <Image src="/img/work-aufn.png" alt="Icon 1" layout="fill" objectFit="cover" /> },
-    { name: 'Component Kit', icon: <Image src="/img/work-componentkit.png" alt="Icon 2" layout="fill" objectFit="cover" /> },
-    { name: 'RES', icon: <Image src="/img/work-res.png" alt="Icon 3" layout="fill" objectFit="cover" /> },
-    { name: 'Toshi', icon: <Image src="/img/work-toshi.png" alt="Icon 4" layout="fill" objectFit="cover" /> },
-    { name: 'Symbols', icon: <Image src="/img/work-symbols.png" alt="Icon 5" layout="fill" objectFit="cover" /> },
+    { name: 'Aufn', image: '/img/work-aufn.png' },
+    { name: 'Component Kit', image: '/img/work-componentkit.png' },
+    { name: 'RES', image: '/img/work-res.png' },
+    { name: 'Toshi', image: '/img/work-toshi.png' },
+    { name: 'Symbols', image: '/img/work-symbols.png' },
 ];
 
 
@@ -53,9 +52,15 @@ export function IosAppFolder({ className = "" }: IosAppFolderProps) {
                         whileHover={{ scale: 1.05 }}
                         >
                             <div className="grid grid-cols-3 gap-3">
-                                {icons.map((icon, index) => (
-                                    <div key={index} className="relative w-[35px] h-[35px] rounded-lg overflow-hidden">
-                                        {icon.icon}
+                                {icons.map((icon) => (
+                                    <div key={icon.name} className="relative w-[35px] h-[35px] rounded-lg overflow-hidden">
+                                        <Image
+                                            src={icon.image}
+                                            alt={`${icon.name} app icon`}
+                                            fill
+                                            sizes="35px"
+                                            className="object-cover"
+                                        />
                                     </div>
                                 ))}
                             </div>
@@ -68,12 +73,18 @@ export function IosAppFolder({ className = "" }: IosAppFolderProps) {
                             className="bg-black/50 backdrop-blur-lg h-[460px] w-[460px] rounded-[60px] p-12 cursor-pointer"
                         >
                             <div className="grid grid-cols-3 gap-x-8 gap-y-4">
-                                {icons.map((icon, index) => (
-                                    <div className="flex flex-col items-center" key={index}>
+                                {icons.map((icon) => (
+                                    <div className="flex flex-col items-center" key={icon.name}>
                                         <Popover>
                                             <PopoverTrigger asChild>
                                                 <div className="relative w-[100px] h-[100px] rounded-3xl overflow-hidden cursor-pointer active:scale-95 transition-all duration-150 ease-in-out">
-                                                    {icon.icon}
+                                                    <Image
+                                                        src={icon.image}
+                                                        alt={`${icon.name} app icon`}
+                                                        fill
+                                                        sizes="100px"
+                                                        className="object-cover"
+                                                    />
                                                 </div>
                                             </PopoverTrigger>
                                             <PopoverContent align="start">
@@ -107,5 +118,4 @@ export function IosAppFolder({ className = "" }: IosAppFolderProps) {
     </div>
     );
 };
-
 
