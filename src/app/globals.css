@@ -160,6 +160,15 @@
     color: #1c1c1c;     
   }
 
+  .long-dashed-rails {
+    background-image:
+      linear-gradient(to bottom, rgb(255 255 255 / 15%) 0 18px, transparent 18px 30px),
+      linear-gradient(to bottom, rgb(255 255 255 / 15%) 0 18px, transparent 18px 30px);
+    background-position: left top, right top;
+    background-repeat: repeat-y;
+    background-size: 1px 30px;
+  }
+
   .bg-texture {
     background-color: #020617;
     background-image: url('/img/package-texture.png');
@@ -226,4 +235,3 @@
 [vaul-drawer] {
   transition: transform 0.5s cubic-bezier(0.18, 0.99, 0.18, 0.99) !important;
 }
-

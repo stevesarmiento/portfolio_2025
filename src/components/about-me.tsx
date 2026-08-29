@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "./ui/button";
-import { IconSunDustFill, IconApplescript, IconPlus } from "symbols-react";
-import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip";
+import { IconPlus } from "symbols-react";
+
+import { AboutActions } from "@/components/about-actions";
 
 export default function AboutMe() {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -22,31 +22,14 @@ export default function AboutMe() {
       <div className="flex flex-col items-left font-nuvo gap-y-6 mt-6 px-4 ">
         {/* <h2 className="text-lg font-nuvo text-zinc-50/30/30">TLDR;</h2> */}
 
-        <p className="group text-2xl text-zinc-50 hover:text-zinc-50 cursor-crosshair transition-all duration-150 ease-in-out">
-          <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">Pushing towards building thoughtful experiences &amp; solving interesting problems with code.</span>
+        <p className="group text-lg text-zinc-50 hover:text-zinc-50 cursor-crosshair transition-all duration-150 ease-in-out">
+          <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">Pushing towards building thoughtful experiences <br /> and solving interesting problems with code.</span>
         </p>
 
-        <TooltipProvider>
-              <Tooltip delayDuration={0}>
-                <TooltipTrigger asChild>
-                  <Button
-                  variant="link"
-                  onClick={() => setIsExpanded(!isExpanded)}
-                  className="group text-lg font-nuvo text-zinc-50/70 hover:text-zinc-50 transition-colors duration-150 ease-in-out mr-auto p-0"
-                  endIcon={isExpanded ? <IconApplescript className="mt-[2px] w-5 h-5 fill-zinc-50/50 group-hover:fill-zinc-50" />: <IconSunDustFill className="mt-[2px] w-5 h-5 fill-yellow-500/50 group-hover:fill-yellow-300" />}
-                >
-                  {isExpanded ? "TLDR;" : <span style={{ textDecoration: "line-through" }}>TLDR;</span>}
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent 
-                side="right" 
-                sideOffset={10}
-                className="text-zinc-50 bg-zinc-950 border border-zinc-50/10 text-xs font-nuvo shadow-none"
-              >
-               {isExpanded ? "Less is more" : "Dive deeper"}
-              </TooltipContent>
-            </Tooltip>          
-          </TooltipProvider>
+        <AboutActions
+          isExpanded={isExpanded}
+          onToggle={() => setIsExpanded((expanded) => !expanded)}
+        />
         <AnimatePresence>
 
           {isExpanded && (
