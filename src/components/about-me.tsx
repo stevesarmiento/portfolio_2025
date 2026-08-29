@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { IconPlus } from "symbols-react";
 
 import { AboutActions } from "@/components/about-actions";
+import { SolanaLogo } from "@/components/solana-logo";
 
 export default function AboutMe() {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -22,7 +23,7 @@ export default function AboutMe() {
       <div className="flex flex-col items-left font-nuvo gap-y-6 mt-6 px-4 ">
         {/* <h2 className="text-lg font-nuvo text-zinc-50/30/30">TLDR;</h2> */}
 
-        <p className="group cursor-crosshair text-lg text-zinc-950 transition-colors duration-150 ease-out">
+        <p className="group cursor-crosshair text-lg text-zinc-950">
           <span className="border-b-2 border-dotted border-transparent group-hover:border-zinc-950/20">Pushing towards building thoughtful experiences <br /> and solving interesting problems with code.</span>
         </p>
 
@@ -41,23 +42,16 @@ export default function AboutMe() {
               variants={variants}
               transition={{ duration: 0.5 }}
             >
-              <p className="group cursor-crosshair text-md text-zinc-900 transition-colors duration-150 ease-out hover:text-zinc-900/35">
+              <p className="group cursor-crosshair text-sm text-zinc-900 hover:text-zinc-900/35">
                 Today, <span className="border-b-2 border-dotted border-transparent group-hover:border-zinc-950/20">I&apos;m building products and tools for the{" "}
-                <a href="https://solana.com" target="_blank" rel="noreferrer" className="ml-2 inline-flex items-baseline gap-1 space-x-1 border-b-2 border-transparent transition-colors duration-150 ease-out group-hover:border-[#df8f93] group-hover:text-zinc-950">
-                  <Image 
-                    src="/img/work-solana.png" 
-                    alt="Solana Foundation" 
-                    width={18} 
-                    height={18} 
-                    className="mr-1 inline-block translate-y-[2.5px] rounded-sm ring-1 ring-black/10"
-                  />
+                <a href="https://solana.com" target="_blank" rel="noreferrer" className="ml-2 inline-flex items-baseline gap-1 space-x-1 border-b-2 border-transparent group-hover:border-[#df8f93] group-hover:text-zinc-950">
+                  <SolanaLogo className="mr-1 size-[18px] shrink-0 translate-y-[2.5px]" />
                   Solana ecosystem.
                 </a></span>
               </p>
 
-              <p className="group cursor-crosshair text-md text-zinc-900 transition-colors duration-150 ease-out hover:text-zinc-900/35">
-                Most recently, <span className="border-b-2 border-dotted border-transparent group-hover:border-zinc-950/20">I worked with startups like{" "}
-                <a href="https://metadao.fi" target="_blank" rel="noreferrer" className="ml-2 inline-flex items-baseline gap-1 space-x-1 border-b-2 border-transparent transition-colors duration-150 ease-out group-hover:border-[#df8f93] group-hover:text-zinc-950">
+              <p className="group cursor-crosshair text-sm text-zinc-900 hover:text-zinc-900/35">
+                <span className="border-b-2 border-dotted border-transparent group-hover:border-zinc-950/20">I&apos;ve worked with startups like{" "} <a href="https://metadao.fi" target="_blank" rel="noreferrer" className="ml-2 inline-flex items-baseline gap-1 space-x-1 border-b-2 border-transparent group-hover:border-[#df8f93] group-hover:text-zinc-950">
                   <Image 
                     src="/img/work-metadao.png" 
                     alt="MetaDAO" 
@@ -68,7 +62,7 @@ export default function AboutMe() {
                   MetaDAO
                 </a>, 
                 <br />
-                <a href="https://triton.one" target="_blank" rel="noreferrer" className="inline-flex items-baseline gap-1 space-x-1 border-b-2 border-transparent transition-colors duration-150 ease-out group-hover:border-[#df8f93] group-hover:text-zinc-950">
+                <a href="https://triton.one" target="_blank" rel="noreferrer" className="inline-flex items-baseline gap-1 space-x-1 border-b-2 border-transparent group-hover:border-[#df8f93] group-hover:text-zinc-950">
                   <Image 
                     src="/img/work-triton.png" 
                     alt="Triton" 
@@ -78,7 +72,7 @@ export default function AboutMe() {
                   />
                   Triton
                 </a>, and 
-                <a href="https://vapi.ai" target="_blank" rel="noreferrer" className="ml-2 inline-flex items-baseline gap-1 space-x-1 border-b-2 border-transparent transition-colors duration-150 ease-out group-hover:border-[#df8f93] group-hover:text-zinc-950">
+                <a href="https://vapi.ai" target="_blank" rel="noreferrer" className="ml-2 inline-flex items-baseline gap-1 space-x-1 border-b-2 border-transparent group-hover:border-[#df8f93] group-hover:text-zinc-950">
                   <Image 
                     src="/img/work-vapi.png" 
                     alt="Vapi" 
@@ -90,9 +84,9 @@ export default function AboutMe() {
                 </a> on product, design and engineering.</span>
               </p>
 
-              <p className="group cursor-crosshair text-md text-zinc-900 transition-colors duration-150 ease-out hover:text-zinc-900/35">
+              <p className="group cursor-crosshair text-sm text-zinc-900 hover:text-zinc-900/35">
                 I like to build things - <span className="border-b-2 border-dotted border-transparent group-hover:border-zinc-950/20">
-                 <a href="https://apps.apple.com/us/app/senko-simple-pro-camera/id6584516223" target="_blank" rel="noreferrer" className="ml-1 inline-flex items-baseline gap-1 space-x-1 border-b-2 border-transparent transition-colors duration-150 ease-out group-hover:border-[#df8f93] group-hover:text-zinc-950">
+                 <a href="https://apps.apple.com/us/app/senko-simple-pro-camera/id6584516223" target="_blank" rel="noreferrer" className="ml-1 inline-flex items-baseline gap-1 space-x-1 border-b-2 border-transparent group-hover:border-[#df8f93] group-hover:text-zinc-950">
                     <Image 
                       src="/img/work-senko.png" 
                       alt="Senko" 
@@ -102,7 +96,7 @@ export default function AboutMe() {
                     />
                     Senko
                   </a>, 
-                <a href="https://symbols.dev" target="_blank" rel="noreferrer" className="ml-1 inline-flex items-baseline gap-1 space-x-1 border-b-2 border-transparent transition-colors duration-150 ease-out group-hover:border-[#df8f93] group-hover:text-zinc-950">
+                <a href="https://symbols.dev" target="_blank" rel="noreferrer" className="ml-1 inline-flex items-baseline gap-1 space-x-1 border-b-2 border-transparent group-hover:border-[#df8f93] group-hover:text-zinc-950">
                   <Image 
                     src="/img/work-symbols.png" 
                     alt="Symbols" 
@@ -112,7 +106,7 @@ export default function AboutMe() {
                   />
                   Symbols
                 </a>, 
-                <a href="https://aggr.watch" target="_blank" rel="noreferrer" className="ml-1 mr-1 inline-flex items-baseline gap-1 space-x-1 border-b-2 border-transparent transition-colors duration-150 ease-out group-hover:border-[#df8f93] group-hover:text-zinc-950">
+                <a href="https://aggr.watch" target="_blank" rel="noreferrer" className="ml-1 mr-1 inline-flex items-baseline gap-1 space-x-1 border-b-2 border-transparent group-hover:border-[#df8f93] group-hover:text-zinc-950">
                   <Image
                     src="/img/work-svela.png"
                     alt="AggrWatch"
@@ -132,7 +126,7 @@ export default function AboutMe() {
                  
                 {showMoreProjects && (
                   <>
-                    <a href="https://github.com/rescomputer/res-ios" target="_blank" rel="noreferrer" className="ml-1 inline-flex items-baseline gap-1 space-x-1 border-b-2 border-transparent transition-colors duration-150 ease-out group-hover:border-[#df8f93] group-hover:text-zinc-950">
+                    <a href="https://github.com/rescomputer/res-ios" target="_blank" rel="noreferrer" className="ml-1 inline-flex items-baseline gap-1 space-x-1 border-b-2 border-transparent group-hover:border-[#df8f93] group-hover:text-zinc-950">
                       <Image 
                         src="/img/work-res.png" 
                         alt="RES" 
@@ -148,9 +142,9 @@ export default function AboutMe() {
                 </span>
               </p>
 
-              <p className="group cursor-crosshair text-md text-zinc-900 transition-colors duration-150 ease-out hover:text-zinc-900/35">
+              <p className="group cursor-crosshair text-sm text-zinc-900 hover:text-zinc-900/35">
                 Previously, <span className="border-b-2 border-dotted border-transparent group-hover:border-zinc-950/20">I was a core contributor to{" "}
-                <a href="https://x.com/mangomarkets" target="_blank" rel="noreferrer" className="ml-2 inline-flex items-baseline gap-1 space-x-1 border-b-2 border-transparent transition-colors duration-150 ease-out group-hover:border-[#df8f93] group-hover:text-zinc-950">
+                <a href="https://x.com/mangomarkets" target="_blank" rel="noreferrer" className="ml-2 inline-flex items-baseline gap-1 space-x-1 border-b-2 border-transparent group-hover:border-[#df8f93] group-hover:text-zinc-950">
                   <Image 
                     src="/img/work-mango.png" 
                     alt="Mango" 
@@ -174,10 +168,10 @@ export default function AboutMe() {
                 )}
                 </span>
                 </p>
-                <p className="group cursor-crosshair text-md text-zinc-900 transition-colors duration-150 ease-out hover:text-zinc-900/35">
+                <p className="group cursor-crosshair text-sm text-zinc-900 hover:text-zinc-900/35">
                  Prior to that, I was on the marketing team for
                  <span className="border-b-2 border-dotted border-transparent group-hover:border-zinc-950/20">
-                <a href="https://www.nasdaq.com/articles/coinbase-acquires-crypto-wallet-firm-brd" target="_blank" rel="noreferrer" className="ml-2 inline-flex items-baseline gap-1 border-b-2 border-transparent transition-colors duration-150 ease-out group-hover:border-[#df8f93] group-hover:text-zinc-950">
+                <a href="https://www.nasdaq.com/articles/coinbase-acquires-crypto-wallet-firm-brd" target="_blank" rel="noreferrer" className="ml-2 inline-flex items-baseline gap-1 border-b-2 border-transparent group-hover:border-[#df8f93] group-hover:text-zinc-950">
                   <Image 
                     src="/img/work-brd.png" 
                     alt="BRD" 

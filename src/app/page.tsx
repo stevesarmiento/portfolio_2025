@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import { 
   // IconLaurelLeading,
   // IconLaurelTrailing,
@@ -16,6 +15,7 @@ import { BlackHoleScene } from "@/components/black-hole-scene";
 // import Work from "@/components/work";
 import { AnimatedText } from "@/components/ui/animated-text";
 import AboutMe from "@/components/about-me";
+import { SolanaLogo } from "@/components/solana-logo";
 //import CommunityLinks from "@/components/community-links";
 
 
@@ -64,14 +64,7 @@ export default function Home() {
               </span>
               <span className="sm:text-md flex flex-row flex-wrap items-center justify-center gap-x-1 border-b-2 border-transparent font-mono text-sm text-zinc-600">
                 Product Engineering @ the
-                <Image 
-                  src="/img/work-solana.png" 
-                  alt="Solana Foundation" 
-                  width={22} 
-                  height={22} 
-                  loading="eager"
-                  className="mx-1 inline-block rounded-md ring-1 ring-black/10"
-                />
+                <SolanaLogo className="mx-1 size-[18px] shrink-0" />
                 <a href="https://solana.foundation" target="_blank" rel="noreferrer" className="inline-flex translate-y-[2px] items-baseline gap-1 border-b-2 border-transparent transition-colors duration-150 ease-out hover:border-[#df8f93] hover:text-zinc-950">
                   Solana Foundation
                 </a>
