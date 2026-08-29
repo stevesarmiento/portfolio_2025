@@ -22,8 +22,8 @@ interface AboutLink {
 
 const aboutLinks: AboutLink[] = [
   { label: "Playground", href: "/playground" },
-  { label: "Musings", href: "/writings" },
-  { label: "GitHub", href: "https://github.com/stevesarmiento", isExternal: true },
+  { label: "Writings", href: "/writings" },
+  { label: "Github", href: "https://github.com/stevesarmiento", isExternal: true },
   { label: "Calendar", href: "https://cal.com/lassi", isExternal: true },
   { label: "@stevensarmi", href: "https://x.com/stevensarmi", isExternal: true },
 ];

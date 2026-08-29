@@ -69,6 +69,7 @@ export default function Home() {
                   alt="Solana Foundation" 
                   width={22} 
                   height={22} 
+                  loading="eager"
                   className="mx-1 inline-block rounded-md ring-1 ring-black/10"
                 />
                 <a href="https://solana.foundation" target="_blank" rel="noreferrer" className="inline-flex translate-y-[2px] items-baseline gap-1 border-b-2 border-transparent transition-colors duration-150 ease-out hover:border-[#df8f93] hover:text-zinc-950">
