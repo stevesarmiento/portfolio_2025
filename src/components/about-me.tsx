@@ -22,8 +22,8 @@ export default function AboutMe() {
       <div className="flex flex-col items-left font-nuvo gap-y-6 mt-6 px-4 ">
         {/* <h2 className="text-lg font-nuvo text-zinc-50/30/30">TLDR;</h2> */}
 
-        <p className="group text-lg text-zinc-50 hover:text-zinc-50 cursor-crosshair transition-all duration-150 ease-in-out">
-          <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">Pushing towards building thoughtful experiences <br /> and solving interesting problems with code.</span>
+        <p className="group cursor-crosshair text-lg text-zinc-950 transition-colors duration-150 ease-out">
+          <span className="border-b-2 border-dotted border-transparent group-hover:border-zinc-950/20">Pushing towards building thoughtful experiences <br /> and solving interesting problems with code.</span>
         </p>
 
         <AboutActions
@@ -41,84 +41,84 @@ export default function AboutMe() {
               variants={variants}
               transition={{ duration: 0.5 }}
             >
-              <p className="group text-md text-white hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
-                Today, <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">I&apos;m building products and tools for the  
-                <a href="https://solana.com" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-2">
+              <p className="group cursor-crosshair text-md text-zinc-900 transition-colors duration-150 ease-out hover:text-zinc-900/35">
+                Today, <span className="border-b-2 border-dotted border-transparent group-hover:border-zinc-950/20">I&apos;m building products and tools for the{" "}
+                <a href="https://solana.com" target="_blank" rel="noreferrer" className="ml-2 inline-flex items-baseline gap-1 space-x-1 border-b-2 border-transparent transition-colors duration-150 ease-out group-hover:border-[#df8f93] group-hover:text-zinc-950">
                   <Image 
                     src="/img/work-solana.png" 
                     alt="Solana Foundation" 
                     width={18} 
                     height={18} 
-                    className="inline-block rounded-sm ring-1 ring-white/20 mr-1 transform translate-y-[2.5px]" 
+                    className="mr-1 inline-block translate-y-[2.5px] rounded-sm ring-1 ring-black/10"
                   />
                   Solana ecosystem.
                 </a></span>
               </p>
 
-              <p className="group text-md text-white hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
-                Most recently, <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">I worked with startups like 
-                <a href="https://metadao.fi" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-2">
+              <p className="group cursor-crosshair text-md text-zinc-900 transition-colors duration-150 ease-out hover:text-zinc-900/35">
+                Most recently, <span className="border-b-2 border-dotted border-transparent group-hover:border-zinc-950/20">I worked with startups like{" "}
+                <a href="https://metadao.fi" target="_blank" rel="noreferrer" className="ml-2 inline-flex items-baseline gap-1 space-x-1 border-b-2 border-transparent transition-colors duration-150 ease-out group-hover:border-[#df8f93] group-hover:text-zinc-950">
                   <Image 
                     src="/img/work-metadao.png" 
                     alt="MetaDAO" 
                     width={18} 
                     height={18} 
-                    className="inline-block rounded-sm ring-1 ring-white/20 mr-1 transform translate-y-[2.5px]" 
+                    className="mr-1 inline-block translate-y-[2.5px] rounded-sm ring-1 ring-black/10"
                   />
                   MetaDAO
                 </a>, 
                 <br />
-                <a href="https://triton.one" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1">
+                <a href="https://triton.one" target="_blank" rel="noreferrer" className="inline-flex items-baseline gap-1 space-x-1 border-b-2 border-transparent transition-colors duration-150 ease-out group-hover:border-[#df8f93] group-hover:text-zinc-950">
                   <Image 
                     src="/img/work-triton.png" 
                     alt="Triton" 
                     width={18} 
                     height={18} 
-                    className="inline-block rounded-sm ring-1 ring-white/20 mr-1 transform translate-y-[2.5px]" 
+                    className="mr-1 inline-block translate-y-[2.5px] rounded-sm ring-1 ring-black/10"
                   />
                   Triton
                 </a>, and 
-                <a href="https://vapi.ai" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-2">
+                <a href="https://vapi.ai" target="_blank" rel="noreferrer" className="ml-2 inline-flex items-baseline gap-1 space-x-1 border-b-2 border-transparent transition-colors duration-150 ease-out group-hover:border-[#df8f93] group-hover:text-zinc-950">
                   <Image 
                     src="/img/work-vapi.png" 
                     alt="Vapi" 
                     width={18} 
                     height={18} 
-                    className="inline-block rounded-sm ring-1 ring-white/20 mr-1 transform translate-y-[2.5px] transform translate-y-[2.5px]" 
+                    className="mr-1 inline-block translate-y-[2.5px] rounded-sm ring-1 ring-black/10"
                   />
                   Vapi
                 </a> on product, design and engineering.</span>
               </p>
 
-              <p className="group text-md text-white hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
-                I like to build things - <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">
-                 <a href="https://apps.apple.com/us/app/senko-simple-pro-camera/id6584516223" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-1">
+              <p className="group cursor-crosshair text-md text-zinc-900 transition-colors duration-150 ease-out hover:text-zinc-900/35">
+                I like to build things - <span className="border-b-2 border-dotted border-transparent group-hover:border-zinc-950/20">
+                 <a href="https://apps.apple.com/us/app/senko-simple-pro-camera/id6584516223" target="_blank" rel="noreferrer" className="ml-1 inline-flex items-baseline gap-1 space-x-1 border-b-2 border-transparent transition-colors duration-150 ease-out group-hover:border-[#df8f93] group-hover:text-zinc-950">
                     <Image 
                       src="/img/work-senko.png" 
                       alt="Senko" 
                       width={18} 
                       height={18} 
-                      className="inline-block rounded-sm ring-1 ring-white/20 mr-1 transform translate-y-[2.5px]" 
+                      className="mr-1 inline-block translate-y-[2.5px] rounded-sm ring-1 ring-black/10"
                     />
                     Senko
                   </a>, 
-                <a href="https://symbols.dev" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-1">
+                <a href="https://symbols.dev" target="_blank" rel="noreferrer" className="ml-1 inline-flex items-baseline gap-1 space-x-1 border-b-2 border-transparent transition-colors duration-150 ease-out group-hover:border-[#df8f93] group-hover:text-zinc-950">
                   <Image 
                     src="/img/work-symbols.png" 
                     alt="Symbols" 
                     width={18} 
                     height={18} 
-                    className="inline-block rounded-sm ring-1 ring-white/20 mr-1 transform translate-y-[2.5px]" 
+                    className="mr-1 inline-block translate-y-[2.5px] rounded-sm ring-1 ring-black/10"
                   />
                   Symbols
                 </a>, 
-                <a href="https://aggr.watch" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-1 mr-1">
+                <a href="https://aggr.watch" target="_blank" rel="noreferrer" className="ml-1 mr-1 inline-flex items-baseline gap-1 space-x-1 border-b-2 border-transparent transition-colors duration-150 ease-out group-hover:border-[#df8f93] group-hover:text-zinc-950">
                   <Image
                     src="/img/work-svela.png"
                     alt="AggrWatch"
                     width={18}
                     height={18}
-                    className="inline-block rounded-sm ring-1 ring-white/20 mr-1 transform translate-y-[2.5px]"
+                    className="mr-1 inline-block translate-y-[2.5px] rounded-sm ring-1 ring-black/10"
                   />
                   Aggr Watch
                 </a>
@@ -127,18 +127,18 @@ export default function AboutMe() {
                   onClick={() => setShowMoreProjects(!showMoreProjects)}
                   className="w-0 group-hover:w-4 ml-2 cursor-pointer"
                 >
-                  <IconPlus className={`hidden group-hover:block w-2.5 h-2.5 fill-zinc-50/50 group-hover:fill-zinc-50 ${showMoreProjects ? 'rotate-45' : ''} transition-all duration-150 ease-in-out`} />
+                  <IconPlus className={`hidden h-2.5 w-2.5 fill-zinc-950/40 transition-transform duration-150 ease-out group-hover:block group-hover:fill-zinc-950 ${showMoreProjects ? 'rotate-45' : ''}`} />
                 </button>
                  
                 {showMoreProjects && (
                   <>
-                    <a href="https://github.com/rescomputer/res-ios" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-1">
+                    <a href="https://github.com/rescomputer/res-ios" target="_blank" rel="noreferrer" className="ml-1 inline-flex items-baseline gap-1 space-x-1 border-b-2 border-transparent transition-colors duration-150 ease-out group-hover:border-[#df8f93] group-hover:text-zinc-950">
                       <Image 
                         src="/img/work-res.png" 
                         alt="RES" 
                         width={18} 
                         height={18} 
-                        className="inline-block rounded-sm ring-1 ring-white/20 mr-1 transform translate-y-[2.5px]" 
+                        className="mr-1 inline-block translate-y-[2.5px] rounded-sm ring-1 ring-black/10"
                       />
                       RES
                     </a>
@@ -148,15 +148,15 @@ export default function AboutMe() {
                 </span>
               </p>
 
-              <p className="group text-md text-white hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
-                Previously, <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">I was a core contributor to 
-                <a href="https://x.com/mangomarkets" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex space-x-1 items-baseline gap-1 ml-2">
+              <p className="group cursor-crosshair text-md text-zinc-900 transition-colors duration-150 ease-out hover:text-zinc-900/35">
+                Previously, <span className="border-b-2 border-dotted border-transparent group-hover:border-zinc-950/20">I was a core contributor to{" "}
+                <a href="https://x.com/mangomarkets" target="_blank" rel="noreferrer" className="ml-2 inline-flex items-baseline gap-1 space-x-1 border-b-2 border-transparent transition-colors duration-150 ease-out group-hover:border-[#df8f93] group-hover:text-zinc-950">
                   <Image 
                     src="/img/work-mango.png" 
                     alt="Mango" 
                     width={18} 
                     height={18} 
-                    className="inline-block rounded-sm ring-1 ring-white/20 mr-1 transform translate-y-[2.5px]" 
+                    className="mr-1 inline-block translate-y-[2.5px] rounded-sm ring-1 ring-black/10"
                   />
                   Mango
                 </a>,
@@ -164,7 +164,7 @@ export default function AboutMe() {
                   onClick={() => setShowMoreHistory(!showMoreHistory)}
                   className="w-0 group-hover:w-4 ml-2 cursor-pointer"
                 >
-                  <IconPlus className={`hidden group-hover:block w-2.5 h-2.5 fill-zinc-50/50 group-hover:fill-zinc-50 ${showMoreHistory ? 'rotate-45' : ''} transition-all duration-150 ease-in-out`} />
+                  <IconPlus className={`hidden h-2.5 w-2.5 fill-zinc-950/40 transition-transform duration-150 ease-out group-hover:block group-hover:fill-zinc-950 ${showMoreHistory ? 'rotate-45' : ''}`} />
                 </button>              
                 {showMoreHistory ? 'a open-source defi platform on Solana ' : 'a open-source defi platform on Solana. '}                 
                 {showMoreHistory && (
@@ -174,16 +174,16 @@ export default function AboutMe() {
                 )}
                 </span>
                 </p>
-                <p className="group text-md text-white hover:text-zinc-50/30 cursor-crosshair transition-all duration-150 ease-in-out">
+                <p className="group cursor-crosshair text-md text-zinc-900 transition-colors duration-150 ease-out hover:text-zinc-900/35">
                  Prior to that, I was on the marketing team for
-                 <span className="border-b-2 border-transparent border-dotted group-hover:border-zinc-50/20">
-                <a href="https://www.nasdaq.com/articles/coinbase-acquires-crypto-wallet-firm-brd" target="_blank" rel="noreferrer" className="group-hover:text-zinc-50 border-b-2 border-transparent group-hover:border-[#ffb7b7] inline-flex items-baseline gap-1 ml-2">
+                 <span className="border-b-2 border-dotted border-transparent group-hover:border-zinc-950/20">
+                <a href="https://www.nasdaq.com/articles/coinbase-acquires-crypto-wallet-firm-brd" target="_blank" rel="noreferrer" className="ml-2 inline-flex items-baseline gap-1 border-b-2 border-transparent transition-colors duration-150 ease-out group-hover:border-[#df8f93] group-hover:text-zinc-950">
                   <Image 
                     src="/img/work-brd.png" 
                     alt="BRD" 
                     width={18} 
                     height={18} 
-                    className="inline-block rounded-sm ring-1 ring-white/20 mr-1 transform translate-y-[2.5px]" 
+                    className="mr-1 inline-block translate-y-[2.5px] rounded-sm ring-1 ring-black/10"
                   />
                   BRD
                 </a>,
@@ -191,7 +191,7 @@ export default function AboutMe() {
                   onClick={() => setShowMoreBrd(!showMoreBrd)}
                   className="w-0 group-hover:w-4 ml-2 cursor-pointer"
                 >
-                  <IconPlus className={`hidden group-hover:block w-2.5 h-2.5 fill-zinc-50/50 group-hover:fill-zinc-50 ${showMoreBrd ? 'rotate-45' : ''} transition-all duration-150 ease-in-out`} />
+                  <IconPlus className={`hidden h-2.5 w-2.5 fill-zinc-950/40 transition-transform duration-150 ease-out group-hover:block group-hover:fill-zinc-950 ${showMoreBrd ? 'rotate-45' : ''}`} />
                 </button>
                 {showMoreBrd ? 'a crypto wallet ' : 'a crypto wallet.'}</span>
                 {showMoreBrd && (

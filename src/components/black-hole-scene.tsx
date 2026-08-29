@@ -15,6 +15,7 @@ interface BlackHoleSceneProps {
   className?: string;
   isInteractive?: boolean;
   isAsciiEnabled?: boolean;
+  tone?: "dark" | "light";
 }
 
 function normalize3(out: Float32Array, x: number, y: number, z: number) {
@@ -47,6 +48,7 @@ export function BlackHoleScene({
   className,
   isInteractive = false,
   isAsciiEnabled = false,
+  tone = "dark",
 }: BlackHoleSceneProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const asciiCanvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -83,7 +85,7 @@ export function BlackHoleScene({
       grayscale: false,
       chars: " .,:;-=+*#%@|/\\0<>",
       minChannel: 60,
-      alpha: 0.8,
+      alpha: tone === "light" ? 0.68 : 0.8,
       fontScale: 0.72,
       fontSize: 16,
       cellWidth: 10,
@@ -507,8 +509,10 @@ export function BlackHoleScene({
         const pixels = imageData.data;
 
         asciiContext.clearRect(0, 0, ascii.viewportWidth, ascii.viewportHeight);
-        asciiContext.fillStyle = "rgba(0, 0, 0, 1)";
-        asciiContext.fillRect(0, 0, ascii.viewportWidth, ascii.viewportHeight);
+        if (tone === "dark") {
+          asciiContext.fillStyle = "rgba(0, 0, 0, 1)";
+          asciiContext.fillRect(0, 0, ascii.viewportWidth, ascii.viewportHeight);
+        }
 
         const chars = ascii.chars;
         const maxIndex = Math.max(chars.length - 1, 1);
@@ -530,7 +534,15 @@ export function BlackHoleScene({
             const ch = chars[charIndex] ?? " ";
             if (ch === " ") continue;
 
-            if (ascii.grayscale) {
+            if (tone === "light") {
+              // Translate the emissive simulation into warm, print-like ink while
+              // leaving the page beneath the ASCII canvas fully transparent.
+              const inkR = Math.round(26 + r * 0.28);
+              const inkG = Math.round(23 + g * 0.24);
+              const inkB = Math.round(20 + b * 0.2);
+              const inkAlpha = ascii.alpha * (0.58 + brightness * 0.42);
+              asciiContext.fillStyle = `rgba(${inkR}, ${inkG}, ${inkB}, ${inkAlpha})`;
+            } else if (ascii.grayscale) {
               asciiContext.fillStyle = `rgba(255, 255, 255, ${ascii.alpha})`;
             } else {
               const brightnessFactor = Math.max(0.3, (charIndex / maxIndex) * 1.5 + 0.5);
@@ -574,14 +586,18 @@ export function BlackHoleScene({
       }
       renderer.destroy();
     };
-  }, [isAsciiEnabled, isInteractive]);
+  }, [isAsciiEnabled, isInteractive, tone]);
 
   return (
     <div className={cn("absolute inset-0", className)}>
       <canvas
         ref={canvasRef}
         aria-hidden="true"
-        className={cn("absolute inset-0 h-full w-full", !isInteractive && "pointer-events-none")}
+        className={cn(
+          "absolute inset-0 h-full w-full",
+          !isInteractive && "pointer-events-none",
+          tone === "light" && isAsciiEnabled && "opacity-0",
+        )}
       />
       {isAsciiEnabled ? (
         <canvas

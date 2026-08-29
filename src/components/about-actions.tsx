@@ -38,12 +38,12 @@ export function AboutActions({ isExpanded, onToggle }: AboutActionsProps) {
               aria-expanded={isExpanded}
               variant="link"
               onClick={onToggle}
-              className="group h-auto p-0 font-nuvo text-sm text-zinc-50/70 transition-colors duration-150 hover:text-zinc-50"
+              className="group h-auto p-0 font-nuvo text-sm text-zinc-700 transition-colors duration-150 ease-out hover:text-zinc-950 active:scale-[0.97]"
               endIcon={
                 isExpanded ? (
-                  <IconApplescript className="mt-[2px] size-5 fill-zinc-50/50 group-hover:fill-zinc-50" />
+                  <IconApplescript className="mt-[2px] size-5 fill-zinc-950/35 transition-[fill] duration-150 ease-out group-hover:fill-zinc-950" />
                 ) : (
-                  <IconSunDustFill className="mt-[2px] size-5 fill-yellow-500/50 group-hover:fill-yellow-300" />
+                  <IconSunDustFill className="mt-[2px] size-5 fill-amber-500/60 transition-[fill] duration-150 ease-out group-hover:fill-amber-600" />
                 )
               }
             >
@@ -60,14 +60,14 @@ export function AboutActions({ isExpanded, onToggle }: AboutActionsProps) {
         </Tooltip>
       </TooltipProvider>
 
-      <span aria-hidden="true" className="mx-3 hidden h-4 w-px bg-white/15 sm:block" />
+      <span aria-hidden="true" className="mx-3 hidden h-4 w-px bg-black/15 sm:block" />
 
       <nav aria-label="Site links" className="basis-full sm:basis-auto">
         <ul className="flex flex-wrap items-center gap-x-3 gap-y-1 sm:gap-0">
           {aboutLinks.map((item, index) => (
             <li key={item.label} className="flex items-center">
               {index > 0 ? (
-                <span aria-hidden="true" className="mx-2 hidden text-xs text-white/20 sm:inline">
+                <span aria-hidden="true" className="mx-2 hidden text-xs text-black/25 sm:inline">
                   ·
                 </span>
               ) : null}
@@ -76,14 +76,14 @@ export function AboutActions({ isExpanded, onToggle }: AboutActionsProps) {
                   href={item.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="font-nuvo text-xs text-zinc-50/50 transition-colors duration-150 hover:text-zinc-50"
+                  className="font-nuvo text-xs text-zinc-600 transition-colors duration-150 ease-out hover:text-zinc-950"
                 >
                   {item.label}
                 </a>
               ) : (
                 <Link
                   href={item.href}
-                  className="font-nuvo text-xs text-zinc-50/50 transition-colors duration-150 hover:text-zinc-50"
+                  className="font-nuvo text-xs text-zinc-600 transition-colors duration-150 ease-out hover:text-zinc-950"
                 >
                   {item.label}
                 </Link>

@@ -162,8 +162,8 @@
 
   .long-dashed-rails {
     background-image:
-      linear-gradient(to bottom, rgb(255 255 255 / 15%) 0 18px, transparent 18px 30px),
-      linear-gradient(to bottom, rgb(255 255 255 / 15%) 0 18px, transparent 18px 30px);
+      linear-gradient(to bottom, rgb(24 24 27 / 14%) 0 18px, transparent 18px 30px),
+      linear-gradient(to bottom, rgb(24 24 27 / 14%) 0 18px, transparent 18px 30px);
     background-position: left top, right top;
     background-repeat: repeat-y;
     background-size: 1px 30px;

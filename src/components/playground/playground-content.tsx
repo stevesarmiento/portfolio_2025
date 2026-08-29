@@ -38,8 +38,8 @@ export function PlaygroundContent() {
       45deg,
       transparent,
       transparent 10px,
-      rgba(255, 255, 255, 0.05) 10px,
-      rgba(255, 255, 255, 0.05) 11px
+      rgba(24, 24, 27, 0.045) 10px,
+      rgba(24, 24, 27, 0.045) 11px
     )`
   };
 
@@ -56,7 +56,7 @@ export function PlaygroundContent() {
       <PlaygroundGridItem
         title="Family Wallet Creation"
         description="Wallet creation animation experiment"
-        className="col-span-4 border-t border-[#252525] border-dashed"
+        className="col-span-4 border-t border-dashed border-black/10"
         delay={0.2}
       >
         <FamilyWalletCreation />
@@ -74,7 +74,7 @@ export function PlaygroundContent() {
       </PlaygroundGridItem>
 
       {/* Row 1 & 2 - Right */}
-      <div className="grid grid-cols-1 divide-y divide-[#252525] divide-dashed col-span-4">
+      <div className="col-span-4 grid grid-cols-1 divide-y divide-dashed divide-black/10">
         <PlaygroundGridItem
           title="Wallet Info Modal"
           description="Transitional animations experiment"
@@ -130,4 +130,4 @@ export function PlaygroundContent() {
       </PlaygroundGridItem>
     </>
   );
-} 
+}
