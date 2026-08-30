@@ -1,14 +1,59 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
+import {
+    IconBoltFill,
+    IconCubeFill,
+    IconGamecontrollerFill,
+    IconGlobeAmericasFill,
+    IconHeartFill,
+    IconLeafFill,
+    IconMoonFill,
+    IconStarFill,
+    IconSunMaxFill,
+} from "symbols-react";
 import { FamilyWalletCard } from "./components/family-wallet-card";
 import GridAnimation from "./components/grid-animation";
+
+const WALLET_COLORS = [
+    "#0f766e",
+    "#1d4ed8",
+    "#6d28d9",
+    "#be123c",
+    "#c2410c",
+    "#047857",
+    "#4338ca",
+    "#a21caf",
+];
+
+const WALLET_ICONS = [
+    IconGamecontrollerFill,
+    IconBoltFill,
+    IconGlobeAmericasFill,
+    IconHeartFill,
+    IconLeafFill,
+    IconMoonFill,
+    IconStarFill,
+    IconSunMaxFill,
+    IconCubeFill,
+];
+
+function createRunSeed() {
+    const values = new Uint32Array(1);
+    crypto.getRandomValues(values);
+    return values[0] || 1;
+}
 
 export default function FamilyWalletCreation() {
     const [showGrid, setShowGrid] = useState(false);
     const [hasStarted, setHasStarted] = useState(false);
     const [isRevealing, setIsRevealing] = useState(false);
+    const [runSeed, setRunSeed] = useState(1);
+
+    const walletColor = WALLET_COLORS[runSeed % WALLET_COLORS.length];
+    const WalletIcon = WALLET_ICONS[(runSeed >>> 8) % WALLET_ICONS.length];
 
     const startAnimation = () => {
+        setRunSeed(createRunSeed());
         setHasStarted(true);
         setShowGrid(true);
         setTimeout(() => {
@@ -28,12 +73,12 @@ export default function FamilyWalletCreation() {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center w-full h-full rounded-3xl bg-white gap-6">
+        <div className="flex flex-col items-center justify-center w-full h-full rounded-3xl gap-6">
             {!hasStarted ? (
                 <motion.button
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="px-4 py-2 text-gray-400 hover:text-gray-500 font-medium rounded-full border border-transparent hover:border-gray-200 active:border-transparent transition-colors"
+                    className="bg-white px-4 py-2 text-gray-400 hover:text-gray-500 font-medium rounded-full border border-gray-300 hover:border-gray-200 active:border-gray-300 transition-colors hover:cursor-pointer"
                     onClick={startAnimation}
                 >
                     Create Wallet
@@ -52,7 +97,12 @@ export default function FamilyWalletCreation() {
                                 transition: 'clip-path 0.5s ease-in-out'
                             }}
                         >
-                            <FamilyWalletCard key={Date.now()} />
+                            <FamilyWalletCard
+                                key={isRevealing ? "revealed" : "hidden"}
+                                uniqueId={String(runSeed)}
+                                bgColor={walletColor}
+                                WalletIconComponent={WalletIcon}
+                            />
                         </motion.div>
 
                         {showGrid && (
@@ -73,7 +123,7 @@ export default function FamilyWalletCreation() {
                                     exit={{ opacity: 0 }}
                                     transition={{ duration: 0.5 }}
                                 >
-                                    <GridAnimation />
+                                    <GridAnimation seed={runSeed} />
                                 </motion.div>
 
                                 <motion.p
@@ -142,7 +192,7 @@ export default function FamilyWalletCreation() {
                                 <motion.button
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
-                                    className="text-sm text-gray-500/50 hover:text-gray-700 transition-colors mt-[220px]"
+                                    className="text-sm text-gray-500/50 hover:text-gray-700 transition-colors mt-[220px] hover:cursor-pointer"
                                     onClick={resetAnimation}
                                 >
                                     Reset Animation

@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { usePathname, useRouter } from "next/navigation";
 import { 
     IconEllipsis,
-    IconFigureIndoorSoccer, 
     IconHouseFill, 
     IconXLogo, 
     IconFigmaLogo, 
@@ -72,12 +71,6 @@ export default function AbsoluteMenu() {
   const handleHomeClick = useCallback(() => {
     if (!isDragging && pathname !== '/') {
       router.push('/');
-    }
-  }, [isDragging, pathname, router]);
-
-  const handlePlaygroundClick = useCallback(() => {
-    if (!isDragging && pathname !== '/playground') {
-      router.push('/playground');
     }
   }, [isDragging, pathname, router]);
 
@@ -164,7 +157,7 @@ export default function AbsoluteMenu() {
       >
         <motion.div
           animate={{
-            width: isOpen ? 260 : 166,
+            width: isOpen ? 260 : 110,
           }}
           transition={transition}
           initial={false}
@@ -184,7 +177,7 @@ export default function AbsoluteMenu() {
           <div className='h-[55px] w-full'>
             <motion.div
               animate={{
-                width: isOpen ? '245px' : '150px',
+                width: isOpen ? '245px' : '94px',
               }}
               initial={false}
             >
@@ -200,16 +193,6 @@ export default function AbsoluteMenu() {
                     >
                         <span className="sr-only">Home</span>
                         <IconHouseFill className={`h-4 w-4 fill-white/50 group-hover:fill-white ${pathname === '/' ? '' : 'fill-white'}`} />
-                    </Button>
-                    <Button 
-                        variant="ghost" 
-                        size="icon"
-                        className={`group rounded-xl hover:bg-white/10 ${pathname === '/playground' ? 'bg-white/5' : ''}`}
-                        onClick={handlePlaygroundClick}
-                        disabled={isDragging}
-                    >
-                        <span className="sr-only">Playground</span>
-                        <IconFigureIndoorSoccer className={`h-4 w-4 fill-white/50 group-hover:fill-white ${pathname === '/playground' ? '' : 'fill-white'}`} />
                     </Button>
                     <Button
                       variant="ghost"

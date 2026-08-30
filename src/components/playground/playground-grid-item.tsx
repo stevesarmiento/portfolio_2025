@@ -7,7 +7,7 @@ import { Suspense } from "react";
 function ComponentSkeleton() {
   return (
     <div className="w-full h-full flex items-center justify-center">
-      <div className="animate-pulse bg-[#2E4D61]/10 rounded-lg w-3/4 h-3/4" />
+      <div className="h-3/4 w-3/4 animate-pulse rounded-lg bg-zinc-950/5 motion-reduce:animate-none" />
     </div>
   );
 }
@@ -34,20 +34,20 @@ export function PlaygroundGridItem({
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay }}
-      className={`p-6 flex flex-col items-center justify-center ${className}`}
+      className={`flex flex-col items-center justify-center p-6 ${className}`}
     >
       <div 
-        className="flex h-full w-full items-center justify-center rounded-[23px] ring-slate-700/10 ring-[1px] mb-3"
+        className="mb-3 flex h-full w-full items-center justify-center rounded-[23px] bg-white/35 shadow-sm ring-1 ring-black/10"
         style={backgroundStyle}
       >
         <Suspense fallback={<ComponentSkeleton />}>
           {children}
         </Suspense>
       </div>
-      <div className="text-left w-full">
-        <h2 className="text-base font-nuvo text-[#ffffff]/40 mb-1">{title}</h2>
-        <span className="text-xs text-[#ffffff]/80">{description}</span>
+      <div className="w-full text-left">
+        <h2 className="font-nuvo mb-1 text-base text-zinc-900">{title}</h2>
+        <span className="text-xs text-zinc-600">{description}</span>
       </div>
     </motion.div>
   );
-} 
+}
