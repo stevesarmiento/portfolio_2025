@@ -4,7 +4,7 @@ import { IconGamecontrollerFill, IconSquareOnSquare } from "symbols-react";
 
 interface FamilyWalletCardProps {
     bgColor?: string;
-    IconComponent?: React.ComponentType<{ className?: string }>;
+    WalletIconComponent?: React.ComponentType<{ className?: string }>;
     walletName?: string;
     ethValue?: string;
     onClick?: () => void;
@@ -12,8 +12,8 @@ interface FamilyWalletCardProps {
 }
 
 export const FamilyWalletCard: FC<FamilyWalletCardProps> = ({
-    bgColor = "cyan-500",
-    IconComponent = IconSquareOnSquare,
+    bgColor = "#0891b2",
+    WalletIconComponent = IconGamecontrollerFill,
     walletName = "GG Wallet",
     ethValue = "1337 SOL",
     onClick = () => {},
@@ -34,7 +34,7 @@ export const FamilyWalletCard: FC<FamilyWalletCardProps> = ({
                     velocity: 2       
                 }
             }}
-            className="flex cursor-pointer flex-col items-start justify-between p-5 bg-cyan-500"
+            className="flex flex-col items-start justify-between p-5"
             style={{
             height: "200px",
             width: "320px",
@@ -45,10 +45,10 @@ export const FamilyWalletCard: FC<FamilyWalletCardProps> = ({
         <motion.div className="flex w-full items-start justify-between">
           <motion.div
             layoutId={`icon-${uniqueId}`}
-            className="flex items-center justify-center bg-white/10 rounded-full p-2"
+            className="flex items-center justify-center bg-white/10 rounded-full p-2.5"
             onClick={onClick}
           >
-             <IconGamecontrollerFill className="h-10 w-10 translate-x-0 translate-y-0 fill-white" />
+             <WalletIconComponent className="size-7 translate-x-0 translate-y-0 fill-white" />
           </motion.div>
           <motion.div
             initial={{ opacity: 0, scale: 0.5, filter: "blur(4px)" }}
@@ -59,7 +59,7 @@ export const FamilyWalletCard: FC<FamilyWalletCardProps> = ({
           >
             MNG0g...69420
             <motion.div className="flex h-6 w-6 shrink-0 cursor-pointer items-center justify-center">
-              {IconComponent && <IconComponent className="h-4 w-4 shrink-0 translate-x-0 translate-y-0 fill-white/50" />}
+              <IconSquareOnSquare className="h-4 w-4 shrink-0 translate-x-0 translate-y-0 fill-white/50" />
             </motion.div>
           </motion.div>
         </motion.div>
@@ -82,7 +82,9 @@ export const FamilyWalletCard: FC<FamilyWalletCardProps> = ({
             initial={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
             animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
             exit={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
-            className=" flex h-[32px] text-md select-none items-center justify-center rounded-full bg-white p-2 px-3 font-semibold text-cyan-500 transition-colors duration-150 ease-out"
+            className="text-md flex h-[32px] select-none items-center justify-center rounded-full bg-white p-2 px-3 font-semibold transition-colors duration-150 ease-out cursor-pointer"
+            style={{ color: bgColor }}
+            whileTap={{ scale: 0.9 }}
           >
             Back Up Now
           </motion.button>

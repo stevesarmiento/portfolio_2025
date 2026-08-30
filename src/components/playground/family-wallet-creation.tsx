@@ -1,14 +1,59 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
+import {
+    IconBoltFill,
+    IconCubeFill,
+    IconGamecontrollerFill,
+    IconGlobeAmericasFill,
+    IconHeartFill,
+    IconLeafFill,
+    IconMoonFill,
+    IconStarFill,
+    IconSunMaxFill,
+} from "symbols-react";
 import { FamilyWalletCard } from "./components/family-wallet-card";
 import GridAnimation from "./components/grid-animation";
+
+const WALLET_COLORS = [
+    "#0f766e",
+    "#1d4ed8",
+    "#6d28d9",
+    "#be123c",
+    "#c2410c",
+    "#047857",
+    "#4338ca",
+    "#a21caf",
+];
+
+const WALLET_ICONS = [
+    IconGamecontrollerFill,
+    IconBoltFill,
+    IconGlobeAmericasFill,
+    IconHeartFill,
+    IconLeafFill,
+    IconMoonFill,
+    IconStarFill,
+    IconSunMaxFill,
+    IconCubeFill,
+];
+
+function createRunSeed() {
+    const values = new Uint32Array(1);
+    crypto.getRandomValues(values);
+    return values[0] || 1;
+}
 
 export default function FamilyWalletCreation() {
     const [showGrid, setShowGrid] = useState(false);
     const [hasStarted, setHasStarted] = useState(false);
     const [isRevealing, setIsRevealing] = useState(false);
+    const [runSeed, setRunSeed] = useState(1);
+
+    const walletColor = WALLET_COLORS[runSeed % WALLET_COLORS.length];
+    const WalletIcon = WALLET_ICONS[(runSeed >>> 8) % WALLET_ICONS.length];
 
     const startAnimation = () => {
+        setRunSeed(createRunSeed());
         setHasStarted(true);
         setShowGrid(true);
         setTimeout(() => {
@@ -52,7 +97,12 @@ export default function FamilyWalletCreation() {
                                 transition: 'clip-path 0.5s ease-in-out'
                             }}
                         >
-                            <FamilyWalletCard key={isRevealing ? "revealed" : "hidden"} />
+                            <FamilyWalletCard
+                                key={isRevealing ? "revealed" : "hidden"}
+                                uniqueId={String(runSeed)}
+                                bgColor={walletColor}
+                                WalletIconComponent={WalletIcon}
+                            />
                         </motion.div>
 
                         {showGrid && (
@@ -73,7 +123,7 @@ export default function FamilyWalletCreation() {
                                     exit={{ opacity: 0 }}
                                     transition={{ duration: 0.5 }}
                                 >
-                                    <GridAnimation />
+                                    <GridAnimation seed={runSeed} />
                                 </motion.div>
 
                                 <motion.p
