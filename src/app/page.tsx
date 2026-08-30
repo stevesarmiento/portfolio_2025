@@ -54,8 +54,8 @@ export default function Home() {
             onMouseLeave={() => setIsHovering(false)}
           >
             <div className="relative cursor-crosshair transition-transform duration-150 ease-out hover:scale-110 active:scale-[0.97] motion-reduce:transform-none">
-              <IconSealFill className="size-[50px] fill-zinc-950/15 transition-[fill] duration-150 ease-out group-hover:fill-zinc-950/25 group-hover:animate-spin-slow motion-reduce:animate-none" />
-              <h1 className="absolute left-[21px] top-[11px] font-rafaella text-xl font-black text-zinc-700 transition-colors duration-150 ease-out group-hover:text-zinc-950">S</h1>
+              <IconSealFill className="size-[50px] fill-rose-400 transition-[fill] duration-150 ease-out group-hover:fill-rose-400 group-hover:animate-spin-slow motion-reduce:animate-none" />
+              <h1 className="absolute left-[21px] top-[11px] font-rafaella text-xl font-black text-white transition-colors duration-150 ease-out group-hover:text-white">S</h1>
             </div>
             <div className="flex flex-col">
               <span className="font-nuvo flex flex-row items-center justify-start gap-x-1 text-lg text-zinc-950">
@@ -63,10 +63,10 @@ export default function Home() {
                 <motion.span animate={{ opacity: [1, 0, 1] }} transition={{ repeat: Infinity, duration: 0.5 }}>_</motion.span>
               </span>
               <span className="sm:text-md flex flex-row flex-wrap items-center justify-center gap-x-1 border-b-2 border-transparent font-mono text-sm text-zinc-600">
-                Product Engineering @ the
-                <SolanaLogo className="mx-1 size-[18px] shrink-0" />
-                <a href="https://solana.foundation" target="_blank" rel="noreferrer" className="inline-flex translate-y-[2px] items-baseline gap-1 border-b-2 border-transparent transition-colors duration-150 ease-out hover:border-[#df8f93] hover:text-zinc-950">
-                  Solana Foundation
+                Product Engineer at 
+                <a href="https://solana.foundation" target="_blank" rel="noreferrer" className="expanding-link inline-flex items-center gap-1 hover:text-zinc-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#df8f93] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f4f1ea] ml-1">
+                  <SolanaLogo className="size-[18px] shrink-0" />
+                  <span>Solana Foundation</span>
                 </a>
               </span>
             </div>

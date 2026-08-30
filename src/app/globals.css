@@ -162,11 +162,31 @@
 
   .long-dashed-rails {
     background-image:
-      linear-gradient(to bottom, rgb(24 24 27 / 14%) 0 18px, transparent 18px 30px),
-      linear-gradient(to bottom, rgb(24 24 27 / 14%) 0 18px, transparent 18px 30px);
+      linear-gradient(to bottom, rgb(24 24 27 / 14%) 0 9px, transparent 9px 15px),
+      linear-gradient(to bottom, rgb(24 24 27 / 14%) 0 9px, transparent 9px 15px);
     background-position: left top, right top;
     background-repeat: repeat-y;
-    background-size: 1px 30px;
+    background-size: 1px 15px;
+  }
+
+  .long-dashed-list {
+    background-image:
+      linear-gradient(to right, rgb(24 24 27 / 14%) 0 9px, transparent 9px 15px),
+      linear-gradient(to right, rgb(24 24 27 / 14%) 0 9px, transparent 9px 15px);
+    background-position: left top, left bottom;
+    background-repeat: repeat-x;
+    background-size: 15px 1px;
+  }
+
+  .long-dashed-list > li:not(:last-child) {
+    background-image: linear-gradient(
+      to right,
+      rgb(24 24 27 / 14%) 0 9px,
+      transparent 9px 15px
+    );
+    background-position: left bottom;
+    background-repeat: repeat-x;
+    background-size: 15px 1px;
   }
 
   .bg-texture {
@@ -207,6 +227,36 @@
   .hide-scrollbar:active::-webkit-scrollbar {
     width: auto;
     height: auto;
+  }
+
+  .expanding-link {
+    position: relative;
+    padding-bottom: 2px;
+    line-height: 1.25rem;
+  }
+
+  .expanding-link::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    content: "";
+    background: #df8f93;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 180ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .expanding-link:hover::after,
+  .expanding-link:focus-visible::after {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .expanding-link::after {
+    transition-duration: 0.01ms;
   }
 }
   

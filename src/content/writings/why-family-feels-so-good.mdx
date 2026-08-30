@@ -1,0 +1,111 @@
+import {
+  FamilyActionMenuStudy,
+  FamilyFeedbackStudy,
+  FamilyTransactionStudy,
+  FamilyWalletCreationStudy,
+} from "@/components/writings/family-experiment-demos";
+
+export const article = {
+  title: "Why Family Feels So Good",
+  description:
+    "Four small interaction studies on how Family makes crypto feel warm, clear, and human.",
+  publishedAt: "2026-08-29",
+  updatedAt: undefined,
+  draft: false,
+};
+
+## A wallet that feels like an app
+
+Family is my favorite wallet on iOS. That sounds like a small distinction, but
+most crypto products make the wallet part impossible to forget. Addresses look
+fragile, fees feel mysterious, and every confirmation carries the quiet threat
+that one wrong tap might be expensive.
+
+Family feels different. It has the confidence of a consumer app: warm without
+being childish, clear without flattening the complexity underneath it. The
+interface does not pretend crypto is simple. It simply refuses to make the
+machinery the first thing you feel.
+
+I rebuilt four of the interactions I kept returning to. They are small studies,
+but together they explain why the product has stayed in my head.
+
+## Waiting can feel reassuring
+
+Creating a wallet involves work that is both important and completely
+invisible. A blank spinner would be technically honest, but emotionally empty.
+Family turns that wait into a little ceremony. The grid assembles, the system
+speaks plainly, and the finished wallet arrives as the result of something—not
+as a card that happened to appear.
+
+Press **Create Wallet** to run the sequence, then reset it to watch it again.
+
+<DemoFrame title="Wallet creation">
+  <FamilyWalletCreationStudy />
+</DemoFrame>
+
+The animation is doing more than filling time. It gives shape to work I cannot
+see and makes the final state feel earned. For a product built around trust,
+that reassurance matters.
+
+## Complexity can unfold
+
+A wallet can do a lot, but it should not have to announce every possibility at
+once. Family often begins with one calm action and lets the next layer unfold
+only after I ask for it.
+
+Open the plus button, move through the choices, and click outside to close it.
+
+<DemoFrame title="Primary actions">
+  <FamilyActionMenuStudy />
+</DemoFrame>
+
+Send, Swap, and Receive are always close, yet they do not compete for attention
+when I am only checking a balance. The expanding shape also explains where the
+choices came from. Nothing teleports into the interface; one control simply
+reveals what it was holding.
+
+## Fees without the fear
+
+Network fees are a perfect example of complexity that cannot be designed away.
+The useful move is to translate it. Normal, Fast, and Urgent are decisions I can
+understand. The dollar estimate and expected time update immediately, while the
+network mechanics stay available without becoming the headline.
+
+Choose a transaction speed and watch the fee and arrival estimate respond.
+
+<DemoFrame title="Transaction speed">
+  <FamilyTransactionStudy />
+</DemoFrame>
+
+The control is tiny compared with the confirmation card, which feels right.
+Most of the time the default is enough. When it is not, the tradeoff is one tap
+away and described in human terms.
+
+## Care continues after the transaction
+
+The feeling of a product is tested at its edges. Reporting a bug is rarely the
+moment a team chooses to show off, but it is exactly when a person needs the
+interface to remain patient and clear.
+
+Open **Send Feedback** and move through the five local steps. This prototype
+does not submit text or upload selected files.
+
+<DemoFrame title="Feedback flow">
+  <FamilyFeedbackStudy />
+</DemoFrame>
+
+The drawer asks one question at a time, keeps the current choice visible in the
+next decision, and leaves room to go back and reconsider. It treats support as
+part of the product rather than a form bolted onto the end of it.
+
+## The feeling is the feature
+
+None of these moments is the reason a wallet works. Keys still need to be
+created, transactions still need fees, actions still need menus, and problems
+still need somewhere to go. Family earns its character in how those necessities
+are handled.
+
+The progress message, the expanding button, the changing estimate, and the
+careful drawer are all doing emotional work. Each one removes a little
+uncertainty. Together they make a system built on cryptography feel unusually
+human—and that is why I keep coming back to it.
