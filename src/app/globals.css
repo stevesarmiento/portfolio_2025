@@ -3,7 +3,7 @@
 
 @config "../../tailwind.config.ts";
 
-@font-face {
+@font-face { 
   font-family:"ff-nuvo-mono-web-pro";
   src:url("https://use.typekit.net/af/05a643/00000000000000007735ab1d/30/l?primer=7fa3915bdafdf03041871920a205bef951d72bf64dd4c4460fb992e3ecc3a862&fvd=i4&v=3") format("woff2"),url("https://use.typekit.net/af/05a643/00000000000000007735ab1d/30/d?primer=7fa3915bdafdf03041871920a205bef951d72bf64dd4c4460fb992e3ecc3a862&fvd=i4&v=3") format("woff"),url("https://use.typekit.net/af/05a643/00000000000000007735ab1d/30/a?primer=7fa3915bdafdf03041871920a205bef951d72bf64dd4c4460fb992e3ecc3a862&fvd=i4&v=3") format("opentype");
   font-display:auto;font-style:italic;font-weight:400;font-stretch:normal;
@@ -289,7 +289,7 @@
 /* Musings */
 .writing-prose {
   color: rgb(39 39 42);
-  font-size: 17px;
+  font-size: 15px;
   line-height: 1.76;
   padding-top: 2.75rem;
 }
@@ -302,23 +302,21 @@
 .writing-prose-h2,
 .writing-prose-h3 {
   color: rgb(24 24 27);
-  font-family: "ff-nuvo-mono-web-pro", sans-serif;
-  font-weight: 400;
+  /* font-family: "ff-nuvo-mono-web-pro", sans-serif; */
+  font-size: 15px;
+  font-weight: 700;
   letter-spacing: -0.025em;
+  line-height: 1.76;
   scroll-margin-top: 6rem;
   text-wrap: balance;
 }
 
 .writing-prose-h1 {
-  font-size: 2.4rem;
-  line-height: 1.05;
   margin: 3.5rem 0 1.25rem;
 }
 
 .writing-prose-h2 {
   border-top: 1px dashed rgb(24 24 27 / 18%);
-  font-size: 1.65rem;
-  line-height: 1.2;
   margin: 4rem 0 1.25rem;
   padding-top: 2rem;
 }
@@ -330,14 +328,11 @@
 }
 
 .writing-prose-h3 {
-  font-size: 1.18rem;
-  line-height: 1.35;
   margin: 2.5rem 0 0.75rem;
 }
 
 .writing-heading-anchor {
   color: #b95f65;
-  font-family: var(--font-geist-mono), monospace;
   font-size: 0.65em;
   margin-left: 0.45rem;
   opacity: 0;
@@ -849,11 +844,7 @@
 
 @media (max-width: 639px) {
   .writing-prose {
-    font-size: 16px;
-  }
-
-  .writing-prose-h2 {
-    font-size: 1.45rem;
+    font-size: 15px;
   }
 
   .writing-figure-bleed {

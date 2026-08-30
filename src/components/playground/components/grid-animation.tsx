@@ -29,22 +29,23 @@ export default function GridAnimation() {
     <Card className="w-[300px] border-[1px] h-[200px] shadow-none overflow-hidden rounded-3xl">
       <div className="relative w-full h-full">
         {/* Vertical lines */}
-        <div className="absolute inset-0 flex justify-between">
-          {Array.from({ length: 11 }).map((_, i) => {
+        <div className="absolute inset-0">
+          {Array.from({ length: 9 }).map((_, i) => {
             const originY = getRandomOrigin();
             return (
               <motion.div 
                 key={`v${i}`} 
-                className={`w-[1px] h-full bg-gray-200 ${
+                className={`absolute h-full w-px bg-gray-200 ${
                   originY === 'start' ? 'origin-top' : 
                   originY === 'center' ? 'origin-center' : 
                   'origin-bottom'
                 }`}
+                style={{ left: `${(i + 1) * 10}%` }}
                 initial={{ scaleY: 0 }}
                 animate={{ scaleY: 1 }}
                 transition={{
                   duration: 0.3,
-                  delay: i * 0.1,
+                  delay: (i + 1) * 0.1,
                   ease: "easeOut"
                 }}
               />
@@ -53,22 +54,23 @@ export default function GridAnimation() {
         </div>
         
         {/* Horizontal lines */}
-        <div className="absolute inset-0 flex flex-col justify-between">
-          {Array.from({ length: 7 }).map((_, i) => {
+        <div className="absolute inset-0">
+          {Array.from({ length: 5 }).map((_, i) => {
             const originX = getRandomOrigin();
             return (
               <motion.div 
                 key={`h${i}`} 
-                className={`w-full h-[1px] bg-gray-200 ${
+                className={`absolute h-px w-full bg-gray-200 ${
                   originX === 'start' ? 'origin-left' : 
                   originX === 'center' ? 'origin-center' : 
                   'origin-right'
                 }`}
+                style={{ top: `${((i + 1) / 6) * 100}%` }}
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{
                   duration: 0.3,
-                  delay: 0.5 + (i * 0.1),
+                  delay: 0.5 + ((i + 1) * 0.1),
                   ease: "easeOut"
                 }}
               />
@@ -78,7 +80,7 @@ export default function GridAnimation() {
         
         {/* Dots with trails */}
         {dotPositions.map(({ start, end }, i) => {
-          const trailLength = 64; 
+          const trailLength = 8;
           const trailSpacing = 0.01;
           
           const variants = {

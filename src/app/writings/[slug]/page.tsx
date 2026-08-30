@@ -97,21 +97,12 @@ export default async function WritingPage({ params }: WritingPageProps) {
             </Link>
           </Button>
 
-          <article className="long-dashed-rails min-h-dvh px-6 pb-24 pt-28 sm:px-8">
-            <header className="mx-auto max-w-[556px] border-b border-black/10 pb-10">
-              <Link
-                href="/writings"
-                className="font-mono text-[11px] uppercase tracking-[0.18em] text-zinc-500 transition-colors duration-150 ease-out hover:text-zinc-950"
-              >
-                Musings
-              </Link>
-              <h1 className="mt-4 text-balance font-nuvo text-[clamp(2.35rem,8vw,4.5rem)] leading-[0.98] tracking-[-0.045em] text-zinc-950">
+          <article className="long-dashed-rails min-h-dvh px-6 pb-24 pt-6 sm:px-8">
+            <header className="mx-auto max-w-[556px] border-b border-black/10 pb-10 pl-12 lg:pl-0">
+              <h1 className="text-balance font-nuvo text-[20px] font-bold leading-[1.76] tracking-[-0.025em] text-zinc-950">
                 {writing.title}
               </h1>
-              <p className="mt-6 text-pretty text-[18px] leading-8 text-zinc-700">
-                {writing.description}
-              </p>
-              <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] text-zinc-500">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[13px] text-zinc-500">
                 <time dateTime={writing.publishedAt}>
                   {formatWritingDate(writing.publishedAt)}
                 </time>
@@ -136,10 +127,10 @@ export default async function WritingPage({ params }: WritingPageProps) {
             <footer className="mx-auto mt-20 max-w-[556px] border-t border-black/10 pt-8">
               <Link
                 href="/writings"
-                className="inline-flex items-center gap-2 font-nuvo text-sm text-zinc-600 transition-[color,transform] duration-150 ease-out hover:text-zinc-950 active:scale-[0.97]"
+                className="inline-flex items-center gap-2 font-nuvo text-xs italic text-zinc-600 transition-[color,transform] duration-150 ease-out hover:text-zinc-950 active:scale-[0.97]"
               >
                 <span aria-hidden="true">←</span>
-                All musings
+                All Writings
               </Link>
             </footer>
           </article>

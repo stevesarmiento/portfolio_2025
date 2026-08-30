@@ -14,6 +14,13 @@ interface AboutRow {
   year?: string;
   image?: string;
   internal?: boolean;
+  showIcon?: boolean;
+}
+
+export interface HomepageWriting {
+  slug: string;
+  title: string;
+  publishedAt: string;
 }
 
 const forFun: AboutRow[] = [
@@ -31,15 +38,6 @@ const forFun: AboutRow[] = [
     name: "Symbols",
     href: "https://symbols.dev",
     image: "/img/work-symbols.png",
-  },
-];
-
-const writings: AboutRow[] = [
-  {
-    name: "Why Family Feels So Good",
-    href: "/writings/why-family-feels-so-good",
-    year: "2026",
-    internal: true,
   },
 ];
 
@@ -99,7 +97,7 @@ function RowIcon({ item }: { item: AboutRow }) {
 function RowContents({ item }: { item: AboutRow }) {
   return (
     <>
-      <RowIcon item={item} />
+      {item.showIcon !== false ? <RowIcon item={item} /> : null}
       <span className="min-w-0 flex-1 truncate text-sm text-zinc-800 transition-colors duration-150 ease-out group-hover:text-zinc-950">
         {item.name}
       </span>
@@ -193,8 +191,15 @@ function LinkSection({
   );
 }
 
-export default function AboutMe() {
+export default function AboutMe({ writings }: { writings: HomepageWriting[] }) {
   const shouldReduceMotion = useReducedMotion();
+  const writingRows: AboutRow[] = writings.map((writing) => ({
+    name: writing.title,
+    href: `/writings/${writing.slug}`,
+    year: writing.publishedAt.slice(0, 4),
+    internal: true,
+    showIcon: false,
+  }));
   const visibleTransform = shouldReduceMotion ? "none" : "translateY(0px)";
   const hiddenTransform = shouldReduceMotion ? "none" : "translateY(6px)";
   const paragraphVariants = {
@@ -288,7 +293,7 @@ export default function AboutMe() {
         />
         <LinkSection
           title="Writings"
-          items={writings}
+          items={writingRows}
           shouldReduceMotion={shouldReduceMotion}
         />
       </motion.div>

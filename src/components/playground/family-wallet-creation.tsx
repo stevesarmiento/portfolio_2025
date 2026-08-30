@@ -28,12 +28,12 @@ export default function FamilyWalletCreation() {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center w-full h-full rounded-3xl bg-white gap-6">
+        <div className="flex flex-col items-center justify-center w-full h-full rounded-3xl gap-6">
             {!hasStarted ? (
                 <motion.button
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="px-4 py-2 text-gray-400 hover:text-gray-500 font-medium rounded-full border border-transparent hover:border-gray-200 active:border-transparent transition-colors"
+                    className="bg-white px-4 py-2 text-gray-400 hover:text-gray-500 font-medium rounded-full border border-gray-300 hover:border-gray-200 active:border-gray-300 transition-colors hover:cursor-pointer"
                     onClick={startAnimation}
                 >
                     Create Wallet
@@ -52,7 +52,7 @@ export default function FamilyWalletCreation() {
                                 transition: 'clip-path 0.5s ease-in-out'
                             }}
                         >
-                            <FamilyWalletCard key={Date.now()} />
+                            <FamilyWalletCard key={isRevealing ? "revealed" : "hidden"} />
                         </motion.div>
 
                         {showGrid && (
@@ -142,7 +142,7 @@ export default function FamilyWalletCreation() {
                                 <motion.button
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
-                                    className="text-sm text-gray-500/50 hover:text-gray-700 transition-colors mt-[220px]"
+                                    className="text-sm text-gray-500/50 hover:text-gray-700 transition-colors mt-[220px] hover:cursor-pointer"
                                     onClick={resetAnimation}
                                 >
                                     Reset Animation

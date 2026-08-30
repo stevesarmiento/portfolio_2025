@@ -30,7 +30,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer-family"
 
-export function DrawerDemo() {
+export function DrawerDemo({ trigger }: { trigger?: React.ReactElement }) {
     const [step, setStep] = React.useState(0)
     const [selectedOption, setSelectedOption] = React.useState("")
     const [, setDirection] = React.useState(1);
@@ -86,11 +86,13 @@ export function DrawerDemo() {
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        <Button 
-        endIcon={<IconMegaphoneFill className="h-4 w-4 fill-orange-300" />}
-        className="rounded-full bg-zinc-700 hover:bg-zinc-600 border-[1px] border-white/5 shadow-lg shadow-black/40">
-          Send Feedback
-        </Button>
+        {trigger ?? (
+          <Button
+          endIcon={<IconMegaphoneFill className="h-4 w-4 fill-orange-300" />}
+          className="rounded-full bg-zinc-700 hover:bg-zinc-600 border-[1px] border-white/5 shadow-lg shadow-black/40">
+            Send Feedback
+          </Button>
+        )}
       </DrawerTrigger>
       <DrawerContent hideTitle>
         <div className="mx-auto w-full max-w-sm pb-6 px-6 pt-2.5">
