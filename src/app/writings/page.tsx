@@ -4,10 +4,22 @@ import { IconArrowLeft } from "symbols-react";
 
 import { Button } from "@/components/ui/button";
 import { formatWritingDate, getAllWritings } from "@/lib/writings";
+import { SITE_NAME, WRITINGS_DESCRIPTION } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Musings · Steven Sarmiento",
-  description: "Notes on design, engineering, and making things for the web.",
+  description: WRITINGS_DESCRIPTION,
+  alternates: {
+    canonical: "/writings",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "/writings",
+    siteName: SITE_NAME,
+    title: "Musings",
+    description: WRITINGS_DESCRIPTION,
+  },
 };
 
 export default async function WritingsPage() {

@@ -11,12 +11,11 @@ import {
   getWritingBySlug,
   getWritingSlugs,
 } from "@/lib/writings";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 type WritingPageProps = {
   params: Promise<{ slug: string }>;
 };
-
-const siteUrl = "https://stevensarmi.com";
 
 export const dynamicParams = false;
 
@@ -39,15 +38,18 @@ export async function generateMetadata({
     title: `${writing.title} · Steven Sarmiento`,
     description: writing.description,
     alternates: {
-      canonical: `${siteUrl}/writings/${writing.slug}`,
+      canonical: `${SITE_URL}/writings/${writing.slug}`,
     },
     openGraph: {
       type: "article",
+      locale: "en_US",
+      siteName: SITE_NAME,
       title: writing.title,
       description: writing.description,
       publishedTime: writing.publishedAt,
       modifiedTime: writing.updatedAt,
-      url: `${siteUrl}/writings/${writing.slug}`,
+      authors: [SITE_NAME],
+      url: `${SITE_URL}/writings/${writing.slug}`,
     },
   };
 }
@@ -72,7 +74,7 @@ export default async function WritingPage({ params }: WritingPageProps) {
       "@type": "Person",
       name: "Steven Sarmiento",
     },
-    mainEntityOfPage: `${siteUrl}/writings/${writing.slug}`,
+    mainEntityOfPage: `${SITE_URL}/writings/${writing.slug}`,
   };
 
   return (
