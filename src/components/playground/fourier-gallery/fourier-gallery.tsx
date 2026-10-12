@@ -18,6 +18,8 @@ export interface FourierGalleryProps {
   color?: string;
   /** Points sampled from each SVG before the transform. */
   samples?: number;
+  /** Share of each loop spent gliding, pen up, between contours. */
+  hopFraction?: number;
   autoPlay?: boolean;
   className?: string;
 }
@@ -35,6 +37,7 @@ export function FourierGallery({
   speed = 1.3,
   color,
   samples = 1024,
+  hopFraction = 0.05,
   autoPlay = true,
   className,
 }: FourierGalleryProps) {
@@ -95,7 +98,7 @@ export function FourierGallery({
       {outline ? (
         <FourierOutline
           key={file}
-          points={outline.points}
+          points={outline.contours}
           silhouettePaths={outline.paths}
           mode={mode}
           maxTerms={maxTerms}
@@ -103,6 +106,7 @@ export function FourierGallery({
           growSteps={growSteps}
           onSequenceEnd={advance}
           speed={speed}
+          hopFraction={hopFraction}
           color={color}
           autoPlay={autoPlay}
           label={prettyName(file)}

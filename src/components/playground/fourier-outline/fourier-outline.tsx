@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
 import {
   buildViewPath,
   lengthAt,
+  type ViewPath,
 } from "@/components/playground/complex-wave/wave-math";
 import {
   dft,
@@ -22,12 +23,15 @@ import {
   evalReal,
   evalRealConjugate,
   maxErrorPct,
-  normalize,
+  normalizeMany,
+  polyLength,
   realSeries,
   resampleClosed,
+  scheduleContours,
   type Coef,
   type Pt,
   type RealSeries,
+  type Slice,
 } from "./outline-math";
 
 const INK = "#18181b";
@@ -39,6 +43,7 @@ const SERIF = "ivypresto-headline, 'Times New Roman', Georgia, serif";
 const VIEW_W = 640;
 const TWO_PI = 2 * Math.PI;
 const MARGIN = 12;
+const MIN_CONTOUR_SAMPLES = 32;
 
 export type OutlineMode = "complex" | "axes";
 
@@ -48,8 +53,11 @@ export interface SilhouettePath {
 }
 
 export interface FourierOutlineProps {
-  /** Closed outline as a polyline, y up. */
-  points: readonly Pt[];
+  /**
+   * Closed outline as a polyline (y up), or several of them. Each contour gets
+   * its own Fourier series and is drawn in turn, pen lifted in between.
+   */
+  points: readonly Pt[] | readonly (readonly Pt[])[];
   /**
    * "complex": one chain, z(t) = Σ c_k e^{ikt}, the N biggest circles first.
    * "axes": one real chain per coordinate, N = highest harmonic kept.
@@ -74,8 +82,10 @@ export interface FourierOutlineProps {
   label?: ReactNode;
   /** Radians of t per second. */
   speed?: number;
-  /** Outline samples used for the transform. */
+  /** Outline samples used for the transform, shared across contours. */
   samples?: number;
+  /** Share of the loop spent on each pen-up hop between contours. */
+  hopFraction?: number;
   color?: string;
   formula?: ReactNode;
   autoPlay?: boolean;
@@ -91,6 +101,31 @@ interface Seg {
   ty: number;
 }
 
+interface Chain {
+  segs: Seg[];
+  tip: [number, number];
+}
+
+interface ContourModel {
+  pts: Pt[];
+  circles: Coef[];
+  c0: { re: number; im: number };
+  sx: RealSeries;
+  sy: RealSeries;
+  originC: [number, number];
+  originX: [number, number];
+  originY: [number, number];
+}
+
+function toContours(points: FourierOutlineProps["points"]): Pt[][] {
+  if (points.length === 0) return [];
+  const first = points[0];
+  if (typeof first[0] === "number") {
+    return [[...(points as readonly Pt[])]];
+  }
+  return (points as readonly (readonly Pt[])[]).map((c) => [...c]).filter((c) => c.length >= 3);
+}
+
 function complexChain(
   t: number,
   circles: readonly Coef[],
@@ -98,11 +133,12 @@ function complexChain(
   scale: number,
   ox: number,
   oy: number,
-): { segs: Seg[]; tip: [number, number] } {
+): Chain {
   const segs: Seg[] = [];
   let px = ox;
   let py = oy;
-  for (let j = 0; j < count; j++) {
+  const top = Math.min(count, circles.length);
+  for (let j = 0; j < top; j++) {
     const { k, amp, phase } = circles[j];
     const r = amp * scale;
     const ang = k * t + phase;
@@ -126,7 +162,7 @@ function realChain(
   ox: number,
   oy: number,
   rot: number,
-): { segs: Seg[]; tip: [number, number] } {
+): Chain {
   const segs: Seg[] = [];
   let px = ox;
   let py = oy;
@@ -166,6 +202,18 @@ function setAttrs(el: Element | null, attrs: Record<string, number>) {
   for (const key in attrs) el.setAttribute(key, attrs[key].toFixed(1));
 }
 
+function setVisible(el: Element | null, visible: boolean) {
+  if (!el) return;
+  el.setAttribute("visibility", visible ? "visible" : "hidden");
+}
+
+function findSlice(slices: readonly Slice[], t: number): number {
+  for (let i = 0; i < slices.length; i++) {
+    if (t < slices[i].hopEnd) return i;
+  }
+  return slices.length - 1;
+}
+
 export function FourierOutline({
   points,
   mode = "complex",
@@ -178,6 +226,7 @@ export function FourierOutline({
   label,
   speed = 1.1,
   samples = 512,
+  hopFraction = 0.05,
   color = ROSE,
   formula,
   autoPlay = true,
@@ -192,7 +241,8 @@ export function FourierOutline({
   const [grow, setGrow] = useState(autoGrow);
 
   const tRef = useRef(0);
-  const traceRef = useRef<SVGPathElement>(null);
+  const traceRefs = useRef<Array<SVGPathElement | null>>([]);
+  const chainGroupRef = useRef<SVGGElement>(null);
   const circleRefs = useRef<Array<SVGCircleElement | null>>([]);
   const vectorRefs = useRef<Array<SVGLineElement | null>>([]);
   const circleRefsY = useRef<Array<SVGCircleElement | null>>([]);
@@ -211,32 +261,45 @@ export function FourierOutline({
     countRef.current = count;
   }, [count]);
 
-  // Everything that depends only on the shape: samples, transform, layout.
+  // Everything that depends only on the shape: samples, transforms, layout, schedule.
   const shape = useMemo(() => {
-    const { pts, width, center, height } = normalize(resampleClosed(points, samples));
-    const coefs = dft(pts);
-    const c0 = coefs.find((c) => c.k === 0) ?? { re: 0, im: 0 };
-    const circles = coefs.filter((c) => c.k !== 0);
-    const sx = realSeries(pts, 0, maxTerms);
-    const sy = realSeries(pts, 1, maxTerms);
+    const input = toContours(points);
+    const safeInput: Pt[][] = input.length > 0 ? input : [[[0, 0], [1, 0], [1, 1]]];
+    const inputLengths = safeInput.map(polyLength);
+    const inputTotal = inputLengths.reduce((a, b) => a + b, 0) || 1;
+    const resampled = safeInput.map((c, i) =>
+      resampleClosed(c, Math.max(MIN_CONTOUR_SAMPLES, Math.round((samples * inputLengths[i]) / inputTotal))),
+    );
+    const norm = normalizeMany(resampled);
+    const { width, center, height } = norm;
 
-    // Farthest the chain tips wander from their fixed centres at max N.
-    let reachC = 0;
-    let reachX = 0;
-    let reachY = 0;
-    for (let i = 0; i < samples; i++) {
-      const t = (TWO_PI * i) / samples;
-      const [zx, zy] = evalComplex(circles, Math.min(maxTerms, circles.length), t);
-      reachC = Math.max(reachC, Math.hypot(zx, zy));
-      reachX = Math.max(
-        reachX,
-        Math.hypot(evalReal(sx, maxTerms, t) - sx.mean, evalRealConjugate(sx, maxTerms, t)),
-      );
-      reachY = Math.max(
-        reachY,
-        Math.hypot(evalReal(sy, maxTerms, t) - sy.mean, evalRealConjugate(sy, maxTerms, t)),
-      );
-    }
+    // Per-contour transforms, plus how far each chain tip wanders at max N.
+    const analysed = norm.contours.map((pts) => {
+      const coefs = dft(pts);
+      const c0 = coefs.find((c) => c.k === 0) ?? { re: 0, im: 0 };
+      const circles = coefs.filter((c) => c.k !== 0);
+      const sx = realSeries(pts, 0, maxTerms);
+      const sy = realSeries(pts, 1, maxTerms);
+      let reachC = 0;
+      let reachX = 0;
+      let reachY = 0;
+      const n = pts.length;
+      const topC = Math.min(maxTerms, circles.length);
+      for (let i = 0; i < n; i++) {
+        const t = (TWO_PI * i) / n;
+        const [zx, zy] = evalComplex(circles, topC, t);
+        reachC = Math.max(reachC, Math.hypot(zx, zy));
+        reachX = Math.max(
+          reachX,
+          Math.hypot(evalReal(sx, maxTerms, t) - sx.mean, evalRealConjugate(sx, maxTerms, t)),
+        );
+        reachY = Math.max(
+          reachY,
+          Math.hypot(evalReal(sy, maxTerms, t) - sy.mean, evalRealConjugate(sy, maxTerms, t)),
+        );
+      }
+      return { pts, coefs, c0, circles, sx, sy, reachC, reachX, reachY };
+    });
 
     let scale: number;
     let SX: number;
@@ -248,104 +311,171 @@ export function FourierOutline({
       SY = 345;
       topY = 128;
       leftX = 150;
-      scale = Math.min(
-        230 / Math.max(width, 1),
-        (topY - MARGIN) / reachX,
-        (leftX - MARGIN) / reachY,
-      );
+      const reachX = Math.max(...analysed.map((a) => a.reachX), 1e-6);
+      const reachY = Math.max(...analysed.map((a) => a.reachY), 1e-6);
+      scale = Math.min(230 / Math.max(width, 1), (topY - MARGIN) / reachX, (leftX - MARGIN) / reachY);
     } else {
       SX = VIEW_W / 2;
       SY = VIEW_H / 2;
-      const fitX = (SX - MARGIN) / (Math.abs(c0.re) + reachC);
-      const fitY = (SY - MARGIN) / (Math.abs(c0.im) + reachC);
+      const fitX = Math.min(...analysed.map((a) => (SX - MARGIN) / (Math.abs(a.c0.re) + a.reachC)));
+      const fitY = Math.min(...analysed.map((a) => (SY - MARGIN) / (Math.abs(a.c0.im) + a.reachC)));
       scale = Math.min(250 / Math.max(width, 1), fitX, fitY);
     }
 
-    const outlineD =
-      pts
-        .map(([x, y], i) => `${i === 0 ? "M" : "L"}${(SX + scale * x).toFixed(1)} ${(SY - scale * y).toFixed(1)}`)
-        .join("") + "Z";
+    const contours: ContourModel[] = analysed.map((a) => ({
+      pts: a.pts,
+      circles: a.circles,
+      c0: a.c0,
+      sx: a.sx,
+      sy: a.sy,
+      originC: [SX + scale * a.c0.re, SY - scale * a.c0.im],
+      originX: [SX + scale * a.sx.mean, topY],
+      originY: [leftX, SY - scale * a.sy.mean],
+    }));
+
+    const outlineD = norm.contours
+      .map(
+        (pts) =>
+          pts
+            .map(([x, y], i) => `${i === 0 ? "M" : "L"}${(SX + scale * x).toFixed(1)} ${(SY - scale * y).toFixed(1)}`)
+            .join("") + "Z",
+      )
+      .join("");
+
+    const slices = scheduleContours(norm.contours.map(polyLength), hopFraction);
+
+    // DOM element budget: enough circles for the richest contour.
+    const maxCircles = Math.max(...contours.map((c) => Math.min(maxTerms, c.circles.length)), 1);
+    const maxCirclesY = Math.max(...contours.map((c) => Math.min(maxTerms, c.sx.terms.length, c.sy.terms.length)), 1);
 
     return {
-      pts,
-      circles,
-      c0,
-      sx,
-      sy,
+      contours,
+      slices,
       scale,
       height,
       SX,
       SY,
       outlineD,
+      maxCircles: axes ? maxCirclesY : maxCircles,
       // Maps raw (y-down) source coordinates onto the screen.
       silhouetteTransform: `translate(${SX} ${SY}) scale(${scale / height}) translate(${-center[0]} ${center[1]})`,
-      // chain origins
-      originC: [SX + scale * c0.re, SY - scale * c0.im] as [number, number],
-      originX: [SX + scale * sx.mean, topY] as [number, number],
-      originY: [leftX, SY - scale * sy.mean] as [number, number],
     };
-  }, [points, samples, maxTerms, axes, VIEW_H]);
+  }, [points, samples, maxTerms, axes, VIEW_H, hopFraction]);
 
-  // Reconstruction with the current N: the path the pen will trace, and its error.
+  // Reconstruction with the current N: one trace per contour, and the overall error.
   const model = useMemo(() => {
-    const { pts, circles, c0, sx, sy, scale, SX, SY } = shape;
-    const recon: Pt[] = new Array(samples);
-    for (let i = 0; i < samples; i++) {
-      const t = (TWO_PI * i) / samples;
-      if (axes) {
-        recon[i] = [evalReal(sx, count, t), evalReal(sy, count, t)];
-      } else {
-        const [x, y] = evalComplex(circles, count, t);
-        recon[i] = [x + c0.re, y + c0.im];
+    const { contours, scale, SX, SY } = shape;
+    const traces: ViewPath[] = [];
+    const starts: Array<[number, number]> = [];
+    let error = 0;
+    for (const c of contours) {
+      const n = c.pts.length;
+      const recon: Pt[] = new Array(n);
+      for (let i = 0; i < n; i++) {
+        const t = (TWO_PI * i) / n;
+        if (axes) {
+          recon[i] = [evalReal(c.sx, count, t), evalReal(c.sy, count, t)];
+        } else {
+          const [x, y] = evalComplex(c.circles, count, t);
+          recon[i] = [x + c.c0.re, y + c.c0.im];
+        }
       }
+      const screen = recon.map(([x, y]) => [SX + scale * x, SY - scale * y] as const);
+      screen.push(screen[0]);
+      traces.push(buildViewPath(screen));
+      starts.push([screen[0][0], screen[0][1]]);
+      error = Math.max(error, maxErrorPct(c.pts, recon));
     }
-    const screen = recon.map(([x, y]) => [SX + scale * x, SY - scale * y] as const);
-    screen.push(screen[0]);
-    return {
-      trace: buildViewPath(screen),
-      error: maxErrorPct(pts, recon),
-    };
-  }, [shape, count, axes, samples]);
+    return { traces, starts, error };
+  }, [shape, count, axes]);
 
-  const chainsAt = useCallback(
-    (t: number) => {
+  const chainsFor = useCallback(
+    (c: ContourModel, tau: number): { x: Chain; y: Chain | null; pen: [number, number] } => {
       if (axes) {
-        const cx = realChain(t, shape.sx, count, shape.scale, shape.originX[0], shape.originX[1], 0);
-        const cy = realChain(t, shape.sy, count, shape.scale, shape.originY[0], shape.originY[1], Math.PI / 2);
-        const pen: [number, number] = [cx.tip[0], cy.tip[1]];
-        return { x: cx, y: cy, pen };
+        const cx = realChain(tau, c.sx, count, shape.scale, c.originX[0], c.originX[1], 0);
+        const cy = realChain(tau, c.sy, count, shape.scale, c.originY[0], c.originY[1], Math.PI / 2);
+        return { x: cx, y: cy, pen: [cx.tip[0], cy.tip[1]] };
       }
-      const c = complexChain(t, shape.circles, count, shape.scale, shape.originC[0], shape.originC[1]);
-      return { x: c, y: null, pen: c.tip };
+      const ch = complexChain(tau, c.circles, count, shape.scale, c.originC[0], c.originC[1]);
+      return { x: ch, y: null, pen: ch.tip };
     },
-    [axes, shape, count],
+    [axes, count, shape.scale],
   );
+
+  // State of the drawing at loop time t: active contour, chains, pen, hop fade.
+  const stateAt = useCallback(
+    (t: number) => {
+      const { contours, slices } = shape;
+      const idx = findSlice(slices, t);
+      const s = slices[idx];
+      if (t < s.end || s.hopEnd <= s.end) {
+        const tau = ((t - s.start) / (s.end - s.start)) * TWO_PI;
+        return { idx, tau, hop: false, opacity: 1, ...chainsFor(contours[idx], tau) };
+      }
+      // Pen up: glide straight to the next contour's start. Chain fades out at
+      // the finished contour, then fades in already positioned on the next one.
+      const u = (t - s.end) / (s.hopEnd - s.end);
+      const nextIdx = (idx + 1) % contours.length;
+      const from = model.starts[idx];
+      const to = model.starts[nextIdx];
+      const pen: [number, number] = [from[0] + (to[0] - from[0]) * u, from[1] + (to[1] - from[1]) * u];
+      const chains = u < 0.5 ? chainsFor(contours[idx], TWO_PI) : chainsFor(contours[nextIdx], 0);
+      const opacity = u < 0.5 ? 1 - u * 2 : (u - 0.5) * 2;
+      return { idx, tau: TWO_PI, hop: true, opacity, x: chains.x, y: chains.y, pen };
+    },
+    [shape, model.starts, chainsFor],
+  );
+
+  const applyChain = (
+    chain: Chain,
+    circles: MutableRefObject<Array<SVGCircleElement | null>>,
+    vectors: MutableRefObject<Array<SVGLineElement | null>>,
+  ) => {
+    const n = shape.maxCircles;
+    for (let k = 0; k < n; k++) {
+      const c = circles.current[k];
+      const v = vectors.current[k];
+      const seg = chain.segs[k];
+      if (seg) {
+        setAttrs(c, { cx: seg.cx, cy: seg.cy, r: seg.r });
+        setAttrs(v, { x1: seg.cx, y1: seg.cy, x2: seg.tx, y2: seg.ty });
+      }
+      setVisible(c, !!seg);
+      setVisible(v, !!seg);
+    }
+  };
 
   const applyFrame = useCallback(
     (t: number) => {
-      if (traceRef.current) {
-        traceRef.current.style.strokeDashoffset = `${model.trace.total - lengthAt(model.trace, t / TWO_PI)}`;
+      const st = stateAt(t);
+      // Traces: finished contours fully shown, the active one revealed by arc
+      // length, later ones hidden.
+      for (let j = 0; j < model.traces.length; j++) {
+        const el = traceRefs.current[j];
+        if (!el) continue;
+        const tr = model.traces[j];
+        let offset: number;
+        if (j < st.idx || (j === st.idx && st.hop)) offset = 0;
+        else if (j === st.idx) offset = tr.total - lengthAt(tr, st.tau / TWO_PI);
+        else offset = tr.total;
+        el.style.strokeDashoffset = `${offset}`;
       }
-      const { x, y, pen } = chainsAt(t);
-      for (let k = 0; k < x.segs.length; k++) {
-        const s = x.segs[k];
-        setAttrs(circleRefs.current[k], { cx: s.cx, cy: s.cy });
-        setAttrs(vectorRefs.current[k], { x1: s.cx, y1: s.cy, x2: s.tx, y2: s.ty });
+      if (chainGroupRef.current) {
+        chainGroupRef.current.style.opacity = `${st.opacity}`;
       }
-      if (y) {
-        for (let k = 0; k < y.segs.length; k++) {
-          const s = y.segs[k];
-          setAttrs(circleRefsY.current[k], { cx: s.cx, cy: s.cy });
-          setAttrs(vectorRefsY.current[k], { x1: s.cx, y1: s.cy, x2: s.tx, y2: s.ty });
-        }
-        setAttrs(tipXRef.current, { cx: x.tip[0], cy: x.tip[1] });
-        setAttrs(tipYRef.current, { cx: y.tip[0], cy: y.tip[1] });
-        setAttrs(guideXRef.current, { x1: x.tip[0], y1: x.tip[1], x2: pen[0], y2: pen[1] });
-        setAttrs(guideYRef.current, { x1: y.tip[0], y1: y.tip[1], x2: pen[0], y2: pen[1] });
+      applyChain(st.x, circleRefs, vectorRefs);
+      if (st.y) {
+        applyChain(st.y, circleRefsY, vectorRefsY);
+        setAttrs(tipXRef.current, { cx: st.x.tip[0], cy: st.x.tip[1] });
+        setAttrs(tipYRef.current, { cx: st.y.tip[0], cy: st.y.tip[1] });
+        setAttrs(guideXRef.current, { x1: st.x.tip[0], y1: st.x.tip[1], x2: st.pen[0], y2: st.pen[1] });
+        setAttrs(guideYRef.current, { x1: st.y.tip[0], y1: st.y.tip[1], x2: st.pen[0], y2: st.pen[1] });
       }
-      setAttrs(penRef.current, { cx: pen[0], cy: pen[1] });
+      setAttrs(penRef.current, { cx: st.pen[0], cy: st.pen[1] });
     },
-    [model, chainsAt],
+    // applyChain only reads refs and shape.maxCircles, which is covered by stateAt's deps.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [stateAt, model.traces],
   );
 
   useLayoutEffect(() => {
@@ -388,42 +518,48 @@ export function FourierOutline({
     return () => cancelAnimationFrame(raf);
   }, [playing, speed, grow, sequence, applyFrame]);
 
-  const init = chainsAt(tRef.current);
+  const init = stateAt(tRef.current);
 
   const renderChain = (
-    segs: Seg[],
+    chain: Chain,
     circles: MutableRefObject<Array<SVGCircleElement | null>>,
     vectors: MutableRefObject<Array<SVGLineElement | null>>,
     lead: string,
   ) =>
-    segs.map((s, k) => (
-      <g key={k}>
-        <circle
-          ref={(el) => {
-            circles.current[k] = el;
-          }}
-          cx={f1(s.cx)}
-          cy={f1(s.cy)}
-          r={f1(s.r)}
-          fill="none"
-          stroke={k === 0 ? lead : INK}
-          strokeOpacity={k === 0 ? 0.6 : 0.28}
-          strokeWidth={k === 0 ? 1.3 : 0.9}
-        />
-        <line
-          ref={(el) => {
-            vectors.current[k] = el;
-          }}
-          x1={f1(s.cx)}
-          y1={f1(s.cy)}
-          x2={f1(s.tx)}
-          y2={f1(s.ty)}
-          stroke={INK}
-          strokeOpacity={0.55}
-          strokeWidth={1}
-        />
-      </g>
-    ));
+    Array.from({ length: shape.maxCircles }, (_, k) => {
+      const s = chain.segs[k] ?? { cx: 0, cy: 0, r: 0, tx: 0, ty: 0 };
+      const visible = k < chain.segs.length;
+      return (
+        <g key={k}>
+          <circle
+            ref={(el) => {
+              circles.current[k] = el;
+            }}
+            cx={f1(s.cx)}
+            cy={f1(s.cy)}
+            r={f1(s.r)}
+            visibility={visible ? "visible" : "hidden"}
+            fill="none"
+            stroke={k === 0 ? lead : INK}
+            strokeOpacity={k === 0 ? 0.6 : 0.28}
+            strokeWidth={k === 0 ? 1.3 : 0.9}
+          />
+          <line
+            ref={(el) => {
+              vectors.current[k] = el;
+            }}
+            x1={f1(s.cx)}
+            y1={f1(s.cy)}
+            x2={f1(s.tx)}
+            y2={f1(s.ty)}
+            visibility={visible ? "visible" : "hidden"}
+            stroke={INK}
+            strokeOpacity={0.55}
+            strokeWidth={1}
+          />
+        </g>
+      );
+    });
 
   return (
     <div className={cn("flex flex-col gap-4", className)}>
@@ -446,33 +582,40 @@ export function FourierOutline({
             ))}
           </g>
         ) : (
-          <path d={shape.outlineD} fill={INK} fillOpacity={0.08} stroke={INK} strokeOpacity={0.18} strokeWidth={1} />
+          <path d={shape.outlineD} fill={INK} fillOpacity={0.08} stroke={INK} strokeOpacity={0.18} strokeWidth={1} fillRule="evenodd" />
         )}
 
-        {/* reconstruction so far — revealed via dashoffset */}
-        <path
-          ref={traceRef}
-          d={model.trace.d}
-          fill="none"
-          stroke={color}
-          strokeWidth={2}
-          strokeDasharray={model.trace.total}
-          strokeDashoffset={model.trace.total}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+        {/* reconstruction so far — one path per contour, revealed via dashoffset */}
+        {model.traces.map((tr, j) => (
+          <path
+            key={j}
+            ref={(el) => {
+              traceRefs.current[j] = el;
+            }}
+            d={tr.d}
+            fill="none"
+            stroke={color}
+            strokeWidth={2}
+            strokeDasharray={tr.total}
+            strokeDashoffset={tr.total}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        ))}
 
-        {renderChain(init.x.segs, circleRefs, vectorRefs, axes ? VIOLET : color)}
-        {init.y && renderChain(init.y.segs, circleRefsY, vectorRefsY, color)}
-
-        {init.y && (
-          <>
-            <line ref={guideXRef} x1={f1(init.x.tip[0])} y1={f1(init.x.tip[1])} x2={f1(init.pen[0])} y2={f1(init.pen[1])} stroke={VIOLET} strokeOpacity={0.6} strokeWidth={1} strokeDasharray="4 5" />
-            <line ref={guideYRef} x1={f1(init.y.tip[0])} y1={f1(init.y.tip[1])} x2={f1(init.pen[0])} y2={f1(init.pen[1])} stroke={color} strokeOpacity={0.6} strokeWidth={1} strokeDasharray="4 5" />
-            <circle ref={tipXRef} cx={f1(init.x.tip[0])} cy={f1(init.x.tip[1])} r={2.5} fill={VIOLET} />
-            <circle ref={tipYRef} cx={f1(init.y.tip[0])} cy={f1(init.y.tip[1])} r={2.5} fill={color} />
-          </>
-        )}
+        {/* epicycle chains; the whole group fades during pen-up hops */}
+        <g ref={chainGroupRef} style={{ opacity: init.opacity }}>
+          {renderChain(init.x, circleRefs, vectorRefs, axes ? VIOLET : color)}
+          {init.y && renderChain(init.y, circleRefsY, vectorRefsY, color)}
+          {init.y && (
+            <>
+              <line ref={guideXRef} x1={f1(init.x.tip[0])} y1={f1(init.x.tip[1])} x2={f1(init.pen[0])} y2={f1(init.pen[1])} stroke={VIOLET} strokeOpacity={0.6} strokeWidth={1} strokeDasharray="4 5" />
+              <line ref={guideYRef} x1={f1(init.y.tip[0])} y1={f1(init.y.tip[1])} x2={f1(init.pen[0])} y2={f1(init.pen[1])} stroke={color} strokeOpacity={0.6} strokeWidth={1} strokeDasharray="4 5" />
+              <circle ref={tipXRef} cx={f1(init.x.tip[0])} cy={f1(init.x.tip[1])} r={2.5} fill={VIOLET} />
+              <circle ref={tipYRef} cx={f1(init.y.tip[0])} cy={f1(init.y.tip[1])} r={2.5} fill={color} />
+            </>
+          )}
+        </g>
 
         <circle ref={penRef} cx={f1(init.pen[0])} cy={f1(init.pen[1])} r={3.2} fill={ROSE_LIGHT} stroke={color} strokeWidth={1} />
 

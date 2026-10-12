@@ -153,7 +153,8 @@ export function realSeries(
 export function evalComplex(coefs: readonly Coef[], count: number, t: number): [number, number] {
   let x = 0;
   let y = 0;
-  for (let j = 0; j < count; j++) {
+  const top = Math.min(count, coefs.length);
+  for (let j = 0; j < top; j++) {
     const { k, amp, phase } = coefs[j];
     const ang = k * t + phase;
     x += amp * Math.cos(ang);
@@ -198,4 +199,91 @@ export function maxErrorPct(
     if (d > worst) worst = d;
   }
   return worst * 100;
+}
+
+/** Perimeter of a closed polyline. */
+export function polyLength(poly: readonly Pt[]): number {
+  let len = 0;
+  for (let i = 0; i < poly.length; i++) {
+    const a = poly[i];
+    const b = poly[(i + 1) % poly.length];
+    len += Math.hypot(b[0] - a[0], b[1] - a[1]);
+  }
+  return len;
+}
+
+/**
+ * Like `normalize`, but one shared bounding box for several contours so they
+ * keep their relative placement and a single scale matches the silhouette.
+ */
+export function normalizeMany(contours: readonly (readonly Pt[])[]): {
+  contours: Pt[][];
+  width: number;
+  center: Pt;
+  height: number;
+} {
+  let minX = Infinity;
+  let maxX = -Infinity;
+  let minY = Infinity;
+  let maxY = -Infinity;
+  for (const c of contours) {
+    for (const [x, y] of c) {
+      if (x < minX) minX = x;
+      if (x > maxX) maxX = x;
+      if (y < minY) minY = y;
+      if (y > maxY) maxY = y;
+    }
+  }
+  if (!Number.isFinite(minX)) {
+    return { contours: [], width: 1, center: [0, 0], height: 1 };
+  }
+  const h = maxY - minY || 1;
+  const cx = (minX + maxX) / 2;
+  const cy = (minY + maxY) / 2;
+  return {
+    contours: contours.map((c) => c.map(([x, y]) => [(x - cx) / h, (y - cy) / h] as const)),
+    width: (maxX - minX) / h,
+    center: [cx, cy],
+    height: h,
+  };
+}
+
+/** One contour's share of the drawing loop, in radians of t ∈ [0, 2π). */
+export interface Slice {
+  /** Pen down: the contour is traced from `start` to `end`. */
+  start: number;
+  end: number;
+  /** Pen up: from `end` to `hopEnd` the pen glides to the next contour. */
+  hopEnd: number;
+}
+
+/**
+ * Divide one loop among contours in proportion to their arc length (with a
+ * floor so tiny pieces are still visible), leaving a short pen-up hop after
+ * each one. A single contour gets the whole loop and no hop.
+ */
+export function scheduleContours(
+  lengths: readonly number[],
+  hopFraction = 0.05,
+  minShare = 0.04,
+): Slice[] {
+  const n = lengths.length;
+  if (n === 0) return [];
+  const twoPi = 2 * Math.PI;
+  if (n === 1) return [{ start: 0, end: twoPi, hopEnd: twoPi }];
+  const hop = Math.max(0, Math.min(hopFraction, 0.5 / n)) * twoPi;
+  const drawTotal = twoPi - n * hop;
+  const total = lengths.reduce((a, b) => a + b, 0) || 1;
+  const shares = lengths.map((l) => Math.max(l / total, minShare));
+  const shareSum = shares.reduce((a, b) => a + b, 0);
+  const slices: Slice[] = [];
+  let cursor = 0;
+  for (let i = 0; i < n; i++) {
+    const start = cursor;
+    const end = start + (shares[i] / shareSum) * drawTotal;
+    const hopEnd = i === n - 1 ? twoPi : end + hop;
+    slices.push({ start, end, hopEnd });
+    cursor = hopEnd;
+  }
+  return slices;
 }
