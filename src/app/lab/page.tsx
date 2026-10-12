@@ -5,6 +5,14 @@ import {
   FourierEpicycles,
   type SeriesTerm,
 } from "@/components/playground/fourier-epicycles";
+import {
+  FourierOutline,
+  kochSnowflake,
+  mooreCurve,
+  sigma,
+} from "@/components/playground/fourier-outline";
+import { FourierGallery } from "@/components/playground/fourier-gallery";
+import { listGallerySvgs } from "@/lib/svg-gallery";
 
 export const metadata: Metadata = {
   title: "Lab",
@@ -51,6 +59,10 @@ const sawtooth: SeriesTerm[] = Array.from({ length: 7 }, (_, i) => ({
   a: 1.5 / Math.sqrt(i + 1),
   f: i + 1,
 }));
+
+const moore = mooreCurve(4);
+const koch = kochSnowflake(3);
+const gallerySvgs = listGallerySvgs();
 
 const experiments: Array<{ number: string; title: string; component: ReactNode }> = [
   {
@@ -144,6 +156,67 @@ const experiments: Array<{ number: string; title: string; component: ReactNode }
         formula={
           <>
             y = <Sigma from="n=1" to="7" /> 1.5 sin(nx) / √n
+          </>
+        }
+      />
+    ),
+  },
+  {
+    number: "08",
+    title: "Icons as sums of circles",
+    component: <FourierGallery className="w-full" files={gallerySvgs} />,
+  },
+  {
+    number: "09",
+    title: "Σ as a sum of circles",
+    component: (
+      <FourierOutline
+        className="w-full"
+        points={sigma}
+        mode="complex"
+        maxTerms={128}
+        formula={
+          <>
+            z(t) = <Sigma from="k" to="" /> c<sub className="text-[0.6em]">k</sub> e
+            <sup className="text-[0.6em]">ikt</sup>
+          </>
+        }
+      />
+    ),
+  },
+  {
+    number: "10",
+    title: "Moore curve, one chain per axis",
+    component: (
+      <FourierOutline
+        className="w-full"
+        points={moore}
+        mode="axes"
+        maxTerms={128}
+        speed={0.8}
+        formula={
+          <>
+            x(t) = <Sigma from="k=1" to="N" /> (a<sub className="text-[0.6em]">k</sub> cos kt + b
+            <sub className="text-[0.6em]">k</sub> sin kt)
+          </>
+        }
+      />
+    ),
+  },
+  {
+    number: "11",
+    title: "Koch snowflake",
+    component: (
+      <FourierOutline
+        className="w-full"
+        points={koch}
+        mode="complex"
+        maxTerms={64}
+        color="#7d6fae"
+        formula={
+          <>
+            z(t) = <Sigma from="k" to="" /> c<sub className="text-[0.6em]">k</sub> e
+            <sup className="text-[0.6em]">ikt</sup>
           </>
         }
       />
