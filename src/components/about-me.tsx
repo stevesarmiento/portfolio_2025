@@ -15,12 +15,14 @@ interface AboutRow {
   image?: string;
   internal?: boolean;
   showIcon?: boolean;
+  disabled?: boolean;
 }
 
 export interface HomepageWriting {
   slug: string;
   title: string;
   publishedAt: string;
+  draft: boolean;
 }
 
 const forFun: AboutRow[] = [
@@ -130,6 +132,17 @@ function RowLink({ item }: { item: AboutRow }) {
   const className =
     "group -mx-2 flex min-h-10 items-center gap-2.5 rounded-lg px-2 transition-[background-color,transform] duration-150 ease-out hover:bg-white/55 active:scale-[0.99] focus-visible:bg-white/55 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#df8f93] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f4f1ea] motion-reduce:transform-none";
 
+  if (item.disabled) {
+    return (
+      <div
+        aria-disabled="true"
+        className="-mx-2 flex min-h-10 cursor-not-allowed select-none items-center gap-2.5 rounded-lg px-2 opacity-50"
+      >
+        <RowContents item={item} />
+      </div>
+    );
+  }
+
   if (item.internal) {
     return (
       <Link href={item.href} className={className}>
@@ -193,13 +206,20 @@ function LinkSection({
 
 export default function AboutMe({ writings }: { writings: HomepageWriting[] }) {
   const shouldReduceMotion = useReducedMotion();
-  const writingRows: AboutRow[] = writings.map((writing) => ({
+  const toWritingRow = (writing: HomepageWriting): AboutRow => ({
     name: writing.title,
     href: `/writings/${writing.slug}`,
-    year: writing.publishedAt.slice(0, 4),
+    year: writing.draft ? "Soon" : writing.publishedAt.slice(0, 4),
     internal: true,
     showIcon: false,
-  }));
+    disabled: writing.draft,
+  });
+  const writingRows = writings
+    .filter((writing) => !writing.draft)
+    .map(toWritingRow);
+  const draftRows = writings
+    .filter((writing) => writing.draft)
+    .map(toWritingRow);
   const visibleTransform = shouldReduceMotion ? "none" : "translateY(0px)";
   const hiddenTransform = shouldReduceMotion ? "none" : "translateY(6px)";
   const paragraphVariants = {
@@ -291,11 +311,20 @@ export default function AboutMe({ writings }: { writings: HomepageWriting[] }) {
           items={forFun}
           shouldReduceMotion={shouldReduceMotion}
         />
-        <LinkSection
-          title="Writings"
-          items={writingRows}
-          shouldReduceMotion={shouldReduceMotion}
-        />
+        {writingRows.length > 0 ? (
+          <LinkSection
+            title="Writings"
+            items={writingRows}
+            shouldReduceMotion={shouldReduceMotion}
+          />
+        ) : null}
+        {draftRows.length > 0 ? (
+          <LinkSection
+            title="Drafts"
+            items={draftRows}
+            shouldReduceMotion={shouldReduceMotion}
+          />
+        ) : null}
       </motion.div>
     </div>
   );

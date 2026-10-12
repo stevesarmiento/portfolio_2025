@@ -54,22 +54,38 @@ export default async function WritingsPage() {
               <ol>
                 {writings.map((writing) => (
                   <li key={writing.slug} className="border-b border-black/10">
-                    <Link
-                      href={`/writings/${writing.slug}`}
-                      className="group block rounded-lg py-3 transition-transform duration-150 ease-out focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#b95f65] active:scale-[0.99]"
-                    >
-                      <div className="flex items-baseline justify-between gap-5">
-                        <h2 className="font-nuvo text-sm leading-tight text-zinc-900 transition-colors duration-75 ease-out group-hover:text-[#b95f65] group-focus-visible:text-[#b95f65]">
-                          {writing.title}
-                        </h2>
-                        <time
-                          dateTime={writing.publishedAt}
-                          className="shrink-0 font-mono text-sm text-zinc-500"
-                        >
-                          {formatWritingDate(writing.publishedAt)}
-                        </time>
+                    {writing.draft ? (
+                      <div
+                        aria-disabled="true"
+                        className="block cursor-not-allowed select-none rounded-lg py-3 opacity-50"
+                      >
+                        <div className="flex items-baseline justify-between gap-5">
+                          <h2 className="font-nuvo text-sm leading-tight text-zinc-500">
+                            {writing.title}
+                          </h2>
+                          <span className="shrink-0 font-mono text-sm text-zinc-400">
+                            Coming soon
+                          </span>
+                        </div>
                       </div>
-                    </Link>
+                    ) : (
+                      <Link
+                        href={`/writings/${writing.slug}`}
+                        className="group block rounded-lg py-3 transition-transform duration-150 ease-out focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#b95f65] active:scale-[0.99]"
+                      >
+                        <div className="flex items-baseline justify-between gap-5">
+                          <h2 className="font-nuvo text-sm leading-tight text-zinc-900 transition-colors duration-75 ease-out group-hover:text-[#b95f65] group-focus-visible:text-[#b95f65]">
+                            {writing.title}
+                          </h2>
+                          <time
+                            dateTime={writing.publishedAt}
+                            className="shrink-0 font-mono text-sm text-zinc-500"
+                          >
+                            {formatWritingDate(writing.publishedAt)}
+                          </time>
+                        </div>
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ol>
