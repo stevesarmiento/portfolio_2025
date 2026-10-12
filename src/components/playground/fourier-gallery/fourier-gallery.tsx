@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { FourierOutline, type OutlineMode } from "@/components/playground/fourier-outline";
+import { FourierOutline, type DrawOrder, type OutlineMode } from "@/components/playground/fourier-outline";
 import { loadSvgOutline, type SvgOutline } from "./svg-outline";
 
 export interface FourierGalleryProps {
@@ -18,8 +18,10 @@ export interface FourierGalleryProps {
   color?: string;
   /** Points sampled from each SVG before the transform. */
   samples?: number;
-  /** Share of each loop spent gliding, pen up, between contours. */
+  /** Share of each loop spent gliding, pen up, between contours (sequential only). */
   hopFraction?: number;
+  /** All contours at once with their own chains, or one after another. */
+  draw?: DrawOrder;
   autoPlay?: boolean;
   className?: string;
 }
@@ -38,6 +40,7 @@ export function FourierGallery({
   color,
   samples = 1024,
   hopFraction = 0.05,
+  draw = "parallel",
   autoPlay = true,
   className,
 }: FourierGalleryProps) {
@@ -107,6 +110,7 @@ export function FourierGallery({
           onSequenceEnd={advance}
           speed={speed}
           hopFraction={hopFraction}
+          draw={draw}
           color={color}
           autoPlay={autoPlay}
           label={prettyName(file)}
