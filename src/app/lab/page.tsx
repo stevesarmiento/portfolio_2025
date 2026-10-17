@@ -5,7 +5,7 @@ import {
   FourierEpicycles,
   type SeriesTerm,
 } from "@/components/playground/fourier-epicycles";
-import { FourierGallery } from "@/components/playground/fourier-gallery";
+import { PlotterFigure } from "@/components/figures/plotter/figure";
 import { listGallerySvgs } from "@/lib/svg-gallery";
 
 export const metadata: Metadata = {
@@ -156,7 +156,7 @@ const experiments: Array<{ number: string; title: string; component: ReactNode }
   {
     number: "08",
     title: "Icons as sums of circles",
-    component: <FourierGallery className="w-full" files={gallerySvgs} />,
+    component: <PlotterFigure files={gallerySvgs} fig="Fig 3" />,
   },
 ];
 

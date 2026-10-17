@@ -1,0 +1,71 @@
+.plotter {
+  cursor: default;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.plotter[data-dragging] {
+  cursor: ew-resize;
+}
+
+.plotter:focus-visible {
+  outline: 1px solid var(--anatomy-muted);
+  outline-offset: 6px;
+}
+
+.plotter .iso-svg {
+  overflow: visible;
+}
+
+.plotter-silhouette {
+  fill: var(--anatomy-shade-2);
+  stroke: var(--anatomy-lo);
+  stroke-width: var(--anatomy-weight);
+  stroke-linejoin: round;
+}
+
+/* The discs are clear acrylic: the drawing underneath stays visible. */
+.plotter-disc > .iso-fill,
+.plotter-disc > .iso-top,
+.plotter-disc > .iso-shade {
+  fill-opacity: 0.55;
+}
+
+.plotter-trace {
+  stroke-width: 1.1;
+}
+
+.plotter-pen {
+  fill: var(--anatomy-lit);
+}
+
+.plotter-needle {
+  fill: var(--anatomy-hi);
+}
+
+.plotter-counter {
+  fill: var(--anatomy-hi);
+}
+
+.plotter-card {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plotter * {
+    transition: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .plotter {
+    overflow: hidden;
+  }
+
+  .iso-plate .plotter .iso-svg {
+    width: 116%;
+    margin: -3% -8% -2%;
+  }
+}
