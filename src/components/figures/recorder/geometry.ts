@@ -118,7 +118,7 @@ export const BRIDGE_ART = {
   penCollar: cylinder(PEN_X, 0, 2.2, CARRIAGE_Z - 3, 3, P, 16),
   penRod: cylinder(PEN_X, 0, 0.9, PAPER_TOP, CARRIAGE_Z - 3 - PAPER_TOP, P, 10),
   penTip: iso([PEN_X, 0, PAPER_TOP], P),
-  linkPin: cylinder(PEN_X, CARRIAGE.y - 1.2, 1.2, CARRIAGE_Z + 0.6, 1.6, P, 10),
+  linkPin: cylinder(PEN_X, CARRIAGE.y + CARRIAGE.d + 1.2, 1.2, CARRIAGE_Z + 0.6, 1.6, P, 10),
 };
 
 // Disc tower pedestal and the motor that drives its spindle.

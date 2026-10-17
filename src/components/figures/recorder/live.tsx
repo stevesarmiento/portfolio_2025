@@ -311,7 +311,6 @@ export function RecorderLive(props: Props) {
           </clipPath>
         </defs>
         {props.base}
-        {props.motor}
         {props.paper}
         <g clipPath="url(#recorder-paper)">
           <g ref={scroll}>
@@ -325,6 +324,11 @@ export function RecorderLive(props: Props) {
           </g>
         </g>
         {props.bridgeBack}
+        <g ref={carriage} transform={shift(0, 0)}>
+          {props.carriage}
+        </g>
+        {props.bridgeFront}
+        {props.motor}
         <g className="recorder-tower">
           {Array.from({ length: DISC_MAX }, (_, j) => (
             <g key={j} ref={bindDisc(j)} style={{ display: "none" }}>
@@ -339,10 +343,6 @@ export function RecorderLive(props: Props) {
           <path ref={pin} className="iso-line" data-tone="lo" d="" />
         </g>
         <path ref={link} className="iso-line" data-tone="hi" d="" />
-        <g ref={carriage} transform={shift(0, 0)}>
-          {props.carriage}
-        </g>
-        {props.bridgeFront}
         {props.controls}
         <path ref={selNeedle} className="iso-line" data-tone="hi" data-free="end" d={selPointer(0, PRESETS.length)} style={{ strokeWidth: 1.1 }} />
         <path ref={termsNeedle} className="iso-line" data-tone="hi" data-free="end" d={termsPointer(PRESETS[0].terms.length, MAX_TERMS)} style={{ strokeWidth: 1.1 }} />

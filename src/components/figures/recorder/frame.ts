@@ -82,7 +82,7 @@ export function towerFrame(preset: Preset, count: number, x: number, scale: numb
     holder: cylinder(last[0], last[1], 1.1, lastTop, HOLDER_H, P, 12),
     arm: lineOnTop(last, tipWorld, pinZ + 0.1, P),
     pin: ring(tipWorld[0], tipWorld[1], 0.9, pinZ + 0.1, P, 10),
-    link: segment([tipWorld[0], tipWorld[1], pinZ + 0.1], [PEN_X, CARRIAGE.y - 1.2 + penY, LINK_Z + 0.8], P),
+    link: segment([tipWorld[0], tipWorld[1], pinZ + 0.1], [PEN_X, CARRIAGE.y + CARRIAGE.d + 1.2 + penY, LINK_Z + 0.8], P),
     penY,
   };
 }
