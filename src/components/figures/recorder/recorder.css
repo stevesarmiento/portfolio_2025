@@ -1,0 +1,52 @@
+.recorder {
+  cursor: default;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.recorder[data-dragging] {
+  cursor: ew-resize;
+}
+
+.recorder:focus-visible {
+  outline: 1px solid var(--anatomy-muted);
+  outline-offset: 6px;
+}
+
+.recorder .iso-svg {
+  overflow: visible;
+}
+
+/* Clear acrylic discs: the drawing underneath stays visible. */
+.recorder-disc > .iso-fill,
+.recorder-disc > .iso-top,
+.recorder-disc > .iso-shade {
+  fill-opacity: 0.55;
+}
+
+.recorder-trace {
+  stroke-width: 1.1;
+}
+
+.recorder-pen {
+  fill: var(--anatomy-lit);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .recorder * {
+    transition: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .recorder {
+    overflow: hidden;
+  }
+
+  .iso-plate .recorder .iso-svg {
+    width: 116%;
+    margin: -3% -8% -2%;
+  }
+}

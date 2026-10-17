@@ -3,9 +3,10 @@
 import * as React from "react";
 import { IsoFigure } from "@/components/iso/react/draw";
 import { asksForStillness, useReadout } from "@/components/iso/react/live";
-import { type Flat, type SolidPaths } from "@/components/iso/iso-kit";
+import type { Flat } from "@/components/iso/iso-kit";
 import { loadSvgOutline, type SvgOutline } from "@/components/playground/fourier-gallery/svg-outline";
 import { faceMatrix } from "../shared/parts";
+import { SolidSlot, applySolid, solidNodes, type SolidNodes } from "../shared/slots";
 import { crankFrame, knobPointerFrame, needleFrame, towerFrame, tracePath, traceScreen, type TowerFrame } from "./frame";
 import { GROW, MAX_TERMS, TWO_PI, errorOf, fmtError, iconModel, nextGrow, prettyName, readoutOf, type IconModel } from "./model";
 import { CARD_C, CARD_FROM_X, CARD_TOP, CRANK, DISC_MAX, HEIGHT, ICON_SCALE, N_KNOB, P, TOGGLE_AUTO, TOGGLE_RUN, WIDTH, at, shift } from "./view";
@@ -16,59 +17,6 @@ const SLIDE_TAU = 0.22;
 const CRANK_TAU = 0.18;
 const NEEDLE = [160, 18] as const;
 const KNOB_DRAG_PX = 70; // viewBox px per doubling of N
-
-interface SolidNodes {
-  fill: SVGPathElement | null;
-  shades: (SVGPathElement | null)[];
-  top: SVGPathElement | null;
-  crease: SVGPathElement | null;
-  edge: SVGPathElement | null;
-}
-
-function solidNodes(g: SVGGElement | null): SolidNodes {
-  return {
-    fill: g?.querySelector(".iso-fill") ?? null,
-    shades: [0, 1, 2, 3].map((i) => g?.querySelector(`.iso-shade[data-shade="${i}"]`) ?? null),
-    top: g?.querySelector(".iso-top") ?? null,
-    crease: g?.querySelector(".iso-crease") ?? null,
-    edge: g?.querySelector(".iso-edge") ?? null,
-  };
-}
-
-function applySolid(n: SolidNodes | undefined, paths: SolidPaths | null) {
-  if (!n || !paths) return;
-  n.fill?.setAttribute("d", paths.fill);
-  paths.shades.forEach((d, i) => n.shades[i]?.setAttribute("d", d));
-  n.top?.setAttribute("d", paths.top);
-  n.crease?.setAttribute("d", paths.crease);
-  n.edge?.setAttribute("d", paths.outline);
-}
-
-function SolidSlot({
-  tone,
-  crease = "faint",
-  lit,
-  className,
-  bind,
-}: {
-  tone: "hi" | "mid" | "lo";
-  crease?: "faint" | "lo" | "none";
-  lit?: boolean;
-  className?: string;
-  bind: (g: SVGGElement | null) => void;
-}) {
-  return (
-    <g className={className ? `iso-solid ${className}` : "iso-solid"} data-lit={lit ? "" : undefined} ref={bind}>
-      <path className="iso-fill" d="" />
-      {[0, 1, 2, 3].map((i) => (
-        <path key={i} className="iso-shade" data-shade={i} d="" />
-      ))}
-      <path className="iso-top" d="" />
-      {crease === "none" ? null : <path className="iso-line iso-crease" data-tone={crease} d="" />}
-      <path className="iso-line iso-edge" data-tone={tone} d="" />
-    </g>
-  );
-}
 
 interface DiscNodes {
   group: SVGGElement | null;
@@ -158,7 +106,6 @@ const counterText = (index: number, total: number) => `${String(index + 1).padSt
 export function PlotterLive(props: Props) {
   const { files } = props;
   const { anchor, say } = useReadout<HTMLDivElement>();
-  const root = React.useRef<HTMLDivElement | null>(null);
 
   const [index, setIndex] = React.useState(0);
   const [icon, setIcon] = React.useState<Icon | null>(null);
@@ -191,13 +138,15 @@ export function PlotterLive(props: Props) {
     file: "",
   });
   const autoRef = React.useRef(auto);
-  autoRef.current = auto;
   const runningRef = React.useRef(running);
-  runningRef.current = running;
   const iconRef = React.useRef<Icon | null>(null);
-  iconRef.current = icon;
   const indexRef = React.useRef(index);
-  indexRef.current = index;
+  React.useLayoutEffect(() => {
+    autoRef.current = auto;
+    runningRef.current = running;
+    iconRef.current = icon;
+    indexRef.current = index;
+  }, [auto, running, icon, index]);
 
   const load = React.useCallback((file: string) => {
     let p = cache.current.get(file);
@@ -335,7 +284,7 @@ export function PlotterLive(props: Props) {
   }, [advance, draw, setCount]);
 
   React.useEffect(() => {
-    const node = root.current;
+    const node = anchor.current;
     if (!node) return;
     const observer = new IntersectionObserver((entries) => setVisible(Boolean(entries.at(-1)?.isIntersecting)), { rootMargin: "120px 0px" });
     observer.observe(node);
@@ -343,7 +292,7 @@ export function PlotterLive(props: Props) {
       observer.disconnect();
       stop();
     };
-  }, [stop]);
+  }, [anchor, stop]);
 
   React.useEffect(() => {
     if (visible) run();
@@ -357,7 +306,7 @@ export function PlotterLive(props: Props) {
   // Pointer: drag the N knob, click the crank or a toggle.
   const drag = React.useRef<{ x: number; exp: number } | null>(null);
   const viewPoint = (event: React.PointerEvent): Flat | null => {
-    const svg = root.current?.querySelector("svg");
+    const svg = anchor.current?.querySelector("svg");
     const box = svg?.getBoundingClientRect();
     if (!box || !box.width) return null;
     return [((event.clientX - box.left) / box.width) * WIDTH, ((event.clientY - box.top) / box.height) * HEIGHT];
@@ -403,10 +352,7 @@ export function PlotterLive(props: Props) {
 
   return (
     <div
-      ref={(node) => {
-        root.current = node;
-        anchor.current = node;
-      }}
+      ref={anchor}
       className="plotter"
       role="slider"
       tabIndex={0}
@@ -507,7 +453,7 @@ export function PlotterLive(props: Props) {
                 const bind = bindTower(i);
                 return (
                   <g key={`${icon?.file}-${i}`} className="plotter-tower">
-                    <path ref={bind.trace} className="iso-line plotter-trace" data-tone="lit" d="" />
+                    <path ref={bind.trace} className="iso-line plotter-trace" data-tone="lit" data-free="start" d="" />
                     <SolidSlot tone="mid" bind={bind.collar} />
                     {Array.from({ length: DISC_MAX }, (_, j) => (
                       <g key={j} ref={bind.disc(j)} style={{ display: "none" }}>
