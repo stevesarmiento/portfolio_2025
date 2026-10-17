@@ -10,7 +10,7 @@ import {
   resampleClosed,
   type Coef,
   type Pt,
-} from "@/components/playground/fourier-outline/outline-math";
+} from "./outline-math";
 
 export const TWO_PI = Math.PI * 2;
 export const MAX_TERMS = 128;

@@ -1,8 +1,12 @@
 // Browser-side sampling of an SVG file's paths into contours for the Fourier
 // tracer. Uses SVGPathElement.getPointAtLength, so DOM only.
 
-import type { Pt } from "@/components/playground/fourier-outline/outline-math";
-import type { SilhouettePath } from "@/components/playground/fourier-outline";
+import type { Pt } from "./outline-math";
+
+export interface SilhouettePath {
+  d: string;
+  fillRule?: "nonzero" | "evenodd";
+}
 
 export interface SvgOutline {
   /** One closed contour per subpath, y up, in the SVG's user units. */

@@ -4,7 +4,7 @@ import * as React from "react";
 import { IsoFigure } from "@/components/iso/react/draw";
 import { asksForStillness, useReadout } from "@/components/iso/react/live";
 import type { Flat } from "@/components/iso/iso-kit";
-import { loadSvgOutline, type SvgOutline } from "@/components/playground/fourier-gallery/svg-outline";
+import { loadSvgOutline, type SvgOutline } from "./svg-outline";
 import { faceMatrix } from "../shared/parts";
 import { SolidSlot, applySolid, solidNodes, type SolidNodes } from "../shared/slots";
 import { crankFrame, knobPointerFrame, needleFrame, towerFrame, tracePath, traceScreen, type TowerFrame } from "./frame";

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { ComplexWave } from "@/components/playground/complex-wave";
+import { WaveBoxFigure } from "@/components/figures/wavebox/figure";
 import { RecorderFigure } from "@/components/figures/recorder/figure";
 import { PlotterFigure } from "@/components/figures/plotter/figure";
 import { listGallerySvgs } from "@/lib/svg-gallery";
@@ -17,7 +17,7 @@ const experiments: Array<{ number: string; title: string; component: ReactNode }
   {
     number: "01",
     title: "Complex Gaussian wave packet",
-    component: <ComplexWave className="w-full" />,
+    component: <WaveBoxFigure fig="Fig 1" />,
   },
   {
     number: "02",
