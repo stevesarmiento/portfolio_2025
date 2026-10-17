@@ -151,10 +151,11 @@ export function RecorderLive(props: Props) {
       const dt = st.last ? Math.min((now - st.last) / 1000, MOST_DT) : 1 / 60;
       st.last = now;
       const p = PRESETS[st.presetIndex];
-      if (runningRef.current) {
+      const calm = asksForStillness();
+      if (runningRef.current && !calm) {
         st.x += dt * p.speed;
         if (st.x >= p.xMax) st.x -= p.xMax;
-        if (!asksForStillness()) {
+        {
           st.idle += dt;
           if (st.idle > IDLE_AFTER + TOUR_EVERY) {
             st.idle = IDLE_AFTER;

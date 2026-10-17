@@ -147,7 +147,7 @@ export function WaveBoxLive(props: Props) {
       st.last = now;
       const calm = asksForStillness();
       if (st.hold > 0) st.hold -= dt;
-      else if (runningRef.current) {
+      else if (runningRef.current && !calm) {
         st.t += dt * SWEEP;
         if (st.t > T_MAX) st.t -= T_MAX;
       }

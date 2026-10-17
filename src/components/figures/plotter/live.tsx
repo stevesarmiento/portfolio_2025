@@ -251,7 +251,8 @@ export function PlotterLive(props: Props) {
       const dt = st.last ? Math.min((now - st.last) / 1000, MOST_DT) : 1 / 60;
       st.last = now;
       const calm = asksForStillness();
-      if (runningRef.current && iconRef.current) {
+      // Under reduced motion the plotter holds its pose; the controls still work.
+      if (runningRef.current && iconRef.current && !calm) {
         const next = st.t + dt * SPEED;
         if (next >= TWO_PI) {
           st.t = next - TWO_PI;
