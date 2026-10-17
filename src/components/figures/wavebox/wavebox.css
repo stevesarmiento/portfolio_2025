@@ -1,0 +1,55 @@
+.wavebox {
+  cursor: default;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.wavebox[data-dragging] {
+  cursor: ew-resize;
+}
+
+.wavebox:focus-visible {
+  outline: 1px solid var(--anatomy-muted);
+  outline-offset: 6px;
+}
+
+.wavebox .iso-svg {
+  overflow: visible;
+}
+
+.wavebox-helix {
+  stroke-width: 1.2;
+}
+
+.wavebox-point {
+  fill: var(--anatomy-lit);
+}
+
+.wavebox-dot {
+  fill: var(--anatomy-paper);
+  stroke: var(--anatomy-hi);
+  stroke-width: var(--anatomy-weight);
+}
+
+.wavebox-needle {
+  fill: var(--anatomy-hi);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wavebox * {
+    transition: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .wavebox {
+    overflow: hidden;
+  }
+
+  .iso-plate .wavebox .iso-svg {
+    width: 116%;
+    margin: -3% -8% -2%;
+  }
+}

@@ -99,10 +99,6 @@ async function loadWriting(slug: string): Promise<WritingDocument | null> {
       return null;
     }
 
-    if (parsedMetadata.data.draft && process.env.NODE_ENV === "production") {
-      return null;
-    }
-
     return {
       slug,
       ...parsedMetadata.data,
@@ -128,6 +124,9 @@ export async function getWritingSlugs() {
 
   return writings
     .filter((writing): writing is WritingDocument => writing !== null)
+    .filter(
+      (writing) => !(writing.draft && process.env.NODE_ENV === "production"),
+    )
     .map((writing) => writing.slug);
 }
 

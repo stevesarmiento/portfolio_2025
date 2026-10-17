@@ -3,8 +3,9 @@
 1. Duplicate `_template.mdx` and rename it with a lowercase, hyphenated slug,
    for example `small-tools.mdx`.
 2. Fill in the exported `article` object. Dates must use `YYYY-MM-DD`.
-3. Keep `draft: true` while working. Drafts render in development and are
-   excluded from production builds.
+3. Keep `draft: true` while working. Drafts are listed on the homepage and
+   Musings index as greyed-out, disabled rows. Their pages render in
+   development but are excluded from production builds.
 4. Begin article content at `##`. The route supplies the only `h1`.
 5. Put article images in `public/img/writings/` and include meaningful alt
    text: `![Description](/img/writings/example.png)`.

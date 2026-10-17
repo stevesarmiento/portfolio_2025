@@ -3,7 +3,7 @@ import { getAllWritings } from "@/lib/writings";
 
 export default async function Home() {
   const writings = (await getAllWritings()).map(
-    ({ slug, title, publishedAt }) => ({ slug, title, publishedAt }),
+    ({ slug, title, publishedAt, draft }) => ({ slug, title, publishedAt, draft }),
   );
 
   return <HomeClient writings={writings} />;

@@ -4,6 +4,8 @@ import "./globals.css";
 import PlausibleProvider from "next-plausible";
 import { Providers } from "./providers";
 
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
+
 const geistSans = localFont({
   src: "./fonts/geist-vf.woff",
   variable: "--font-geist-sans",
@@ -16,8 +18,23 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Steven Sarmiento",
-  description: "A designer who engineers web and mobile experiences.",
+  metadataBase: new URL(SITE_URL),
+  title: SITE_NAME,
+  description: SITE_DESCRIPTION,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "/",
+    siteName: SITE_NAME,
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 
