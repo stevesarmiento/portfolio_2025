@@ -14,8 +14,8 @@ export const FOOT_H = 5;
 // Paper path: two rollers, a platen between them, the strip on top.
 export const PAPER_Y0 = -35;
 export const PAPER_D = 70;
-export const STRIP_X0 = -70;
-export const STRIP_X1 = 122;
+export const STRIP_X0 = -122;
+export const STRIP_X1 = 70;
 // Paper supply and take-up spools beyond the rollers.
 export const SPOOL_R = 8;
 export const SPOOL_XS = [STRIP_X0 - 14, STRIP_X1 + 14];
@@ -28,15 +28,15 @@ export const STRIP: Plan = { x: STRIP_X0, y: PAPER_Y0, w: STRIP_X1 - STRIP_X0, d
 export const SPROCKET_GAP = 6;
 export const SPROCKET_INSET = 3;
 
-// The pen writes at a fixed x; the paper scrolls under it toward −x.
-export const PEN_X = 86;
+// The pen writes at a fixed x near the left end; the paper scrolls under it toward +x.
+export const PEN_X = -86;
 /** Largest wave amplitude on paper, in world units. */
 export const AMP = 24;
 /** World units of paper per wave unit of x. */
 export const SX = 18;
 
 // Disc tower on a pedestal straight in front of the pen bridge, driven by a motor beside it.
-export const TOWER: Flat = [86, 76];
+export const TOWER: Flat = [-86, 76];
 export const PEDESTAL_R = 10;
 export const PEDESTAL_H = 3;
 export const SPINDLE_Z = PEDESTAL_H;
@@ -44,7 +44,7 @@ export const DISC_H = 1.4;
 export const DISC_MAX = 13;
 export const DISC_MIN_R = 0.9;
 export const HOLDER_H = 2.2;
-export const MOTOR: Plan = { x: TOWER[0] - 46, y: TOWER[1] - 8, w: 18, d: 16, r: 2 };
+export const MOTOR: Plan = { x: TOWER[0] + 28, y: TOWER[1] - 8, w: 18, d: 16, r: 2 };
 export const MOTOR_H = 12;
 
 // Pen bridge across the paper at PEN_X.
@@ -60,15 +60,15 @@ export const LINK_Z = CARRIAGE_Z + 1.2;
 
 // Controls along the front edge.
 export const CTRL_Y = 58;
-export const SEL_KNOB: Flat = [-118, CTRL_Y];
+export const SEL_KNOB: Flat = [118, CTRL_Y];
 export const SEL_R = 8;
 export const SEL_H = 6;
-export const TERMS_KNOB: Flat = [-86, CTRL_Y];
+export const TERMS_KNOB: Flat = [86, CTRL_Y];
 export const TERMS_R = 7;
 export const TERMS_H = 5;
-export const RUN_TOGGLE: Flat = [-58, CTRL_Y];
+export const RUN_TOGGLE: Flat = [58, CTRL_Y];
 
-export const LABEL: Plan = { x: 96, y: -60, w: 48, d: 10, r: 1.5 };
+export const LABEL: Plan = { x: -144, y: -60, w: 48, d: 10, r: 1.5 };
 export const RULER: Plan = { x: -138, y: -67.5, w: 276, d: 4.5, r: 0.8 };
 
 export const P = fitProjection([...boxCorners(BASE, -BASE_H - FOOT_H, 0), ...boxCorners(BEAM, 0, POST_H + BEAM_H + 2), ...boxCorners(MOTOR, 0, MOTOR_H + 4)], WIDTH, HEIGHT, {

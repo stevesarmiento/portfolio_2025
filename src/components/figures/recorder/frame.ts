@@ -87,12 +87,12 @@ export function towerFrame(preset: Preset, count: number, x: number, scale: numb
   };
 }
 
-/** Screen points of the whole wave in paper-fixed coordinates (x = 0 under the pen when the paper is at rest). */
+/** Screen points of the whole wave in paper-fixed coordinates: the point written at x sits x·SX to the left of the pen before the paper carries it right. */
 export function traceScreen(preset: Preset, count: number, scale: number, samples = 900): Flat[] {
   const out: Flat[] = new Array(samples);
   for (let i = 0; i < samples; i++) {
     const x = (i / (samples - 1)) * preset.xMax;
-    out[i] = iso([PEN_X + x * SX, -evalSeries(x, preset.terms, count) * scale, PAPER_TOP + 0.1], P);
+    out[i] = iso([PEN_X - x * SX, -evalSeries(x, preset.terms, count) * scale, PAPER_TOP + 0.1], P);
   }
   return out;
 }
@@ -106,7 +106,7 @@ export function tracePath(points: Flat[], u: number, penScreen: Flat): string {
 }
 
 /** Where the pen tip is on the (scrolled) paper: in paper-fixed coordinates it sits at x·SX along the paper. */
-export const penOnPaper = (x: number, y: number, scale: number): Flat => iso([PEN_X + x * SX, -y * scale, PAPER_TOP + 0.1], P);
+export const penOnPaper = (x: number, y: number, scale: number): Flat => iso([PEN_X - x * SX, -y * scale, PAPER_TOP + 0.1], P);
 
 const KNOB_FROM = -Math.PI * 0.75;
 const KNOB_SPAN = Math.PI * 1.5;

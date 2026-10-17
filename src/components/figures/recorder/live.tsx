@@ -8,7 +8,7 @@ import { SolidSlot, applySolid, setD, show, solidNodes, type SolidNodes } from "
 import { sprocketDots } from "./geometry";
 import { penOnPaper, selPointer, termsPointer, towerFrame, tracePath, traceScreen, type TowerFrame } from "./frame";
 import { MAX_TERMS, PRESETS, evalSeries, readoutOf, scaleOf } from "./model";
-import { AMP, DISC_MAX, HEIGHT, PEN_X, RUN_TOGGLE, SEL_KNOB, STRIP, SX, TERMS_KNOB, WIDTH, at, shift } from "./view";
+import { AMP, DISC_MAX, HEIGHT, RUN_TOGGLE, SEL_KNOB, STRIP, SX, TERMS_KNOB, WIDTH, at, shift } from "./view";
 
 const MOST_DT = 1 / 30;
 const TOUR_EVERY = 11; // seconds between presets when nobody touches it
@@ -51,7 +51,8 @@ const RUN_AT = at([RUN_TOGGLE[0], RUN_TOGGLE[1], 3]);
 const LONGEST = Math.max(...PRESETS.map((p) => p.xMax)) * SX;
 const INITIAL_SCALE = scaleOf(PRESETS[0], PRESETS[0].terms.length, AMP);
 const INITIAL_TRACE = traceScreen(PRESETS[0], PRESETS[0].terms.length, INITIAL_SCALE);
-const SPROCKETS = sprocketDots(PEN_X - LONGEST - (STRIP.x + STRIP.w - PEN_X) - 12, PEN_X + (STRIP.x + STRIP.w - PEN_X) + 12);
+// Paper-fixed x that ever shows through the strip while it scrolls right by up to LONGEST.
+const SPROCKETS = sprocketDots(STRIP.x - LONGEST - 12, STRIP.x + STRIP.w + 12);
 
 export function RecorderLive(props: Props) {
   const { anchor, say } = useReadout<HTMLDivElement>();
@@ -125,7 +126,7 @@ export function RecorderLive(props: Props) {
     setD(pin.current, f.pin);
     setD(link.current, f.link);
     carriage.current?.setAttribute("transform", shift(0, f.penY));
-    scroll.current?.setAttribute("transform", shift(-st.x * SX));
+    scroll.current?.setAttribute("transform", shift(st.x * SX));
     const y = evalSeries(st.x, p.terms, st.count);
     const pen = penOnPaper(st.x, y, st.scale);
     setD(trace.current, tracePath(traces.current, st.x / p.xMax, pen));

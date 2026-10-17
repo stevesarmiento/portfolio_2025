@@ -122,7 +122,7 @@ export const BRIDGE_ART = {
 };
 
 // Disc tower pedestal and the motor that drives its spindle.
-const COUPLING: Plan = { x: MOTOR.x + MOTOR.w, y: TOWER[1] - 3, w: TOWER[0] - PEDESTAL_R - (MOTOR.x + MOTOR.w) + 2, d: 6, r: 1.2 };
+const COUPLING: Plan = { x: TOWER[0] + PEDESTAL_R - 2, y: TOWER[1] - 3, w: MOTOR.x - (TOWER[0] + PEDESTAL_R) + 2, d: 6, r: 1.2 };
 export const TOWER_ART = {
   pedestal: cylinder(TOWER[0], TOWER[1], PEDESTAL_R, 0, PEDESTAL_H, P, 40, 0.5),
   pedestalScrews: [0, 1, 2, 3].map((i) => {
