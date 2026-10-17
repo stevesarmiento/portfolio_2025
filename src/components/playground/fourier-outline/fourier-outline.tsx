@@ -14,10 +14,6 @@ import { Slider } from "@/components/ui/slider";
 import { cn } from "@/lib/utils";
 import {
   buildViewPath,
-  lengthAt,
-  type ViewPath,
-} from "@/components/playground/complex-wave/wave-math";
-import {
   dft,
   evalComplex,
   evalReal,
@@ -28,10 +24,12 @@ import {
   realSeries,
   resampleClosed,
   scheduleContours,
+  lengthAt,
   type Coef,
   type Pt,
   type RealSeries,
   type Slice,
+  type ViewPath,
 } from "./outline-math";
 
 const INK = "#18181b";

@@ -287,3 +287,43 @@ export function scheduleContours(
   }
   return slices;
 }
+
+export interface ViewPath {
+  d: string;
+  cum: Float64Array;
+  total: number;
+}
+
+// Polyline path + exact cumulative arc length (measured on the same rounded
+// coords that go into `d`, so it always agrees with the rendered path — no
+// getTotalLength() needed).
+export function buildViewPath(
+  pts: ReadonlyArray<readonly [number, number]>,
+): ViewPath {
+  const cum = new Float64Array(pts.length);
+  let d = "";
+  let total = 0;
+  let px = 0;
+  let py = 0;
+  for (let i = 0; i < pts.length; i++) {
+    const x = Math.round(pts[i][0] * 100) / 100;
+    const y = Math.round(pts[i][1] * 100) / 100;
+    d += `${i === 0 ? "M" : "L"}${x} ${y}`;
+    if (i > 0) total += Math.hypot(x - px, y - py);
+    cum[i] = total;
+    px = x;
+    py = y;
+  }
+  return { d, cum, total };
+}
+
+// Arc length at fraction u ∈ [0, 1] of the sample range (u is linear in t;
+// arc length is not, hence the lookup).
+export function lengthAt(vp: ViewPath, u: number): number {
+  const n = vp.cum.length;
+  if (n === 0) return 0;
+  const idx = Math.min(Math.max(u, 0), 1) * (n - 1);
+  const i0 = Math.floor(idx);
+  const i1 = Math.min(i0 + 1, n - 1);
+  return vp.cum[i0] + (vp.cum[i1] - vp.cum[i0]) * (idx - i0);
+}
